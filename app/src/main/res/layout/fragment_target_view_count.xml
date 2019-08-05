@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/vLayoutTargetInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#efefef"
+        android:layout_marginBottom="8dp">
+
+        <!--<TextView-->
+            <!--android:id="@+id/vTargetName"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="16dp"-->
+            <!--android:layout_marginTop="16dp"-->
+            <!--android:textColor="#000000"-->
+            <!--android:textSize="18dp"-->
+            <!--android:textStyle="bold"-->
+            <!--tools:text="每天打卡" />-->
+
+        <TextView
+            android:id="@+id/vTargetSetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:text="设置"
+            android:textColor="#000000" />
+
+        <TextView
+            android:layout_marginLeft="16dp"
+            android:id="@+id/vTargetType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="16dp"
+            android:text="打卡类型：计次"
+            android:textSize="14dp" />
+
+
+        <TextView
+            android:id="@+id/vTargetCountSum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/vTargetType"
+            android:layout_below="@+id/vTargetType"
+            android:textSize="14dp"
+            tools:text="已打卡xx次" />
+
+        <TextView
+            android:id="@+id/vTargetRecord"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/vTargetCountSum"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="8dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_toRightOf="@+id/vTargetCountSum"
+            android:background="#46A0F0"
+            android:text="查看打卡记录"
+            android:textColor="#FFFFFF"
+            android:textSize="12dp" />
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/vLayoutWeek"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/vLayoutTargetInfo"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="一" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="二" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="三" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="四" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="五" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="六" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="日" />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/vRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/vLayoutWeek" />
+
+    <TextView
+        android:id="@+id/vAddTargetItem"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/shape_vol"
+        android:gravity="center"
+        android:text="打卡"
+        android:textColor="#FFFFFF"
+        android:textSize="12dp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

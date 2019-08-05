@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <TextView
+        style="@style/TipsTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="打卡" />
+
+    <EditText
+        android:id="@+id/vValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <TextView
+        android:id="@+id/vAddItem"
+        style="@style/SaveItemTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="打卡" />
+
+</LinearLayout>

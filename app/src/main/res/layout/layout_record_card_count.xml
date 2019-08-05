@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/vStartTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="打卡时间："
+        tools:text="2019.01.01 12:12" />
+
+    <TextView
+        android:id="@+id/vEndTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/vStartTime"
+        tools:text="2019.02.01 12:15" />
+
+    <TextView
+        android:id="@+id/vValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:textColor="@color/color_46A0F0"
+        tools:text="11：11" />
+
+</RelativeLayout>

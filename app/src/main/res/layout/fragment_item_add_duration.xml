@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/vStartTimeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/vStartTimeTip"
+            style="@style/TipsTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="开始时间" />
+
+        <TextView
+            android:id="@+id/vStartTime"
+            style="@style/DateTimeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2019" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/vEndTimeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/vEndTimeTip"
+            style="@style/TipsTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="结束时间" />
+
+        <TextView
+            android:id="@+id/vEndTime"
+            style="@style/DateTimeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/vAddItem"
+        style="@style/SaveItemTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="打卡" />
+
+</LinearLayout>

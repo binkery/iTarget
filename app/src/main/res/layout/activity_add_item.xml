@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <com.binkery.itarget.widgets.SettingColumn
+        android:id="@+id/vStartTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:key="开始时间" />
+
+    <com.binkery.itarget.widgets.SettingColumn
+        android:id="@+id/vEndTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:key="结束时间" />
+
+    <com.binkery.itarget.widgets.SettingColumn
+        android:id="@+id/vValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:key="值" />
+
+    <TextView
+        android:id="@+id/vAddItem"
+        style="@style/SaveItemTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="打卡" />
+
+</LinearLayout>

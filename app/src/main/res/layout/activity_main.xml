@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.binkery.itarget.ui.MainActivity">
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/targetRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#efefef" />
+
+    <TextView
+        android:id="@+id/vAddTarget"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/shape_vol"
+        android:gravity="center"
+        android:text="新建"
+        android:textColor="#FFFFFF"
+        android:textSize="12dp"
+        android:textStyle="bold" />
+</RelativeLayout>

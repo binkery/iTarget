@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/vTargetName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:textColor="#46A0F0"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        tools:text="target name" />
+
+
+    <TextView
+        android:id="@+id/vTargetStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/vTargetName"
+        android:text="今日已打卡" />
+
+    <TextView
+        android:id="@+id/vTargetCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/vTargetStatus"
+        tools:text="已打卡xx次" />
+
+    <TextView
+        android:id="@+id/vTargetType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:textColor="#D8770B"
+        tools:text="类型" />
+
+</RelativeLayout>
