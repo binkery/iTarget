@@ -6,8 +6,9 @@ import android.view.View
 import java.lang.ref.WeakReference
 
 /**
- *
- *
+ * Create by binkery@gmail.com
+ * on 2019 08 08
+ * Copyright (c) 2019 iTarget.binkery.com. All rights reserved.
  */
 abstract class BaseViewCard<E> {
 

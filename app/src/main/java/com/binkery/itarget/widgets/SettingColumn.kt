@@ -5,11 +5,13 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import com.binkery.itarget.R
+import com.binkery.itarget.utils.Utils
 import kotlinx.android.synthetic.main.widget_setting_column.view.*
 
 /**
- *
- *
+ * Create by binkery@gmail.com
+ * on 2019 08 08
+ * Copyright (c) 2019 iTarget.binkery.com. All rights reserved.
  */
 class SettingColumn : RelativeLayout {
 
@@ -23,6 +25,9 @@ class SettingColumn : RelativeLayout {
         vKey.text = typedArray.getText(R.styleable.SettingColumn_key)
         vValue.text = typedArray.getText(R.styleable.SettingColumn_value)
         typedArray.recycle()
+
+        setBackgroundResource(R.color.color_white)
+        setPadding(0, Utils.dip2px(context, 8), 0, Utils.dip2px(context, 8))
     }
 
     fun setKey(text: String) {
@@ -31,6 +36,10 @@ class SettingColumn : RelativeLayout {
 
     fun setValue(text: String) {
         vValue.text = text
+    }
+
+    fun getValue(): String {
+        return vValue.text.toString()
     }
 
 }

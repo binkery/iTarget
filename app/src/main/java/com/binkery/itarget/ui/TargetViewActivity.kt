@@ -1,160 +1,147 @@
 package com.binkery.itarget.ui
 
 import android.os.Bundle
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.view.*
-import android.widget.TextView
+import android.view.View
+import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.binkery.itarget.R
 import com.binkery.itarget.base.BaseActivity
 import com.binkery.itarget.router.Router
 import com.binkery.itarget.sqlite.DBHelper
 import com.binkery.itarget.sqlite.ItemEntity
 import com.binkery.itarget.sqlite.TargetEntity
-import com.binkery.itarget.ui.target.FactoryManager
-import com.binkery.itarget.ui.target.TargetType
+import com.binkery.itarget.utils.TextFormater
+import kotlinx.android.synthetic.main.activity_target_detail.*
 import kotlinx.android.synthetic.main.base_activity.*
-import kotlinx.android.synthetic.main.fragment_target_view_count.*
 import java.util.*
 
 /**
- *
- *
+ * Create by binkery@gmail.com
+ * on 2019 08 08
+ * Copyright (c) 2019 iTarget.binkery.com. All rights reserved.
  */
 class TargetViewActivity : BaseActivity() {
 
-    private var targetEntity: TargetEntity? = null
-    private var mAdapter: DateAdapter? = null
-
+    private var mTargetId: Int = -1
 
     override fun getContentLayoutId(): Int = R.layout.activity_target_detail
 
     override fun onContentCreate(savedInstanceState: Bundle?) {
-        val targetId = intent.getIntExtra("target_id", -1)
-        if (targetId == -1) {
+        mTargetId = intent.getIntExtra("target_id", -1)
+        if (mTargetId == -1) {
             finish()
             return
         }
-        targetEntity = DBHelper.getInstance().targetDao().queryTargetById(targetId)
-        if (targetEntity == null) {
-            finish()
-            return
-        }
-        vActionBarTitle.text = targetEntity?.name
-        FactoryManager.getFactory(targetEntity?.type!!).updateTargetViewActivity(this, targetEntity!!)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        update()
+    }
+
+    fun update() {
+        val targetEntity = DBHelper.getInstance().targetDao().queryTargetById(mTargetId)
+        val itemList = DBHelper.getInstance().itemDao().queryItemByTargetId(targetEntity.id)
+        // title
+        vActionBarTitle.text = targetEntity.name
         vActionBarBack.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
                 finish()
             }
         })
 
-        vTargetRecord.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                startTargetRecordActivity()
+        // target info
+        vTargetType.text = TargetType.title(targetEntity.type)
+
+        vTargetCountSum.text = when (targetEntity.type) {
+            TargetType.COUNTER -> {
+                "已完成打卡 " + itemList.size + " 次"
             }
-        })
-
-        vRecyclerView.layoutManager = GridLayoutManager(this, 7)
-        mAdapter = DateAdapter(targetEntity!!)
-        vRecyclerView.adapter = mAdapter
-
+            TargetType.DURATION -> {
+                var sum = 0L
+                for (item in itemList) {
+                    if (item.endTime > 0) {
+                        sum += (item.endTime - item.startTime)
+                    }
+                }
+                "累计时间" + TextFormater.durationSum(sum)
+            }
+            else -> ""
+        }
         vTargetSetting.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
                 Router.startSettingActivity(this@TargetViewActivity, targetEntity?.id!!)
             }
-
         })
 
-        update()
-    }
+        // recyclerview
+        vRecyclerView.layoutManager = GridLayoutManager(this, 7)
+        val dateAdapter = DateAdapter(targetEntity)
+        vRecyclerView.adapter = dateAdapter
 
-    fun update(){
-        val list = DBHelper.getInstance().itemDao().queryItemByTargetId(targetEntity?.id!!)
-        vTargetCountSum.text = FactoryManager.getFactory(targetEntity?.type!!).getTargetSummary(list)
-        vTargetType.text = TargetType.find(targetEntity?.type!!).title
-        mAdapter?.updateDate(list)
+
+
+        vRecordRecyclerView.layoutManager = LinearLayoutManager(this)
+        val recordAdapter = RecordAdapter(this, targetEntity.type)
+
+        dateAdapter.setDateViewClickListener(object : DateViewClickListener {
+            override fun onClick(targetEntity: TargetEntity, starTime: Long) {
+                val list = DBHelper.getInstance().itemDao().queryOneDayItemsByTargetId(targetEntity.id, starTime, starTime + (1000 * 60 * 60 * 24))
+                recordAdapter.update(list)
+            }
+        })
+        vRecordRecyclerView.adapter = recordAdapter
+        dateAdapter.updateDate(itemList)
         vRecyclerView.scrollToPosition(Int.MAX_VALUE / 2 - (14))
-    }
 
-    fun startTargetRecordActivity() {
-        Router.startTargetRecordActivity(this, targetEntity?.id!!)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_target_view, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
-            R.id.menu_delete -> {
-                DBHelper.getInstance().targetDao().deteteTarget(targetEntity)
-                finish()
+        // 打卡按钮
+        vAddTargetItem.text = when (targetEntity.type) {
+            TargetType.COUNTER -> "打卡"
+            TargetType.DURATION -> {
+                val item = DBHelper.getInstance().itemDao().queryItemEndTimeNull(targetEntity.id)
+                if (item == null) "开始" else "结束"
             }
-            R.id.menu_edit -> {
-
-            }
-            R.id.menu_record -> {
-                startTargetRecordActivity()
-            }
+            else -> "undefined"
         }
-        return super.onOptionsItemSelected(item)
-    }
-
-    class DateAdapter(val targetEntity: TargetEntity) : RecyclerView.Adapter<DateViewHolder>() {
-
-        private val ONE_DAY = 1000L * 60 * 60 * 24
-
-        private var mListItem: MutableList<ItemEntity>? = null
-
-        fun updateDate(list:MutableList<ItemEntity>) {
-            mListItem = list
-            notifyDataSetChanged()
-        }
-
-        override fun onBindViewHolder(holder: DateViewHolder?, position: Int) {
-            val calendar = Calendar.getInstance()
-            val offset = calendar.get(Calendar.DAY_OF_WEEK)
-            calendar.add(Calendar.DAY_OF_MONTH, position + offset - 1 - (Int.MAX_VALUE / 2))
-
-            val ms = calendar.timeInMillis - (calendar.timeInMillis % (1000 * 60 * 60 * 24))
-
-            val mon = calendar.get(Calendar.MONTH)
-            val day = calendar.get(Calendar.DAY_OF_MONTH)
-            when {
-                day == 1 -> holder?.vDate?.text = (mon + 1).toString() + "/" + day.toString()
-                else -> holder?.vDate?.text = day.toString()
-            }
-
-            val result = mListItem?.filter { it.startTime > ms && it.startTime < ms + ONE_DAY }
-            when{
-                result?.isEmpty()!! -> holder?.vCount?.text = ""
-                else -> {
-                    holder?.vCount?.text = FactoryManager.getFactory(targetEntity.type).updateDateView(result.toMutableList())
+        vAddTargetItem.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                when (targetEntity.type) {
+                    TargetType.COUNTER -> {
+                        val item = ItemEntity()
+                        item.uuid = UUID.randomUUID().toString()
+                        item.startTime = System.currentTimeMillis() / 60_000 * 60_000
+                        item.targetId = targetEntity?.id!!
+                        DBHelper.getInstance().itemDao().insertItem(item)
+                        Toast.makeText(this@TargetViewActivity, "打卡成功", Toast.LENGTH_LONG).show()
+                        update()
+                    }
+                    TargetType.DURATION -> {
+                        var item = DBHelper.getInstance().itemDao().queryItemEndTimeNull(targetEntity?.id!!)
+                        if (item == null) {
+                            item = ItemEntity()
+                            item.uuid = UUID.randomUUID().toString()
+                            item.startTime = System.currentTimeMillis() / 60_000 * 60_000
+                            vAddTargetItem.text = "结束"
+                            item.targetId = targetEntity?.id!!
+                            DBHelper.getInstance().itemDao().insertItem(item)
+                            Toast.makeText(this@TargetViewActivity, "打卡开始", Toast.LENGTH_LONG).show()
+                        } else {
+                            item.endTime = System.currentTimeMillis() / 60_000 * 60_000
+                            DBHelper.getInstance().itemDao().updateItem(item)
+                            vAddTargetItem.text = "开始"
+                            update()
+                            Toast.makeText(this@TargetViewActivity, "打卡成功", Toast.LENGTH_LONG).show()
+                        }
+                    }
+                    else -> {
+                        Toast.makeText(applicationContext, "未支持", Toast.LENGTH_LONG).show()
+                    }
                 }
             }
+        })
 
-        }
 
-        override fun getItemCount(): Int {
-            return Int.MAX_VALUE
-        }
-
-        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): DateViewHolder {
-            val view = LayoutInflater.from(parent?.context).inflate(R.layout.layout_date_item, parent, false)
-            return DateViewHolder(view)
-        }
-
-    }
-
-    class DateViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val vDate: TextView
-        val vCount: TextView
-
-        init {
-            vDate = view.findViewById(R.id.vDate)
-            vCount = view.findViewById(R.id.vCount)
-        }
     }
 
 }

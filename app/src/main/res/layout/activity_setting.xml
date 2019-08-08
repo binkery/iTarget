@@ -8,64 +8,61 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#efefef"
+        android:background="@color/color_gray"
         android:orientation="vertical">
 
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="8dp" />
-
         <com.binkery.itarget.widgets.SettingColumn
             android:id="@+id/vTargetName"
-            style="@style/SettingColumns"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             app:key="名称"
             app:value="" />
 
         <com.binkery.itarget.widgets.SettingColumn
-            android:id="@+id/vTargetRecord"
-            style="@style/SettingColumns"
+            android:id="@+id/vTargetType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            app:key="类型" />
+
+        <com.binkery.itarget.widgets.SettingColumn
+            android:id="@+id/vTargetRecord"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
             app:key="打卡记录" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="8dp" />
 
         <com.binkery.itarget.widgets.SettingColumn
-            style="@style/SettingColumns"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <com.binkery.itarget.widgets.SettingColumn
-            style="@style/SettingColumns"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="8dp" />
-
-        <com.binkery.itarget.widgets.SettingColumn
-            style="@style/SettingColumns"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" />
+
+        <com.binkery.itarget.widgets.SettingColumn
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp" />
+
+
+        <com.binkery.itarget.widgets.SettingColumn
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             app:key="关于" />
 
         <com.binkery.itarget.widgets.SettingColumn
-            style="@style/SettingColumns"
+            android:id="@+id/vAppVersion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
             app:key="版本" />
 
         <com.binkery.itarget.widgets.SettingColumn
-            style="@style/SettingColumns"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
             app:key="意见反馈" />
     </LinearLayout>
 

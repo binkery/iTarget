@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#efefef"
     android:orientation="vertical">
 
 
@@ -10,25 +11,42 @@
         android:id="@+id/vStartTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:key="开始时间" />
+        android:layout_marginTop="16dp"
+        app:key="开始时间"
+        app:value="" />
 
     <com.binkery.itarget.widgets.SettingColumn
         android:id="@+id/vEndTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:key="结束时间" />
+        android:layout_marginTop="16dp"
+        app:key="结束时间"
+        app:value="" />
 
     <com.binkery.itarget.widgets.SettingColumn
-        android:id="@+id/vValue"
+        android:id="@+id/vInputValue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:key="值" />
+        android:layout_marginTop="16dp"
+        app:key="值"
+        app:value="" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
 
     <TextView
         android:id="@+id/vAddItem"
-        style="@style/SaveItemTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="打卡" />
+        android:layout_margin="8dp"
+        android:background="@color/color_46A0F0"
+        android:gravity="center"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp"
+        android:text="保存"
+        android:textColor="@color/color_white"
+        android:textSize="16dp" />
 
 </LinearLayout>

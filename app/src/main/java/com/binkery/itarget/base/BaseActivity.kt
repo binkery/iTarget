@@ -1,14 +1,15 @@
 package com.binkery.itarget.base
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
+import androidx.appcompat.app.AppCompatActivity
 import com.binkery.itarget.R
 import kotlinx.android.synthetic.main.base_activity.*
 
 /**
- *
- *
+ * Create by binkery@gmail.com
+ * on 2019 08 08
+ * Copyright (c) 2019 iTarget.binkery.com. All rights reserved.
  */
 abstract class BaseActivity : AppCompatActivity() {
 

@@ -7,7 +7,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -21,9 +20,13 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/**
- */
+import androidx.core.content.ContextCompat;
 
+/**
+ * Create by binkery@gmail.com
+ * on 2019 08 08
+ * Copyright (c) 2019 iTarget.binkery.com. All rights reserved.
+ */
 public class PickerView extends View {
 
     private Context mContext;

@@ -3,13 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="8dp">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/vStartTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="12dp"
         android:text="打卡时间："
         tools:text="2019.01.01 12:12" />
 
@@ -17,7 +18,9 @@
         android:id="@+id/vEndTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/vStartTime"
         android:layout_below="@+id/vStartTime"
+        android:layout_marginBottom="12dp"
         tools:text="2019.02.01 12:15" />
 
     <TextView
@@ -25,8 +28,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="16dp"
         android:textColor="@color/color_46A0F0"
         tools:text="11：11" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/vEndTime"
+        android:background="@color/color_gray" />
 </RelativeLayout>

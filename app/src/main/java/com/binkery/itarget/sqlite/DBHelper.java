@@ -1,11 +1,14 @@
 package com.binkery.itarget.sqlite;
 
-import android.arch.persistence.room.Room;
 import android.content.Context;
 
-/**
- */
+import androidx.room.Room;
 
+/**
+ * Create by binkery@gmail.com
+ * on 2019 08 08
+ * Copyright (c) 2019 iTarget.binkery.com. All rights reserved.
+ */
 public class DBHelper {
 
     private AppDatabase mAppDatabase;

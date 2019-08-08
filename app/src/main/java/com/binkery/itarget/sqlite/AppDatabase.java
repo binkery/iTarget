@@ -1,9 +1,13 @@
 package com.binkery.itarget.sqlite;
 
-import android.arch.persistence.room.Database;
-import android.arch.persistence.room.RoomDatabase;
+
+import androidx.room.Database;
+import androidx.room.RoomDatabase;
 
 /**
+ * Create by binkery@gmail.com
+ * on 2019 08 08
+ * Copyright (c) 2019 iTarget.binkery.com. All rights reserved.
  */
 @Database(entities = {TargetEntity.class, ItemEntity.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {

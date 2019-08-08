@@ -1,21 +1,20 @@
 package com.binkery.itarget.adapter
 
 import android.app.Activity
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import java.lang.ref.WeakReference
 
 /**
- *
- *
+ * Create by binkery@gmail.com
+ * on 2019 08 08
+ * Copyright (c) 2019 iTarget.binkery.com. All rights reserved.
  */
 abstract class BaseAdapter<Entity>(activity: Activity) : RecyclerView.Adapter<BaseAdapter.ViewHolder<Entity>>() {
 
     open val mActivityRef: WeakReference<Activity>
-
-    private var mList: MutableList<Entity>? = null
 
     init {
         mActivityRef = WeakReference(activity)
@@ -38,28 +37,15 @@ abstract class BaseAdapter<Entity>(activity: Activity) : RecyclerView.Adapter<Ba
         })
     }
 
-    fun setData(list: MutableList<Entity>?) {
-        mList = list
-        notifyDataSetChanged()
-    }
+    abstract fun getItem(position: Int): Entity?
 
-    fun getData(): MutableList<Entity>? {
-        return mList
-    }
-
-    fun getItem(position: Int): Entity? {
-        return mList?.get(position)
-    }
-
-    final override fun getItemCount(): Int {
-        return mList?.size ?: 0
-    }
+    abstract override fun getItemCount(): Int
 
     final override fun getItemViewType(position: Int): Int {
         return getItemViewCardType(position)
     }
 
-    abstract fun getItemViewCardType(position: Int):Int
+    abstract fun getItemViewCardType(position: Int): Int
 
     abstract fun onCreateViewCard(parent: ViewGroup?, viewType: Int): BaseViewCard<Entity>
 

@@ -3,10 +3,12 @@ package com.binkery.itarget.router
 import android.app.Activity
 import android.content.Intent
 import com.binkery.itarget.ui.*
+import com.binkery.itarget.ui.TargetViewActivity
 
 /**
- *
- *
+ * Create by binkery@gmail.com
+ * on 2019 08 08
+ * Copyright (c) 2019 iTarget.binkery.com. All rights reserved.
  */
 class Router {
 

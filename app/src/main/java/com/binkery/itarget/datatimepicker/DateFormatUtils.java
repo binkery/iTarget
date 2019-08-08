@@ -5,8 +5,10 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
+ * Create by binkery@gmail.com
+ * on 2019 08 08
+ * Copyright (c) 2019 iTarget.binkery.com. All rights reserved.
  */
-
 public class DateFormatUtils {
     private static final String DATE_FORMAT_PATTERN_YMD = "yyyy-MM-dd";
     private static final String DATE_FORMAT_PATTERN_YMD_HM = "yyyy-MM-dd HH:mm";
