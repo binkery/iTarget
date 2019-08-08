@@ -2,6 +2,7 @@ package com.binkery.itarget.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.binkery.itarget.R
 import kotlinx.android.synthetic.main.base_activity.*
@@ -23,9 +24,17 @@ abstract class BaseActivity : AppCompatActivity() {
         val layoutId = getContentLayoutId()
         LayoutInflater.from(this).inflate(layoutId, vContainer, true)
         onContentCreate(savedInstanceState)
+
+        vActionBarBack.setOnClickListener(View.OnClickListener {
+            finish()
+        })
     }
 
-    abstract fun getContentLayoutId():Int
+    abstract fun getContentLayoutId(): Int
     abstract fun onContentCreate(savedInstanceState: Bundle?)
+
+    fun setTitle(title: String) {
+        vActionBarTitle.text = title
+    }
 
 }

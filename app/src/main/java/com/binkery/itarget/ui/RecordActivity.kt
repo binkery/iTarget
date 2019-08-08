@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.base_activity.*
  */
 class RecordActivity : BaseActivity() {
 
-    var mAdapter: RecordAdapter? = null
+    var mAdapter: RecordAdapter = RecordAdapter(this)
     var targetEntity: TargetEntity? = null
     var mTargetId: Int? = null
 
@@ -43,7 +43,7 @@ class RecordActivity : BaseActivity() {
             }
         })
 
-        mAdapter = RecordAdapter(this, targetEntity?.type!!)
+//        mAdapter = RecordAdapter(this, targetEntity?.type!!)
         vRecyclerView.layoutManager = LinearLayoutManager(this)
         vRecyclerView.adapter = mAdapter
     }
@@ -52,7 +52,7 @@ class RecordActivity : BaseActivity() {
     override fun onResume() {
         super.onResume()
         val list = DBHelper.getInstance().itemDao().queryItemByTargetId(targetEntity?.id!!)
-        mAdapter?.update(list)
+        mAdapter.update(targetEntity?.type!!,list)
     }
 
 }

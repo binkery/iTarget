@@ -1,7 +1,5 @@
 package com.binkery.itarget.ui
 
-import com.binkery.itarget.sqlite.TargetEntity
-
 /**
  * Create by binkery@gmail.com
  * on 2019 08 08
@@ -9,6 +7,6 @@ import com.binkery.itarget.sqlite.TargetEntity
  */
 interface DateViewClickListener {
 
-    fun onClick(targetEntity: TargetEntity, starTime: Long)
+    fun onClick(starTime: Long)
 
 }
