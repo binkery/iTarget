@@ -6,18 +6,35 @@
     android:background="@color/color_gray"
     android:orientation="vertical">
 
-    <com.binkery.itarget.widgets.SettingColumn
+    <!--<com.binkery.itarget.widgets.SettingColumn-->
+    <!--android:id="@+id/vTargetName"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--app:key="项目名" />-->
+
+    <!--<com.binkery.itarget.widgets.SettingColumn-->
+    <!--android:id="@+id/vTargetType"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="8dp"-->
+    <!--app:key="类型" />-->
+
+    <!--<com.binkery.itarget.widgets.SettingColumn-->
+    <!--android:id="@+id/vTargetValue"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="8dp"-->
+    <!--app:key="目标" />-->
+
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1" />-->
+
+    <EditText
         android:id="@+id/vTargetName"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:key="项目名" />
-
-    <com.binkery.itarget.widgets.SettingColumn
-        android:id="@+id/vTargetType"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:key="类型" />
+        android:layout_height="wrap_content" />
 
     <View
         android:layout_width="match_parent"
@@ -25,7 +42,7 @@
         android:layout_weight="1" />
 
     <TextView
-        android:id="@+id/vSave"
+        android:id="@+id/vNextStep"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -33,7 +50,7 @@
         android:gravity="center"
         android:paddingBottom="16dp"
         android:paddingTop="16dp"
-        android:text="保存"
+        android:text="下一步"
         android:textColor="@color/color_white"
         android:textSize="16dp" />
 

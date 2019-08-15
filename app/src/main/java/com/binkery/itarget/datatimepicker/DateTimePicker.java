@@ -15,6 +15,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 
 /**
  * Create by binkery@gmail.com
@@ -95,11 +96,11 @@ public class DateTimePicker implements View.OnClickListener, PickerView.OnSelect
 
         mContext = context;
         mCallback = callback;
-        mBeginTime = Calendar.getInstance();
+        mBeginTime = Calendar.getInstance(TimeZone.getTimeZone("GMT+8:00"));
         mBeginTime.setTimeInMillis(beginTimestamp);
-        mEndTime = Calendar.getInstance();
+        mEndTime = Calendar.getInstance(TimeZone.getTimeZone("GMT+8:00"));
         mEndTime.setTimeInMillis(endTimestamp);
-        mSelectedTime = Calendar.getInstance();
+        mSelectedTime = Calendar.getInstance(TimeZone.getTimeZone("GMT+8:00"));
 
         initView();
         initData();

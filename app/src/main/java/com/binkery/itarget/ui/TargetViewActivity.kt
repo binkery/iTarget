@@ -13,6 +13,7 @@ import com.binkery.itarget.sqlite.TargetEntity
 import com.binkery.itarget.utils.TextFormater
 import com.binkery.itarget.utils.Utils
 import kotlinx.android.synthetic.main.activity_target_detail.*
+import java.util.*
 
 /**
  * Create by binkery@gmail.com
@@ -22,8 +23,8 @@ import kotlinx.android.synthetic.main.activity_target_detail.*
 class TargetViewActivity : BaseActivity() {
 
     private var mTargetId: Int = -1
-    private var mTargetType: Int = TargetType.COUNTER
-    private val mDateAdapter: DateAdapter = DateAdapter()
+    private var mTargetType: TargetType = TargetType.MANY_COUNT
+    private val mDateAdapter: DateAdapter = DateAdapter(this)
     private val mRecordAdapter: RecordAdapter = RecordAdapter(this)
 
     override fun getContentLayoutId(): Int = R.layout.activity_target_detail
@@ -72,8 +73,8 @@ class TargetViewActivity : BaseActivity() {
                 if (targetEntity == null) {
                     return
                 }
-                mTargetType = targetEntity.type
-                vTargetType.text = TargetType.title(mTargetType)
+                mTargetType = TargetType.find(targetEntity.type)
+                vTargetType.text = mTargetType.title
                 setTitle(targetEntity.name)
 
             }
@@ -84,10 +85,10 @@ class TargetViewActivity : BaseActivity() {
                     return
                 }
                 vTargetCountSum.text = when (mTargetType) {
-                    TargetType.COUNTER -> {
+                    TargetType.MANY_COUNT -> {
                         "已完成打卡 " + itemList.size + " 次"
                     }
-                    TargetType.DURATION -> {
+                    TargetType.MANY_TIME -> {
                         var sum = 0L
                         itemList.forEach({
                             if (it.endTime > 0) sum += it.endTime - it.startTime
@@ -99,6 +100,9 @@ class TargetViewActivity : BaseActivity() {
 
                 mDateAdapter.updateDate(mTargetType, itemList)
                 vRecyclerView.scrollToPosition(Int.MAX_VALUE / 2 - (14))
+                val calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8:00"))
+                val offset = calendar.get(Calendar.DAY_OF_WEEK)
+                mDateAdapter.onDateViewClick(Int.MAX_VALUE / 2 + offset - 1)
             }
         })
     }

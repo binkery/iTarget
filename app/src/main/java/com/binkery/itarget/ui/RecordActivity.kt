@@ -52,7 +52,7 @@ class RecordActivity : BaseActivity() {
     override fun onResume() {
         super.onResume()
         val list = DBHelper.getInstance().itemDao().queryItemByTargetId(targetEntity?.id!!)
-        mAdapter.update(targetEntity?.type!!,list)
+        mAdapter.update(TargetType.find(targetEntity?.type!!), list)
     }
 
 }

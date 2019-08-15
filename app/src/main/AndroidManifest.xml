@@ -19,10 +19,21 @@
         </activity>
 
         <activity android:name=".ui.AddTargetActivity" />
+        <activity android:name=".ui.activity.AddTargetTypeActivity" />
+        <activity android:name=".ui.activity.AddTargetOneCountActivity" />
+        <activity android:name=".ui.activity.AddTargetManyCountActivity" />
+        <activity android:name=".ui.activity.AddTargetManyTimeActivity"/>
+
+        <activity android:name=".ui.activity.ManyCountActivity" />
+        <activity android:name=".ui.activity.OneCountActivity" />
+        <activity android:name=".ui.activity.ManyTimeActivity" />
+        <activity android:name=".ui.activity.BaseTargetDetailActivity"/>
+
         <activity android:name=".ui.TargetViewActivity" />
         <activity android:name=".ui.AddItemActivity" />
         <activity android:name=".ui.RecordActivity" />
-        <activity android:name=".ui.SettingActivity"/>
+        <activity android:name=".ui.SettingActivity" />
+
     </application>
 
 </manifest>

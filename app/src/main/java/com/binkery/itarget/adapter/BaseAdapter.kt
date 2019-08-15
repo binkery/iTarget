@@ -29,7 +29,7 @@ abstract class BaseAdapter<Entity>(activity: Activity) : RecyclerView.Adapter<Ba
     }
 
     final override fun onBindViewHolder(holder: ViewHolder<Entity>?, position: Int) {
-        holder?.viewCard?.onBindView(getItem(position)!!, holder.itemView)
+        holder?.viewCard?.onBindView(getItem(position), holder.itemView)
         holder?.itemView?.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
                 holder.viewCard.onItemClick(getItem(position), position)

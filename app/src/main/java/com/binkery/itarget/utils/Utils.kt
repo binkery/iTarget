@@ -1,6 +1,7 @@
 package com.binkery.itarget.utils
 
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
 
 /**
@@ -36,6 +37,13 @@ class Utils {
             Toast.makeText(context, message, Toast.LENGTH_LONG).show()
         }
 
+        fun log(message: String) {
+            Log.i("iTarget", message)
+        }
+
+        fun log(tag: String, message: String) {
+            Log.i("iTarget-" + tag, message)
+        }
 
     }
 }

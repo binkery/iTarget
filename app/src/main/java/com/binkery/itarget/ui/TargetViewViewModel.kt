@@ -16,10 +16,10 @@ import java.util.*
 class TargetViewViewModel : ViewModel() {
 
     val dataItemList: MutableLiveData<MutableList<ItemEntity>> = MutableLiveData()
-    val dataAddItemText:MutableLiveData<String> = MutableLiveData()
-    val dataToast:MutableLiveData<String> = MutableLiveData()
-    val dataTargetEntity:MutableLiveData<TargetEntity> = MutableLiveData()
-    val dataRecordList:MutableLiveData<MutableList<ItemEntity>> = MutableLiveData()
+    val dataAddItemText: MutableLiveData<String> = MutableLiveData()
+    val dataToast: MutableLiveData<String> = MutableLiveData()
+    val dataTargetEntity: MutableLiveData<TargetEntity> = MutableLiveData()
+    val dataRecordList: MutableLiveData<MutableList<ItemEntity>> = MutableLiveData()
 
     fun queryTargetEntity(id: Int) {
         val entity = DBHelper.getInstance().targetDao().queryTargetById(id)
@@ -28,17 +28,19 @@ class TargetViewViewModel : ViewModel() {
 
         val list = DBHelper.getInstance().itemDao().queryItemByTargetId(id)
         dataItemList.postValue(list)
+        val targetType = TargetType.find(entity.type)
         val text = when {
-            entity.type == TargetType.COUNTER -> "打卡"
-            list.last().endTime == 0L -> "结束"
-            else -> "开始"
+            targetType == TargetType.MANY_COUNT -> "打卡"
+            targetType == TargetType.MANY_TIME && list[0].endTime == 0L -> "结束"
+            targetType == TargetType.MANY_TIME -> "开始"
+            else -> "undefined"
         }
         dataAddItemText.postValue(text)
     }
 
-    fun addItem(type:Int,targetId:Int) {
+    fun addItem(type: TargetType, targetId: Int) {
         when (type) {
-            TargetType.COUNTER -> {
+            TargetType.MANY_COUNT -> {
                 val item = ItemEntity()
                 item.uuid = UUID.randomUUID().toString()
                 item.startTime = System.currentTimeMillis() / 60_000 * 60_000
@@ -46,7 +48,7 @@ class TargetViewViewModel : ViewModel() {
                 DBHelper.getInstance().itemDao().insertItem(item)
                 dataToast.postValue("打卡成功")
             }
-            TargetType.DURATION -> {
+            TargetType.MANY_TIME -> {
                 var item = DBHelper.getInstance().itemDao().queryItemEndTimeNull(targetId)
                 if (item == null) {
                     item = ItemEntity()

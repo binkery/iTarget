@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <com.binkery.itarget.widgets.SettingColumn
+        android:id="@+id/vTargetName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:key="目标名称" />
+
+
+    <com.binkery.itarget.widgets.SettingColumn
+        android:id="@+id/vMatchType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:key="每日达成条件"
+        app:value="最多" />
+
+    <com.binkery.itarget.widgets.SettingColumn
+        android:id="@+id/vMatchCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:key="每日次数"
+        app:value="3" />
+
+
+    <TextView
+        android:id="@+id/vSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@color/color_46A0F0"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="保存"
+        android:textColor="@color/color_white" />
+
+</LinearLayout>

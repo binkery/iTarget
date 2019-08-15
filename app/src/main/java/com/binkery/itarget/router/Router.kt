@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import com.binkery.itarget.ui.*
 import com.binkery.itarget.ui.TargetViewActivity
+import com.binkery.itarget.ui.activity.OneCountActivity
 
 /**
  * Create by binkery@gmail.com
@@ -29,10 +30,11 @@ class Router {
             activity.startActivity(intent)
         }
 
-        fun startAddItemActivity(activity: Activity, itemId: Int?) {
-            val intent = Intent(activity, AddItemActivity::class.java)
-            intent.putExtra("item_id", itemId)
-            activity.startActivity(intent)
+        fun startAddItemActivity(activity: Activity, targetId: Int, itemId: Int?) {
+//            val intent = Intent(activity, AddItemActivity::class.java)
+//            intent.putExtra("target_id", targetId)
+//            intent.putExtra("item_id", itemId)
+//            activity.startActivity(intent)
         }
 
         fun startTargetRecordActivity(activity: Activity, targetId: Int) {
@@ -48,6 +50,12 @@ class Router {
             activity.startActivity(intent)
         }
 
+
+        fun startEveryDayOnTimeActivity(activity: Activity, targetId: Int) {
+            val intent = Intent(activity, OneCountActivity::class.java)
+            intent.putExtra("target_id", targetId)
+            activity.startActivity(intent)
+        }
 
     }
 }

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:background="@color/color_46A0F0"
+    tools:parentTag="android.widget.RelativeLayout">
+
+
+    <TextView
+        android:id="@+id/vTargetType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:text="每日定时打卡"
+        android:textColor="@color/color_white" />
+
+    <TextView
+        android:id="@+id/vTargetTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/vTargetType"
+        android:layout_below="@id/vTargetType"
+        android:text="每日 7：30 前打卡"
+        android:textColor="@color/color_white" />
+
+    <TextView
+        android:id="@+id/vTargetSetting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="8dp"
+        android:padding="8dp"
+        android:text="设置"
+        android:textColor="@color/color_white"
+        android:textSize="14dp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/vTargetTitle"
+        android:background="@color/color_46A0F0"
+        android:orientation="horizontal"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp">
+
+
+        <com.binkery.itarget.widgets.TargetStaticItem
+            android:id="@+id/vItem1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <com.binkery.itarget.widgets.TargetStaticItem
+            android:id="@+id/vItem2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <com.binkery.itarget.widgets.TargetStaticItem
+            android:id="@+id/vItem3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+</merge>

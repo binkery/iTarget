@@ -1,5 +1,6 @@
 package com.binkery.itarget.ui
 
+import android.content.Intent
 import android.view.View
 import android.widget.TextView
 import com.binkery.itarget.R
@@ -7,6 +8,9 @@ import com.binkery.itarget.adapter.BaseViewCard
 import com.binkery.itarget.router.Router
 import com.binkery.itarget.sqlite.DBHelper
 import com.binkery.itarget.sqlite.TargetEntity
+import com.binkery.itarget.ui.activity.BaseTargetDetailActivity
+import com.binkery.itarget.ui.activity.ManyCountActivity
+import com.binkery.itarget.ui.activity.ManyTimeActivity
 import com.binkery.itarget.utils.TextFormater
 
 /**
@@ -14,7 +18,7 @@ import com.binkery.itarget.utils.TextFormater
  * on 2019 08 08
  * Copyright (c) 2019 iTarget.binkery.com. All rights reserved.
  */
-class TargetItemViewCard: BaseViewCard<TargetEntity>() {
+class TargetItemViewCard : BaseViewCard<TargetEntity>() {
 
     private var vTargetName: TextView? = null
     private var vTargetStatus: TextView? = null
@@ -30,13 +34,13 @@ class TargetItemViewCard: BaseViewCard<TargetEntity>() {
 
     override fun getLayoutId(): Int = R.layout.layout_home_card_common
 
-    override fun onBindView(entity: TargetEntity, view: View) {
-        vTargetName?.text = entity.name
-        vTargetType?.text = TargetType.title(entity.type)
+    override fun onBindView(entity: TargetEntity?, view: View) {
+        vTargetName?.text = entity?.name
+        vTargetType?.text = TargetType.title(entity?.type!!)
         val list = DBHelper.getInstance().itemDao().queryItemByTargetId(entity.id)
 
-        when (entity.type) {
-            TargetType.COUNTER -> {
+        when (TargetType.find(entity.type)) {
+            TargetType.MANY_COUNT -> {
                 vTargetStatus?.text = when {
                     list.size == 0 -> "暂无打卡"
                     list[0].startTime > TextFormater.getTodayMs() -> "今日已打卡"
@@ -44,7 +48,7 @@ class TargetItemViewCard: BaseViewCard<TargetEntity>() {
                 }
                 vTargetCount?.text = "已完成打卡 " + list.size + " 次"
             }
-            TargetType.DURATION -> {
+            TargetType.MANY_TIME -> {
                 vTargetStatus?.text = when {
                     list.size == 0 -> "暂无打卡"
                     list[0].endTime == 0L -> "有进行中的打卡"
@@ -63,7 +67,26 @@ class TargetItemViewCard: BaseViewCard<TargetEntity>() {
     }
 
     override fun onItemClick(entity: TargetEntity?, position: Int) {
-        Router.startTargetViewActivity(getActivity()!!, entity?.id!!)
+
+        val intent = Intent(getActivity(),BaseTargetDetailActivity::class.java)
+        intent.putExtra("target_id",entity?.id)
+        getActivity()?.startActivity(intent)
+
+//        when (TargetType.find(entity?.type!!)) {
+//            TargetType.ONE_COUNT -> Router.startEveryDayOnTimeActivity(getActivity()!!, entity.id)
+//            TargetType.MANY_COUNT -> {
+//                val intent = Intent(getActivity(),ManyCountActivity::class.java)
+//                intent.putExtra("target_id",entity.id)
+//                getActivity()?.startActivity(intent)
+//            }
+//            TargetType.MANY_TIME->{
+//                val intent = Intent(getActivity(),ManyTimeActivity::class.java)
+//                intent.putExtra("target_id",entity.id)
+//                getActivity()?.startActivity(intent)
+//            }
+//            else -> Router.startTargetViewActivity(getActivity()!!, entity.id)
+//        }
+
     }
 
 }

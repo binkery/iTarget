@@ -1,11 +1,12 @@
 package com.binkery.itarget.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.binkery.itarget.R
 import com.binkery.itarget.base.BaseActivity
-import com.binkery.itarget.router.Router
+import com.binkery.itarget.ui.activity.AddTargetTypeActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.base_activity.*
 /**
@@ -23,7 +24,8 @@ class MainActivity : BaseActivity() {
         vAddTarget.setOnClickListener(
                 object : View.OnClickListener {
                     override fun onClick(v: View?) {
-                        Router.startAddTargetActivity(this@MainActivity)
+                        val intent = Intent(this@MainActivity, AddTargetTypeActivity::class.java)
+                        startActivity(intent)
                     }
                 }
         )

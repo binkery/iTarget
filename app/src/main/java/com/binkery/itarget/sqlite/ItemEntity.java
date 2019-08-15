@@ -32,4 +32,6 @@ public class ItemEntity {
     @ColumnInfo(name = "value")
     public long value;
 
+    @ColumnInfo(name = "content")
+    public String content;
 }

@@ -37,7 +37,7 @@ abstract class BaseViewCard<E> {
 
     abstract fun getLayoutId(): Int
 
-    abstract fun onBindView(entity: @UnsafeVariance E, view: View)
+    abstract fun onBindView(entity: @UnsafeVariance E?, view: View)
 
     abstract fun onItemClick(entity: @UnsafeVariance E?, position: Int)
 

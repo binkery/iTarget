@@ -1,10 +1,9 @@
 package com.binkery.itarget.ui
 
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import com.binkery.itarget.R
+import com.binkery.itarget.adapter.BaseAdapter
+import com.binkery.itarget.adapter.BaseViewCard
+import com.binkery.itarget.base.BaseActivity
 import com.binkery.itarget.sqlite.ItemEntity
 import com.binkery.itarget.utils.Const
 import com.binkery.itarget.utils.TextFormater
@@ -15,13 +14,22 @@ import java.util.*
  * on 2019 08 08
  * Copyright (c) 2019 iTarget.binkery.com. All rights reserved.
  */
-class DateAdapter : RecyclerView.Adapter<DateViewHolder>() {
+class DateAdapter(activity: BaseActivity) : BaseAdapter<Int>(activity) {
+
+    override fun getItem(position: Int): Int? = position
+
+    override fun getItemViewCardType(position: Int): Int = 0
+
+    override fun onCreateViewCard(parent: ViewGroup?, viewType: Int): BaseViewCard<Int> {
+        return DateViewHolder()
+    }
 
     private var mListItem: MutableList<ItemEntity>? = null
     private var mDateViewClickListener: DateViewClickListener? = null
-    private var mTargetType: Int = TargetType.COUNTER
+    private var mTargetType: TargetType = TargetType.MANY_COUNT
+    var mSelectedPosition: Int = Int.MAX_VALUE / 2
 
-    fun updateDate(type: Int, list: MutableList<ItemEntity>) {
+    fun updateDate(type: TargetType, list: MutableList<ItemEntity>) {
         mListItem = list
         mTargetType = type
         notifyDataSetChanged()
@@ -31,26 +39,17 @@ class DateAdapter : RecyclerView.Adapter<DateViewHolder>() {
         mDateViewClickListener = listener
     }
 
-    override fun onBindViewHolder(holder: DateViewHolder?, position: Int) {
-        val calendar = Calendar.getInstance()
-        val offset = calendar.get(Calendar.DAY_OF_WEEK)
-        calendar.add(Calendar.DAY_OF_MONTH, position + offset - 1 - (Int.MAX_VALUE / 2))
+    override fun getItemCount(): Int {
+        return Int.MAX_VALUE
+    }
 
-        val ms = calendar.timeInMillis - (calendar.timeInMillis % (1000 * 60 * 60 * 24))
-
-        val mon = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-        when (day) {
-            1 -> holder?.vDate?.text = (mon + 1).toString() + "/" + day.toString()
-            else -> holder?.vDate?.text = day.toString()
-        }
-
+    fun getDateText(ms: Long): String {
         val result = mListItem?.filter { it.startTime > ms && it.startTime < ms + Const.ONE_DAY }
-        val text = when {
-            result ==  null || result.isEmpty() -> ""
-            mTargetType == TargetType.COUNTER && result.size > 1 -> "打卡" + result.size + "次"
-            mTargetType == TargetType.COUNTER -> TextFormater.hhmm(result[0].startTime)
-            mTargetType == TargetType.DURATION -> {
+        return when {
+            result == null || result.isEmpty() -> ""
+            mTargetType == TargetType.MANY_COUNT && result.size > 1 -> "打卡" + result.size + "次"
+            mTargetType == TargetType.MANY_COUNT -> TextFormater.hhmm(result[0].startTime)
+            mTargetType == TargetType.MANY_TIME -> {
                 var sum = 0L
                 result.forEach {
                     if (it.endTime > 0) {
@@ -61,22 +60,23 @@ class DateAdapter : RecyclerView.Adapter<DateViewHolder>() {
             }
             else -> ""
         }
-        holder?.vCount?.text = text
-        holder?.itemView?.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                mDateViewClickListener?.onClick(ms)
-            }
-        })
-
     }
 
-    override fun getItemCount(): Int {
-        return Int.MAX_VALUE
+    fun position2ms(position: Int): Long {
+        val calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8:00"))
+        val offset = calendar.get(Calendar.DAY_OF_WEEK)
+        calendar.add(Calendar.DAY_OF_MONTH, position - (Int.MAX_VALUE / 2) - offset + 1)
+        calendar.set(Calendar.HOUR_OF_DAY, 0)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 0)
+        calendar.set(Calendar.MILLISECOND, 0)
+        return calendar.timeInMillis
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): DateViewHolder {
-        val view = LayoutInflater.from(parent?.context).inflate(R.layout.layout_date_item, parent, false)
-        return DateViewHolder(view)
+    fun onDateViewClick(position: Int) {
+        mSelectedPosition = position
+        mDateViewClickListener?.onClick(position2ms(position))
+        notifyDataSetChanged()
     }
 
 }

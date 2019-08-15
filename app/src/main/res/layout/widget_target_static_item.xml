@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:background="@color/color_46A0F0"
+    tools:parentTag="android.widget.RelativeLayout">
+
+    <TextView
+        android:id="@+id/vValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="10"
+        android:textColor="@color/color_white"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/vKey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/vValue"
+        android:layout_centerHorizontal="true"
+        android:text="累计"
+        android:textColor="@color/color_white"
+        android:textSize="14dp" />
+
+    <TextView
+        android:id="@+id/vUnit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/vValue"
+        android:layout_centerHorizontal="true"
+        android:layout_toRightOf="@+id/vValue"
+        android:text="次"
+        android:textColor="@color/color_white"
+        android:textSize="14dp" />
+
+</merge>

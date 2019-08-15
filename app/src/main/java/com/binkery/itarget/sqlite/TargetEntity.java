@@ -26,4 +26,28 @@ public class TargetEntity {
     @ColumnInfo(name = "type")
     public int type;
 
+    @ColumnInfo(name = "data_1")
+    public String data1;
+
+    @ColumnInfo(name = "data_2")
+    public String data2;
+
+    @ColumnInfo(name = "data_3")
+    public String data3;
+
+    @ColumnInfo(name = "data_4")
+    public String data4;
+
+    @ColumnInfo(name = "data_5")
+    public String data5;
+
+    @ColumnInfo(name = "data_6")
+    public String data6;
+
+    @ColumnInfo(name = "data_7")
+    public String data7;
+
+    @ColumnInfo(name = "data_8")
+    public String data8;
+
 }

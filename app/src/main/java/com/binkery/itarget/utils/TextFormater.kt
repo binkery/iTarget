@@ -36,7 +36,7 @@ class TextFormater {
         }
 
         fun getTodayMs(): Long {
-            var tms = Calendar.getInstance()
+            var tms = Calendar.getInstance(TimeZone.getTimeZone("GMT+8:00"))
             tms.set(Calendar.HOUR_OF_DAY, 0)
             tms.set(Calendar.MINUTE, 0)
             tms.set(Calendar.SECOND, 0)
