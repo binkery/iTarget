@@ -33,15 +33,24 @@
         <item name="android:gravity">right</item>
     </style>
 
-    <style name="SaveItemTextView">
-        <item name="android:layout_marginTop">16dp</item>
-        <item name="android:background">#FBEBCD</item>
-        <item name="android:gravity">center</item>
-        <item name="android:paddingTop">16dp</item>
-        <item name="android:paddingBottom">16dp</item>
-        <item name="android:textColor">#A06935</item>
-
+    <style name="SaveButtonStyle" parent="ButtonStyle">
+        <item name="android:background">@color/color_46A0F0</item>
+        <item name="android:textColor">@color/color_white</item>
     </style>
+
+    <style name="DeteleButtonStyle" parent="ButtonStyle">
+        <item name="android:background">@color/color_black_gray</item>
+        <item name="android:textColor">@color/color_white_gray</item>
+    </style>
+
+    <style name="ButtonStyle">
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">8dp</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:padding">12dp</item>
+    </style>
+
 
     <style name="HomeCardTitleTextView">
         <item name="android:layout_marginBottom">8dp</item>
@@ -52,15 +61,15 @@
     </style>
 
     <!--<style name="SettingColumns">-->
-        <!--<item name="android:layout_marginTop">1dp</item>-->
-        <!--<item name="android:paddingTop">8dp</item>-->
-        <!--<item name="android:paddingBottom">8dp</item>-->
-        <!--<item name="android:background">@color/color_white</item>-->
+    <!--<item name="android:layout_marginTop">1dp</item>-->
+    <!--<item name="android:paddingTop">8dp</item>-->
+    <!--<item name="android:paddingBottom">8dp</item>-->
+    <!--<item name="android:background">@color/color_white</item>-->
     <!--</style>-->
 
     <declare-styleable name="SettingColumn">
-        <attr name="key" format="string"/>
-        <attr name="value" format="string"/>
+        <attr name="key" format="string" />
+        <attr name="value" format="string" />
     </declare-styleable>
 
 </resources>

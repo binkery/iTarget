@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="8dp"
     android:background="@color/color_white"
     android:orientation="vertical">
 
@@ -20,20 +21,21 @@
 
 
     <TextView
-        android:id="@+id/vTargetStatus"
+        android:id="@+id/vTargetMatch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/vTargetName"
         android:layout_below="@+id/vTargetName"
-        android:text="今日已打卡" />
+        android:text="已完成" />
 
     <TextView
-        android:id="@+id/vTargetCount"
-        android:layout_width="match_parent"
+        android:id="@+id/vTargetStatus"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/vTargetStatus"
-        android:layout_below="@+id/vTargetStatus"
+        android:layout_alignBaseline="@+id/vTargetMatch"
         android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@+id/vTargetMatch"
         tools:text="已打卡xx次" />
 
     <TextView
@@ -47,10 +49,5 @@
         android:textColor="#D8770B"
         tools:text="类型" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:layout_below="@id/vTargetCount"
-        android:background="@color/color_gray" />
 
 </RelativeLayout>

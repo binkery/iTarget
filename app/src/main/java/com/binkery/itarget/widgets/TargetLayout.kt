@@ -28,9 +28,9 @@ class TargetLayout : RelativeLayout {
         vTargetType.text = text
     }
 
-    fun setTargetTile(text: String) {
-        vTargetTitle.text = text
-    }
+//    fun setTargetTile(text: String) {
+//        vTargetTitle.text = text
+//    }
 
     fun setSettingClickListener(listener: View.OnClickListener) {
         vTargetSetting.setOnClickListener(listener)

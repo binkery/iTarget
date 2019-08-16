@@ -7,6 +7,7 @@ import com.binkery.itarget.R
 import com.binkery.itarget.adapter.BaseViewCard
 import com.binkery.itarget.sqlite.DBHelper
 import com.binkery.itarget.sqlite.TargetEntity
+import com.binkery.itarget.utils.Const
 import com.binkery.itarget.utils.TextFormater
 
 /**
@@ -18,13 +19,13 @@ class TargetItemViewCard : BaseViewCard<TargetEntity>() {
 
     private var vTargetName: TextView? = null
     private var vTargetStatus: TextView? = null
-    private var vTargetCount: TextView? = null
+    private var vTargetMatch: TextView? = null
     private var vTargetType: TextView? = null
 
     override fun onCreateView(view: View) {
         vTargetName = view.findViewById(R.id.vTargetName)
         vTargetStatus = view.findViewById(R.id.vTargetStatus)
-        vTargetCount = view.findViewById(R.id.vTargetCount)
+        vTargetMatch = view.findViewById(R.id.vTargetMatch)
         vTargetType = view.findViewById(R.id.vTargetType)
     }
 
@@ -34,36 +35,35 @@ class TargetItemViewCard : BaseViewCard<TargetEntity>() {
         vTargetName?.text = entity?.name
         vTargetType?.text = TargetType.title(entity?.type!!)
         val list = DBHelper.getInstance().itemDao().queryItemByTargetId(entity.id)
+        val match = entity.data1.toInt()
 
-        when (TargetType.find(entity.type)) {
-            TargetType.MANY_COUNT -> {
-                vTargetStatus?.text = when {
-                    list.size == 0 -> "暂无打卡"
-                    list[0].startTime > TextFormater.getTodayMs() -> "今日已打卡"
-                    else -> "最后打卡时间：" + TextFormater.dateTime(list[0].startTime)
-                }
-                vTargetCount?.text = "已完成打卡 " + list.size + " 次"
-            }
+        val result: Int = when (TargetType.find(entity.type)) {
             TargetType.MANY_TIME -> {
-                vTargetStatus?.text = when {
-                    list.size == 0 -> "暂无打卡"
-                    list[0].endTime == 0L -> "有进行中的打卡"
-                    list[0].startTime > TextFormater.getTodayMs() -> "今日已打卡"
-                    else -> "最后打卡时间：" + TextFormater.dateTime(list[0].startTime)
-                }
+                val result = list.filter { it.startTime > TextFormater.getTodayMs() && it.startTime < TextFormater.getTodayMs() + Const.ONE_DAY }
                 var sum = 0L
-                for (item in list) {
-                    if (item.endTime > 0) {
-                        sum += (item.endTime - item.startTime)
-                    }
-                }
-                vTargetCount?.text = "累计时间" + TextFormater.durationSum(sum)
+                result.forEach({
+                    if (it.endTime > 0) sum += (it.endTime - it.startTime)
+                })
+                (sum/Const.ONE_MINUTE).toInt()
+            }
+            TargetType.MANY_COUNT -> {
+                val result = list.filter { it.startTime > TextFormater.getTodayMs() && it.startTime < TextFormater.getTodayMs() + Const.ONE_DAY }
+                result.size
             }
         }
+
+        vTargetMatch?.text = when {
+            result < match -> "未完成"
+            else -> "已完成"
+        }
+        vTargetStatus?.text = when (TargetType.find(entity.type)) {
+            TargetType.MANY_COUNT -> "(" + result + "次/" + match + "次)"
+            else -> "(" + result + "分钟/" + match + "分钟)"
+        }
+
     }
 
     override fun onItemClick(entity: TargetEntity?, position: Int) {
-
         val intent = Intent(getActivity(), CheckInActivity::class.java)
         intent.putExtra("target_id", entity?.id)
         getActivity()?.startActivity(intent)

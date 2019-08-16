@@ -6,15 +6,11 @@ package com.binkery.itarget.ui
  * on 2019 08 08
  * Copyright (c) 2019 iTarget.binkery.com. All rights reserved.
  */
-enum class TargetType(val value: Int, val title: String) {
+enum class TargetType(val value: Int, val title: String, val description: String) {
 
-    // 一天打卡多次，记录每次打卡时间。比如记录每天喝水次数
-    // 一天打卡多次，记录每次打卡时长。比如记录每天看书的时间
-    // 一天打一次卡，不记录打卡时间。比如每天一篇文章编写
-    // 一天打一次卡，记录打卡时间。比如每天起床时间，睡觉时间
-    //
 
-    MANY_COUNT(0, "每日多次打卡"), MANY_TIME(1, "每日多次计时"), ONE_COUNT(2, "每日单次打卡"), ONE_TIME(3, "每日定时打卡");
+    MANY_COUNT(0, "计次打卡", "记录每次打卡的时间，以完成规定打卡次数为目标"),
+    MANY_TIME(1, "计时打卡", "记录每次打卡的时间，累计打卡时间总和达到设定时间为目标");
 
     companion object {
 

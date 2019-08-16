@@ -58,24 +58,16 @@
 
     <TextView
         android:id="@+id/vDelete"
+        style="@style/DeteleButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:gravity="center"
-        android:padding="8dp"
         android:text="删除" />
 
     <TextView
         android:id="@+id/vAddItem"
+        style="@style/SaveButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:background="@color/color_46A0F0"
-        android:gravity="center"
-        android:paddingBottom="16dp"
-        android:paddingTop="16dp"
-        android:text="保存"
-        android:textColor="@color/color_white"
-        android:textSize="16dp" />
+        android:text="保存" />
 
 </LinearLayout>

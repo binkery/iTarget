@@ -9,6 +9,7 @@ import com.binkery.itarget.dialog.Dialogs
 import com.binkery.itarget.dialog.OnTextChangedListener
 import com.binkery.itarget.sqlite.DBHelper
 import com.binkery.itarget.sqlite.ItemEntity
+import com.binkery.itarget.sqlite.TargetEntity
 import com.binkery.itarget.ui.activity.BaseTargetDetailActivity
 import com.binkery.itarget.utils.Const
 import com.binkery.itarget.utils.TextFormater
@@ -42,11 +43,16 @@ class CheckInActivity : BaseActivity() {
             startActivity(intent)
         })
 
-        updateView()
+        updateView(targetEntity)
     }
 
 
-    private fun updateView() {
+    private fun updateView(targetEntity: TargetEntity) {
+        setTitle(targetEntity.name)
+
+        vCurrentDate.text = TextFormater.yyyymmdd(System.currentTimeMillis())
+        vCurrentTime.text = TextFormater.hhmm(System.currentTimeMillis())
+
         when (mTargetType) {
             TargetType.MANY_TIME -> {
                 val itemEntity = DBHelper.getInstance().itemDao().queryItemEndTimeNull(mTargetId)
@@ -59,7 +65,7 @@ class CheckInActivity : BaseActivity() {
                         item.uuid = UUID.randomUUID().toString()
                         item.startTime = System.currentTimeMillis() / Const.ONE_MINUTE * Const.ONE_MINUTE
                         DBHelper.getInstance().itemDao().insertItem(item)
-                        updateView()
+                        updateView(targetEntity)
                     })
                 } else {
                     vStartTime.visibility = View.VISIBLE

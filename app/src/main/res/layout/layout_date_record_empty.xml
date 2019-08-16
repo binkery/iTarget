@@ -5,16 +5,11 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/vDateTime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/vAddItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="Add Item"
+        android:text="此地无银~~"
         android:textColor="@color/color_46A0F0" />
+
 
 </RelativeLayout>

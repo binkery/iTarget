@@ -18,8 +18,13 @@ class TextFormater {
             return format.format(dateTime)
         }
 
-        fun hhmm(ms:Long):String{
+        fun hhmm(ms: Long): String {
             val format = SimpleDateFormat("HH:mm")
+            return format.format(ms)
+        }
+
+        fun yyyymmdd(ms: Long): String {
+            val format = SimpleDateFormat("yyyy.MM.dd")
             return format.format(ms)
         }
 
@@ -49,7 +54,7 @@ class TextFormater {
             return (mins / 60).toString() + "小时" + (mins % 60) + "分钟"
         }
 
-        fun durationSumChar(duration: Long):String{
+        fun durationSumChar(duration: Long): String {
             val mins = duration / 60_000
             return (mins / 60).toString() + ":" + (mins % 60)
         }

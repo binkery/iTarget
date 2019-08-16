@@ -15,31 +15,20 @@
         android:text="每日定时打卡"
         android:textColor="@color/color_white" />
 
-    <TextView
-        android:id="@+id/vTargetTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/vTargetType"
-        android:layout_below="@id/vTargetType"
-        android:text="每日 7：30 前打卡"
-        android:textColor="@color/color_white" />
-
-    <TextView
-        android:id="@+id/vTargetSetting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="8dp"
-        android:padding="8dp"
-        android:text="设置"
-        android:textColor="@color/color_white"
-        android:textSize="14dp" />
+    <!--<TextView-->
+    <!--android:id="@+id/vTargetTitle"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignLeft="@+id/vTargetType"-->
+    <!--android:layout_below="@id/vTargetType"-->
+    <!--android:text="每日 7：30 前打卡"-->
+    <!--android:textColor="@color/color_white" />-->
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/vTargetTitle"
+        android:layout_below="@+id/vTargetType"
         android:background="@color/color_46A0F0"
         android:orientation="horizontal"
         android:paddingBottom="16dp"
@@ -65,4 +54,18 @@
             android:layout_weight="1" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/vTargetSetting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="8dp"
+        android:paddingBottom="4dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="4dp"
+        android:text="设置"
+        android:textColor="@color/color_white"
+        android:textSize="14dp" />
 </merge>

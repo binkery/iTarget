@@ -14,6 +14,7 @@ import com.binkery.itarget.base.BaseActivity
 import com.binkery.itarget.sqlite.DBHelper
 import com.binkery.itarget.sqlite.ItemEntity
 import com.binkery.itarget.ui.AddItemActivity
+import com.binkery.itarget.ui.SettingActivity
 import com.binkery.itarget.ui.TargetType
 import com.binkery.itarget.utils.Const
 import com.binkery.itarget.utils.TextFormater
@@ -29,7 +30,7 @@ import kotlinx.android.synthetic.main.activity_target_detail_base.*
 class BaseTargetDetailActivity : BaseActivity() {
 
     private var mTargetId = -1
-    private var mTargetType = TargetType.ONE_COUNT
+    private var mTargetType = TargetType.MANY_COUNT
     private var mRecordAdapter = DateRecordAdapter(this, mTargetId)
     private var mItemList: MutableList<ItemEntity> = arrayListOf()
 
@@ -53,6 +54,12 @@ class BaseTargetDetailActivity : BaseActivity() {
         vRecyclerView.layoutManager = LinearLayoutManager(this)
         vRecyclerView.adapter = mRecordAdapter
         updateView(System.currentTimeMillis())
+
+        vTargetLayout.setSettingClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                SettingActivity.start(this@BaseTargetDetailActivity, mTargetId)
+            }
+        })
     }
 
 
@@ -66,12 +73,6 @@ class BaseTargetDetailActivity : BaseActivity() {
                 }
 
             }
-            TargetType.ONE_COUNT -> {
-                when {
-                    list.isEmpty() -> ""
-                    else -> TextFormater.hhmm(list[0].startTime)
-                }
-            }
             TargetType.MANY_TIME -> {
                 when {
                     list.isEmpty() -> ""
@@ -83,15 +84,9 @@ class BaseTargetDetailActivity : BaseActivity() {
                         if (sum == 0L) {
                             ""
                         } else {
-                            TextFormater.durationSum(sum)
+                            TextFormater.durationMins(sum)
                         }
                     }
-                }
-            }
-            TargetType.ONE_TIME -> {
-                when {
-                    list.isEmpty() -> ""
-                    else -> TextFormater.durationSum(list[0].endTime - list[0].startTime)
                 }
             }
         }
@@ -101,7 +96,6 @@ class BaseTargetDetailActivity : BaseActivity() {
 
     private fun onDateChanged(ms: Long, list: List<ItemEntity>) {
         when (mTargetType) {
-            TargetType.ONE_COUNT -> onDateChangedOneCount(ms, list)
             TargetType.MANY_COUNT -> onDateChangedManyCount(ms, list)
             TargetType.MANY_TIME -> onDateChangeManyTime(ms, list)
         }
@@ -126,25 +120,6 @@ class BaseTargetDetailActivity : BaseActivity() {
     }
 
     private fun onDateChangeManyTime(ms: Long, list: List<ItemEntity>) {
-//        if (ms < System.currentTimeMillis() && ms + Const.ONE_DAY > System.currentTimeMillis()) {
-//            when {
-//                list.isEmpty() -> {
-//                    vAddItem.text = "开始"
-//                }
-//                list[0].endTime == 0L -> {
-//                    vAddItem.text = "结束"
-//                }
-//                else -> {
-//                    vAddItem.text = "开始"
-//                }
-//            }
-//
-//        } else {
-//            vAddItem.text = "新增"
-//        }
-    }
-
-    private fun onDateChangedOneCount(ms: Long, list: List<ItemEntity>) {
     }
 
     private fun onDateChangedManyCount(ms: Long, list: List<ItemEntity>) {
@@ -155,9 +130,7 @@ class BaseTargetDetailActivity : BaseActivity() {
 class DateRecordAdapter(activity: BaseTargetDetailActivity, val targetId: Int) : BaseAdapter<ItemEntity>(activity) {
 
     private val TYPE_EMPTY = 0
-    //    private val TYPE_ADD = 1
     private val TYPE_NORMAL = 2
-//    private val TYPE_GOING_ON = 3
 
     private var mItemList: MutableList<ItemEntity>? = null
     private var mTargetType: TargetType = TargetType.MANY_COUNT

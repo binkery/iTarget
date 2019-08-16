@@ -22,8 +22,6 @@ import kotlinx.android.synthetic.main.activity_add_target_type.*
  */
 class AddTargetTypeActivity : BaseActivity() {
 
-    private var mTargetName: String? = null
-
     override fun getContentLayoutId(): Int {
         return R.layout.activity_add_target_type
     }
@@ -31,8 +29,6 @@ class AddTargetTypeActivity : BaseActivity() {
     override fun onContentCreate(savedInstanceState: Bundle?) {
 
         setTitle("新增目标 - 选择打卡类型")
-
-        mTargetName = intent.getStringExtra("target_name")
 
         vRecyclerView.layoutManager = LinearLayoutManager(this)
         vRecyclerView.adapter = TargetTypeAdapter(this)
@@ -45,19 +41,16 @@ class AddTargetTypeActivity : BaseActivity() {
             requestCode == 101 && resultCode == Activity.RESULT_OK -> {
                 finish()
             }
-
         }
     }
 
 
     class TargetTypeAdapter(activity: AddTargetTypeActivity) : BaseAdapter<TargetType>(activity) {
 
-        private val types = arrayListOf<TargetType>(TargetType.MANY_COUNT, TargetType.MANY_TIME)
 
+        override fun getItem(position: Int): TargetType? = TargetType.values()[position]
 
-        override fun getItem(position: Int): TargetType? = types[position]
-
-        override fun getItemCount(): Int = types.size
+        override fun getItemCount(): Int = TargetType.values().size
 
         override fun getItemViewCardType(position: Int): Int = 0
 
@@ -80,28 +73,13 @@ class AddTargetTypeActivity : BaseActivity() {
         override fun getLayoutId(): Int = R.layout.layout_add_target_type_card
 
         override fun onBindView(entity: TargetType?, view: View) {
-            vTargetTypeName?.text = entity?.name
-            vTargetTypeTitle?.text = entity?.title
+            vTargetTypeName?.text = entity?.title
+            vTargetTypeTitle?.text = entity?.description
 
         }
 
         override fun onItemClick(entity: TargetType?, position: Int) {
-
-            val intent = Intent()
-            when (entity) {
-                TargetType.MANY_COUNT -> {
-                    intent.setClass(getActivity(), AddTargetManyCountActivity::class.java)
-                }
-                TargetType.MANY_TIME -> {
-                    intent.setClass(getActivity(), AddTargetManyTimeActivity::class.java)
-                }
-                else -> {
-                    Utils.toast(getContext()!!, "Unsupported.")
-                    return
-                }
-
-            }
-            getActivity()?.startActivityForResult(intent, 101)
+            AddTargetManyTimeActivity.start(getActivity()!!, entity?.value ?: TargetType.MANY_COUNT.value, 101)
         }
 
     }
