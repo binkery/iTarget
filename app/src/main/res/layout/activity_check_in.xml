@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/vStartTarget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@color/color_46A0F0"
+        android:padding="8dp"
+        android:text="开始打卡"
+        android:textColor="@color/color_white"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/vAddItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/vStartTarget"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:padding="8dp"
+        android:text="添加记录"
+        android:textColor="@color/color_46A0F0"
+        android:textSize="14dp" />
+
+
+    <TextView
+        android:id="@+id/vCurrentDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/vCurrentTime"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
+        android:text="2019.09.09"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/vCurrentTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/vStartTarget"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="72dp"
+        android:text="12:12"
+        android:textSize="24dp" />
+
+    <TextView
+        android:id="@+id/vStartTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/vStartTarget"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
+        android:text="开始时间：" />
+
+    <TextView
+        android:id="@+id/vTargetFlow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:padding="8dp"
+        android:text="统计和时间流"
+        android:textColor="@color/color_46A0F0" />
+
+</RelativeLayout>

@@ -37,9 +37,6 @@ enum class TargetType(val value: Int, val title: String) {
             return titles.toTypedArray()
         }
 
-//        fun size():Int{
-//            return
-//        }
     }
 
 }

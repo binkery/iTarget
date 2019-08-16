@@ -68,7 +68,7 @@ class TargetItemViewCard : BaseViewCard<TargetEntity>() {
 
     override fun onItemClick(entity: TargetEntity?, position: Int) {
 
-        val intent = Intent(getActivity(),BaseTargetDetailActivity::class.java)
+        val intent = Intent(getActivity(),CheckInActivity::class.java)
         intent.putExtra("target_id",entity?.id)
         getActivity()?.startActivity(intent)
 

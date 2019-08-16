@@ -8,6 +8,7 @@ import com.binkery.itarget.sqlite.DBHelper
 import com.binkery.itarget.sqlite.TargetEntity
 import com.binkery.itarget.ui.TargetType
 import com.binkery.itarget.dialog.Dialogs
+import com.binkery.itarget.dialog.OnNumberChangedListener
 import com.binkery.itarget.dialog.OnSingleChoiceItemSelectedListener
 import com.binkery.itarget.dialog.OnTextChangedListener
 import kotlinx.android.synthetic.main.activity_add_target_many_count.*
@@ -21,11 +22,7 @@ import java.util.*
 class AddTargetManyCountActivity : BaseActivity() {
 
     private var mStringTargetName: String = ""
-    private val mTargetMatches = arrayOf("最多", "最少")
-    private var mIntMatchType: Int = 0
-
-    private val mMatchValues = arrayOf("1", "2", "3", "4", "5")
-    private var mIntMatchValue: Int = 0
+    private var mIntMatchCount: Int = 1
 
 
     override fun getContentLayoutId(): Int = R.layout.activity_add_target_many_count
@@ -41,40 +38,41 @@ class AddTargetManyCountActivity : BaseActivity() {
                 override fun onTextChanged(text: String) {
                     vTargetName.setValue(text)
                     mStringTargetName = text
+                    if (mStringTargetName == "") {
+                        vSave.isEnabled = false
+                        vSave.setBackgroundResource(R.color.color_gray)
+                    } else {
+                        vSave.isEnabled = true
+                        vSave.setBackgroundResource(R.color.color_46A0F0)
+                    }
 
                 }
             })
         })
 
-        vMatchType.setValue(mTargetMatches[mIntMatchType])
-        vMatchType.setOnClickListener({
-            Dialogs.showSingleChoiceItems(this@AddTargetManyCountActivity, mTargetMatches, mIntMatchType, object : OnSingleChoiceItemSelectedListener {
-                override fun onSelected(which: Int, item: String) {
-                    mIntMatchType = which
-                    vMatchType.setValue(item)
-
+        vTargetMatch.setKey("每次打卡次数")
+        vTargetMatch.setValue(mIntMatchCount.toString())
+        vTargetMatch.setOnClickListener({
+            Dialogs.showNumberEditTextDialog(this, mIntMatchCount, "", object : OnNumberChangedListener {
+                override fun onChanged(value: Int) {
+                    if (value <= 0) {
+                        mIntMatchCount = 1
+                    } else {
+                        mIntMatchCount = value
+                    }
+                    vTargetMatch.setValue(mIntMatchCount.toString())
                 }
             })
         })
 
-        vMatchCount.setValue(mMatchValues[mIntMatchValue])
-        vMatchCount.setOnClickListener({
-            Dialogs.showSingleChoiceItems(this@AddTargetManyCountActivity, mMatchValues, mIntMatchValue, object : OnSingleChoiceItemSelectedListener {
-                override fun onSelected(which: Int, item: String) {
-                    mIntMatchValue = which
-                    vMatchCount.setValue(item)
-                }
-            })
-        })
-
-
+        vSave.isEnabled = false
+        vSave.setBackgroundResource(R.color.color_gray)
         vSave.setOnClickListener({
             val target = TargetEntity()
             target.uuid = UUID.randomUUID().toString()
             target.type = TargetType.MANY_COUNT.value
             target.name = mStringTargetName
-            target.data1 = mIntMatchType.toString()
-            target.data2 = mIntMatchValue.toString()
+            target.data1 = mIntMatchCount.toString()
             DBHelper.getInstance().targetDao().insertTarget(target)
             setResult(Activity.RESULT_OK)
             finish()

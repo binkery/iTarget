@@ -7,6 +7,7 @@ import android.view.View
 import com.binkery.itarget.R
 import com.binkery.itarget.base.BaseActivity
 import com.binkery.itarget.dialog.Dialogs
+import com.binkery.itarget.dialog.OnDeleteListener
 import com.binkery.itarget.dialog.OnMilliSecondsChangeListener
 import com.binkery.itarget.sqlite.DBHelper
 import com.binkery.itarget.sqlite.ItemEntity
@@ -24,18 +25,13 @@ class AddItemActivity : BaseActivity() {
 
     private var mItemId: Int = -1
     private var mTargetId: Int = -1
-    private var mBaseDateMs = 0L
-    private var mBaseTimeMs = 0L
-
 
     companion object {
 
-        fun startResult(activity: Activity, targetId: Int, itemId: Int, dateMs: Long, timeMs: Long, requestCode: Int) {
+        fun startResult(activity: Activity, targetId: Int, itemId: Int, requestCode: Int) {
             val intent = Intent(activity, AddItemActivity::class.java)
             intent.putExtra("target_id", targetId)
             intent.putExtra("item_id", itemId)
-            intent.putExtra("base_date", dateMs)
-            intent.putExtra("base_time", timeMs)
             activity.startActivityForResult(intent, requestCode)
         }
     }
@@ -43,12 +39,8 @@ class AddItemActivity : BaseActivity() {
     override fun getContentLayoutId(): Int = R.layout.activity_add_item
 
     override fun onContentCreate(savedInstanceState: Bundle?) {
-
-
         mItemId = intent.getIntExtra("item_id", -1)
         mTargetId = intent.getIntExtra("target_id", -1)
-        mBaseDateMs = intent.getLongExtra("base_date", 0L)
-        mBaseTimeMs = intent.getLongExtra("base_time", 0L)
 
         val targetEntity = DBHelper.getInstance().targetDao().queryTargetById(mTargetId)
         if (mTargetId == -1 || targetEntity == null) {
@@ -68,59 +60,83 @@ class AddItemActivity : BaseActivity() {
             TargetType.MANY_COUNT -> onCountTpye()
             TargetType.ONE_COUNT -> onCountTpye()
         }
+
+        if (mItemId != -1) {
+            vDelete.visibility = View.VISIBLE
+            vDelete.setOnClickListener({
+                Dialogs.showDeleteDialog(this, object : OnDeleteListener {
+                    override fun onDeleted() {
+                        val item = DBHelper.getInstance().itemDao().queryItemById(mItemId)
+                        DBHelper.getInstance().itemDao().deteteItem(item)
+                        setResult(Activity.RESULT_OK)
+                        finish()
+                    }
+                })
+            })
+        } else {
+            vDelete.visibility = View.GONE
+        }
     }
 
     private fun onTimeType() {
         vInputValue.visibility = View.GONE
 
-        if (mItemId == -1) {
-            vEndTime.visibility = View.GONE
-
-            var selectedTimeMs = getBaseDateTime(mBaseDateMs, mBaseTimeMs)
-            vStartTime.setKey("开始时间")
-            vStartTime.setValue(TextFormater.dataTimeWithoutSecond(selectedTimeMs))
-            vStartTime.setOnClickListener({
-                Dialogs.showTimePicker(this, mBaseDateMs, selectedTimeMs, object : OnMilliSecondsChangeListener {
-                    override fun onChanged(ms: Long) {
-                        vStartTime.setValue(TextFormater.dataTimeWithoutSecond(ms))
-                        selectedTimeMs = ms
-                    }
-                })
-            })
-
-            vAddItem.setOnClickListener({
-                insertOrUpdateItem(mTargetId, -1, selectedTimeMs, 0, 0, null)
-            })
-        } else {
+        var startTime = System.currentTimeMillis()
+        var endTime = System.currentTimeMillis()
+        var content = ""
+        if (mItemId != -1) {
             val item = DBHelper.getInstance().itemDao().queryItemById(mItemId)
-
-            var startTime = item.startTime
-            vStartTime.setKey("开始时间")
-            vStartTime.setValue(TextFormater.dataTimeWithoutSecond(startTime))
-            vStartTime.setOnClickListener({
-                Dialogs.showTimePicker(this, startTime, startTime, object : OnMilliSecondsChangeListener {
-                    override fun onChanged(ms: Long) {
-                        vStartTime.setValue(TextFormater.dataTimeWithoutSecond(ms))
-                        startTime = ms
-                    }
-                })
-            })
-
-            var endTime = if (item.endTime == 0L) getBaseDateTime(mBaseDateMs, mBaseTimeMs) else item.endTime
-            vEndTime.setKey("结束时间")
-            vEndTime.setValue(TextFormater.dataTimeWithoutSecond(endTime))
-            vEndTime.setOnClickListener({
-                Dialogs.showTimePicker(this, endTime, endTime, object : OnMilliSecondsChangeListener {
-                    override fun onChanged(ms: Long) {
-                        vEndTime.setValue(TextFormater.dataTimeWithoutSecond(ms))
-                        endTime = ms
-                    }
-                })
-            })
-            vAddItem.setOnClickListener({
-                insertOrUpdateItem(mTargetId, mItemId, startTime, endTime, 0, null)
-            })
+            startTime = item.startTime
+            endTime = item.endTime
+            content = item.content
         }
+
+        vStartTime.setKey("开始时间")
+        vStartTime.setValue(TextFormater.dataTimeWithoutSecond(startTime))
+        vStartTime.setOnClickListener({
+            Dialogs.showDateTimePicker(this, startTime, object : OnMilliSecondsChangeListener {
+                override fun onChanged(ms: Long) {
+                    vStartTime.setValue(TextFormater.dataTimeWithoutSecond(ms))
+                    startTime = ms
+                    if (startTime > endTime) {
+                        vAddItem.isEnabled = false
+                        vAddItem.setBackgroundResource(R.color.color_gray)
+                    } else {
+                        vAddItem.isEnabled = true
+                        vAddItem.setBackgroundResource(R.color.color_46A0F0)
+                    }
+                }
+            })
+        })
+
+        vEndTime.setKey("结束时间")
+        vEndTime.setValue(TextFormater.dataTimeWithoutSecond(endTime))
+        vEndTime.setOnClickListener({
+            Dialogs.showDateTimePicker(this, endTime, object : OnMilliSecondsChangeListener {
+                override fun onChanged(ms: Long) {
+                    vEndTime.setValue(TextFormater.dataTimeWithoutSecond(ms))
+                    endTime = ms
+                    if (startTime > endTime) {
+                        vAddItem.isEnabled = false
+                        vAddItem.setBackgroundResource(R.color.color_gray)
+                    } else {
+                        vAddItem.isEnabled = true
+                        vAddItem.setBackgroundResource(R.color.color_46A0F0)
+                    }
+                }
+            })
+        })
+
+
+
+        vContent.setText(content)
+
+        vAddItem.setOnClickListener({
+
+            content = vContent.text.toString()
+            insertOrUpdateItem(mTargetId, mItemId, startTime, endTime, 0, content)
+        })
+
     }
 
     private fun onCountTpye() {
@@ -128,37 +144,25 @@ class AddItemActivity : BaseActivity() {
         vInputValue.visibility = View.GONE
 
         vStartTime.setKey("打卡时间")
-        var selectedTimeMs = getBaseDateTime(mBaseDateMs, mBaseTimeMs)
+        var startTime = System.currentTimeMillis()
         if (mItemId != -1) {
             val item = DBHelper.getInstance().itemDao().queryItemById(mItemId)
-            selectedTimeMs = item.startTime
+            startTime = item.startTime
         }
 
-        vStartTime.setValue(TextFormater.dataTimeWithoutSecond(selectedTimeMs))
+        vStartTime.setValue(TextFormater.dataTimeWithoutSecond(startTime))
         vStartTime.setOnClickListener({
-            Dialogs.showTimePicker(this, mBaseDateMs, selectedTimeMs, object : OnMilliSecondsChangeListener {
+            Dialogs.showDateTimePicker(this, startTime, object : OnMilliSecondsChangeListener {
                 override fun onChanged(ms: Long) {
                     vStartTime.setValue(TextFormater.dataTimeWithoutSecond(ms))
-                    selectedTimeMs = ms
+                    startTime = ms
                 }
             })
         })
         vAddItem.setOnClickListener({
-            insertOrUpdateItem(mTargetId, mItemId, selectedTimeMs, 0, 0, null)
+            val content = vContent.text.toString()
+            insertOrUpdateItem(mTargetId, mItemId, startTime, 0, 0, content)
         })
-    }
-
-    private fun getBaseDateTime(baseDate: Long, baseTime: Long): Long {
-        val calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8:00"))
-        calendar.timeInMillis = baseDate
-        val currentYear = calendar.get(Calendar.YEAR)
-        val currentMonth = calendar.get(Calendar.MONTH)
-        val currentDay = calendar.get(Calendar.DAY_OF_MONTH)
-        calendar.timeInMillis = baseTime
-        val currentHour = calendar.get(Calendar.HOUR_OF_DAY)
-        val currentMinute = calendar.get(Calendar.MINUTE)
-        calendar.set(currentYear, currentMonth, currentDay, currentHour, currentMinute, 0)
-        return calendar.timeInMillis
     }
 
     private fun insertOrUpdateItem(targetId: Int, itemId: Int, startTime: Long, endTime: Long, value: Long, content: String?) {

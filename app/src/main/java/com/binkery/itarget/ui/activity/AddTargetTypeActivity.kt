@@ -52,9 +52,12 @@ class AddTargetTypeActivity : BaseActivity() {
 
     class TargetTypeAdapter(activity: AddTargetTypeActivity) : BaseAdapter<TargetType>(activity) {
 
-        override fun getItem(position: Int): TargetType? = TargetType.values()[position]
+        private val types = arrayListOf<TargetType>(TargetType.MANY_COUNT,TargetType.MANY_TIME)
 
-        override fun getItemCount(): Int = TargetType.values().size
+
+        override fun getItem(position: Int): TargetType? = types[position]
+
+        override fun getItemCount(): Int = types.size
 
         override fun getItemViewCardType(position: Int): Int = 0
 
@@ -83,9 +86,6 @@ class AddTargetTypeActivity : BaseActivity() {
         }
 
         override fun onItemClick(entity: TargetType?, position: Int) {
-//            val intent = Intent(getActivity(), AddTargetNameActivity::class.java)
-//            intent.putExtra("target_type", entity?.value)
-//            getActivity()?.startActivityForResult(intent, 101)
 
             val intent = Intent()
             when (entity) {

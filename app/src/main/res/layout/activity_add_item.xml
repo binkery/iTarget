@@ -31,10 +31,39 @@
         app:key="值"
         app:value="" />
 
+
+    <com.binkery.itarget.widgets.SettingColumn
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:key="备注" />
+
+    <EditText
+        android:id="@+id/vContent"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:background="@color/color_white"
+        android:gravity="top"
+        android:hint="写点什么"
+        android:paddingBottom="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp" />
+
+
     <View
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/vDelete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="删除" />
 
     <TextView
         android:id="@+id/vAddItem"
