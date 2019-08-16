@@ -52,7 +52,7 @@ class AddTargetTypeActivity : BaseActivity() {
 
     class TargetTypeAdapter(activity: AddTargetTypeActivity) : BaseAdapter<TargetType>(activity) {
 
-        private val types = arrayListOf<TargetType>(TargetType.MANY_COUNT,TargetType.MANY_TIME)
+        private val types = arrayListOf<TargetType>(TargetType.MANY_COUNT, TargetType.MANY_TIME)
 
 
         override fun getItem(position: Int): TargetType? = types[position]
@@ -89,9 +89,6 @@ class AddTargetTypeActivity : BaseActivity() {
 
             val intent = Intent()
             when (entity) {
-                TargetType.ONE_COUNT -> {
-                    intent.setClass(getActivity(), AddTargetOneCountActivity::class.java)
-                }
                 TargetType.MANY_COUNT -> {
                     intent.setClass(getActivity(), AddTargetManyCountActivity::class.java)
                 }

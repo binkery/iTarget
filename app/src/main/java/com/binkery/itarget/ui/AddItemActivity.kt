@@ -55,10 +55,8 @@ class AddItemActivity : BaseActivity() {
 
         val targetType = TargetType.find(targetEntity.type)
         when (targetType) {
-            TargetType.ONE_TIME -> onTimeType()
             TargetType.MANY_TIME -> onTimeType()
             TargetType.MANY_COUNT -> onCountTpye()
-            TargetType.ONE_COUNT -> onCountTpye()
         }
 
         if (mItemId != -1) {

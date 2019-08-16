@@ -5,12 +5,8 @@ import android.view.View
 import android.widget.TextView
 import com.binkery.itarget.R
 import com.binkery.itarget.adapter.BaseViewCard
-import com.binkery.itarget.router.Router
 import com.binkery.itarget.sqlite.DBHelper
 import com.binkery.itarget.sqlite.TargetEntity
-import com.binkery.itarget.ui.activity.BaseTargetDetailActivity
-import com.binkery.itarget.ui.activity.ManyCountActivity
-import com.binkery.itarget.ui.activity.ManyTimeActivity
 import com.binkery.itarget.utils.TextFormater
 
 /**
@@ -68,24 +64,9 @@ class TargetItemViewCard : BaseViewCard<TargetEntity>() {
 
     override fun onItemClick(entity: TargetEntity?, position: Int) {
 
-        val intent = Intent(getActivity(),CheckInActivity::class.java)
-        intent.putExtra("target_id",entity?.id)
+        val intent = Intent(getActivity(), CheckInActivity::class.java)
+        intent.putExtra("target_id", entity?.id)
         getActivity()?.startActivity(intent)
-
-//        when (TargetType.find(entity?.type!!)) {
-//            TargetType.ONE_COUNT -> Router.startEveryDayOnTimeActivity(getActivity()!!, entity.id)
-//            TargetType.MANY_COUNT -> {
-//                val intent = Intent(getActivity(),ManyCountActivity::class.java)
-//                intent.putExtra("target_id",entity.id)
-//                getActivity()?.startActivity(intent)
-//            }
-//            TargetType.MANY_TIME->{
-//                val intent = Intent(getActivity(),ManyTimeActivity::class.java)
-//                intent.putExtra("target_id",entity.id)
-//                getActivity()?.startActivity(intent)
-//            }
-//            else -> Router.startTargetViewActivity(getActivity()!!, entity.id)
-//        }
 
     }
 

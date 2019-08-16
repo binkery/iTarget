@@ -2,9 +2,8 @@ package com.binkery.itarget.router
 
 import android.app.Activity
 import android.content.Intent
-import com.binkery.itarget.ui.*
-import com.binkery.itarget.ui.TargetViewActivity
-import com.binkery.itarget.ui.activity.OneCountActivity
+import com.binkery.itarget.ui.RecordActivity
+import com.binkery.itarget.ui.SettingActivity
 
 /**
  * Create by binkery@gmail.com
@@ -14,21 +13,6 @@ import com.binkery.itarget.ui.activity.OneCountActivity
 class Router {
 
     companion object {
-
-        fun startTargetHomeActivity() {
-
-        }
-
-        fun startTargetViewActivity(activity: Activity, targetId: Int) {
-            val intent = Intent(activity, TargetViewActivity::class.java)
-            intent.putExtra("target_id", targetId)
-            activity.startActivity(intent)
-        }
-
-        fun startAddTargetActivity(activity: Activity) {
-            val intent = Intent(activity, AddTargetActivity::class.java)
-            activity.startActivity(intent)
-        }
 
         fun startAddItemActivity(activity: Activity, targetId: Int, itemId: Int?) {
 //            val intent = Intent(activity, AddItemActivity::class.java)
@@ -46,13 +30,6 @@ class Router {
 
         fun startSettingActivity(activity: Activity, targetId: Int) {
             val intent = Intent(activity, SettingActivity::class.java)
-            intent.putExtra("target_id", targetId)
-            activity.startActivity(intent)
-        }
-
-
-        fun startEveryDayOnTimeActivity(activity: Activity, targetId: Int) {
-            val intent = Intent(activity, OneCountActivity::class.java)
             intent.putExtra("target_id", targetId)
             activity.startActivity(intent)
         }
