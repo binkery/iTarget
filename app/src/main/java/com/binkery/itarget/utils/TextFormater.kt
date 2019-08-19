@@ -23,6 +23,11 @@ class TextFormater {
             return format.format(ms)
         }
 
+        fun  hhmmss(ms: Long):String{
+            val format = SimpleDateFormat("HH:mm:ss")
+            return format.format(ms)
+        }
+
         fun yyyymmdd(ms: Long): String {
             val format = SimpleDateFormat("yyyy.MM.dd")
             return format.format(ms)
@@ -34,10 +39,17 @@ class TextFormater {
         }
 
         fun duration(duration: Long): String {
-            var hours = duration / (1000 * 60 * 60)
-            var minutes = (duration / (1000 * 60)) % 60
-            var seconds = (duration / 1000) % 60
-            return hours.toString() + ":" + minutes.toString() + ":" + seconds.toString()
+            val hours = duration / (1000 * 60 * 60)
+            val minutes = (duration / (1000 * 60)) % 60
+            val seconds = (duration / 1000) % 60
+            val builder = StringBuilder()
+            if (hours < 10) builder.append("0")
+            builder.append(hours).append(":")
+            if (minutes < 10) builder.append("0")
+            builder.append(minutes).append(":")
+            if (seconds < 10) builder.append("0")
+            builder.append(seconds)
+            return builder.toString()
         }
 
         fun getTodayMs(): Long {

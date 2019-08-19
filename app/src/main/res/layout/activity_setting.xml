@@ -43,17 +43,15 @@
 
 
         <com.binkery.itarget.widgets.SettingColumn
+            android:id="@+id/vTargetDelete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" />
-
-        <com.binkery.itarget.widgets.SettingColumn
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1dp" />
+            android:layout_marginTop="8dp"
+            app:key="删除目标" />
 
 
         <com.binkery.itarget.widgets.SettingColumn
+            android:id="@+id/vAppAbout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"

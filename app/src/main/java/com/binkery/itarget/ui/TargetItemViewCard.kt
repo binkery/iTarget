@@ -21,12 +21,14 @@ class TargetItemViewCard : BaseViewCard<TargetEntity>() {
     private var vTargetStatus: TextView? = null
     private var vTargetMatch: TextView? = null
     private var vTargetType: TextView? = null
+    private var vTargetCount: TextView? = null
 
     override fun onCreateView(view: View) {
         vTargetName = view.findViewById(R.id.vTargetName)
         vTargetStatus = view.findViewById(R.id.vTargetStatus)
         vTargetMatch = view.findViewById(R.id.vTargetMatch)
         vTargetType = view.findViewById(R.id.vTargetType)
+        vTargetCount = view.findViewById(R.id.vTargetCount)
     }
 
     override fun getLayoutId(): Int = R.layout.layout_home_card_common
@@ -44,7 +46,7 @@ class TargetItemViewCard : BaseViewCard<TargetEntity>() {
                 result.forEach({
                     if (it.endTime > 0) sum += (it.endTime - it.startTime)
                 })
-                (sum/Const.ONE_MINUTE).toInt()
+                (sum / Const.ONE_MINUTE).toInt()
             }
             TargetType.MANY_COUNT -> {
                 val result = list.filter { it.startTime > TextFormater.getTodayMs() && it.startTime < TextFormater.getTodayMs() + Const.ONE_DAY }
@@ -59,6 +61,19 @@ class TargetItemViewCard : BaseViewCard<TargetEntity>() {
         vTargetStatus?.text = when (TargetType.find(entity.type)) {
             TargetType.MANY_COUNT -> "(" + result + "次/" + match + "次)"
             else -> "(" + result + "分钟/" + match + "分钟)"
+        }
+
+        when (TargetType.find(entity.type)) {
+            TargetType.MANY_COUNT -> {
+                vTargetCount?.text = list.size.toString() + "次"
+            }
+            TargetType.MANY_TIME -> {
+                var sum = 0L
+                list.forEach({
+                    if (it.endTime > 0) sum += (it.endTime - it.startTime)
+                })
+                vTargetCount?.text = TextFormater.durationMins(sum) + "/" + list.size + "次"
+            }
         }
 
     }

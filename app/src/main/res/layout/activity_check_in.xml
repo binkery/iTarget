@@ -11,7 +11,10 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:background="@color/color_46A0F0"
-        android:padding="8dp"
+        android:paddingBottom="8dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="8dp"
         android:text="开始打卡"
         android:textColor="@color/color_white"
         android:textSize="20dp" />
@@ -37,7 +40,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="8dp"
         android:text="2019.09.09"
-        android:textSize="18dp" />
+        android:textSize="16dp" />
 
     <TextView
         android:id="@+id/vCurrentTime"
@@ -53,10 +56,21 @@
         android:id="@+id/vStartTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/vStartTarget"
+        android:layout_below="@+id/vStartTarget"
+        android:textSize="16dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="72dp"
         android:text="开始时间：" />
+
+    <TextView
+        android:id="@+id/vDuration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/vStartTime"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
+        android:text="12:12"
+        android:textSize="24dp" />
 
     <TextView
         android:id="@+id/vTargetFlow"
@@ -67,6 +81,28 @@
         android:layout_marginBottom="16dp"
         android:padding="8dp"
         android:text="统计和时间流"
+        android:textColor="@color/color_46A0F0" />
+
+    <TextView
+        android:id="@+id/vTargetSetting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/vTargetFlow"
+        android:layout_marginLeft="36dp"
+        android:layout_toRightOf="@+id/vTargetFlow"
+        android:padding="8dp"
+        android:text="设置"
+        android:textColor="@color/color_46A0F0" />
+
+    <TextView
+        android:id="@+id/vTargetRecord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/vTargetFlow"
+        android:layout_marginRight="36dp"
+        android:layout_toLeftOf="@+id/vTargetFlow"
+        android:padding="8dp"
+        android:text="打卡记录"
         android:textColor="@color/color_46A0F0" />
 
 </RelativeLayout>

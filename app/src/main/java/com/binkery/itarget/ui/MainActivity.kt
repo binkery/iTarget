@@ -3,12 +3,13 @@ package com.binkery.itarget.ui
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.binkery.itarget.R
 import com.binkery.itarget.base.BaseActivity
-import com.binkery.itarget.ui.activity.AddTargetTypeActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.base_activity.*
+
 /**
  * Create by binkery@gmail.com
  * on 2019 08 08
@@ -21,14 +22,10 @@ class MainActivity : BaseActivity() {
     override fun getContentLayoutId(): Int = R.layout.activity_main
 
     override fun onContentCreate(savedInstanceState: Bundle?) {
-        vAddTarget.setOnClickListener(
-                object : View.OnClickListener {
-                    override fun onClick(v: View?) {
-                        val intent = Intent(this@MainActivity, AddTargetTypeActivity::class.java)
-                        startActivity(intent)
-                    }
-                }
-        )
+        vAddTarget.setOnClickListener({
+            val intent = Intent(this@MainActivity, AddTargetTypeActivity::class.java)
+            startActivity(intent)
+        })
 
         vActionBarTitle.text = "iTarget"
         vActionBarBack.setOnClickListener(object : View.OnClickListener {

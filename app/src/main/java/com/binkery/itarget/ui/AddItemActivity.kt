@@ -60,18 +60,20 @@ class AddItemActivity : BaseActivity() {
         }
 
         if (mItemId != -1) {
+            setTitle("修改记录")
             vDelete.visibility = View.VISIBLE
             vDelete.setOnClickListener({
-                Dialogs.showDeleteDialog(this, object : OnDeleteListener {
+                Dialogs.showDeleteDialog(this,"您是否要删除该打卡记录？", object : OnDeleteListener {
                     override fun onDeleted() {
                         val item = DBHelper.getInstance().itemDao().queryItemById(mItemId)
-                        DBHelper.getInstance().itemDao().deteteItem(item)
+                        DBHelper.getInstance().itemDao().deleteItem(item)
                         setResult(Activity.RESULT_OK)
                         finish()
                     }
                 })
             })
         } else {
+            setTitle("添加记录")
             vDelete.visibility = View.GONE
         }
     }

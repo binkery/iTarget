@@ -11,5 +11,6 @@ class Const {
         const val ONE_MINUTE = 60_000
         const val ONE_DAY = 1000L * 60 * 60 * 24
         const val ONE_YEAR = 1000L * 60 * 60 * 24 * 365
+        const val ONE_SECOND = 1000L
     }
 }

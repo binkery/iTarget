@@ -4,7 +4,9 @@ import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
+import com.binkery.itarget.R
 import java.lang.ref.WeakReference
 
 /**
@@ -49,7 +51,16 @@ abstract class BaseAdapter<Entity>(activity: Activity) : RecyclerView.Adapter<Ba
 
     abstract fun onCreateViewCard(parent: ViewGroup?, viewType: Int): BaseViewCard<Entity>
 
-    class ViewHolder<E>(itemView: View, val viewCard: BaseViewCard<E>) : RecyclerView.ViewHolder(itemView) {
+    override fun onViewAttachedToWindow(holder: ViewHolder<Entity>?) {
+        super.onViewAttachedToWindow(holder)
+        holder?.itemView?.animation = AnimationUtils.loadAnimation(mActivityRef.get(), R.anim.item_animation_fall_down)
+    }
 
+    override fun onViewDetachedFromWindow(holder: ViewHolder<Entity>?) {
+        super.onViewDetachedFromWindow(holder)
+        holder?.itemView?.clearAnimation()
+    }
+
+    class ViewHolder<E>(itemView: View, val viewCard: BaseViewCard<E>) : RecyclerView.ViewHolder(itemView) {
     }
 }

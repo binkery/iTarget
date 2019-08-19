@@ -49,5 +49,14 @@
         android:textColor="#D8770B"
         tools:text="类型" />
 
+    <TextView
+        android:id="@+id/vTargetCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/vTargetType"
+        android:layout_below="@id/vTargetType"
+        android:layout_marginTop="4dp"
+        android:text="11 次" />
+
 
 </RelativeLayout>

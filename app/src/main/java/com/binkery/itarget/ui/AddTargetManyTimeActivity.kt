@@ -1,4 +1,4 @@
-package com.binkery.itarget.ui.activity
+package com.binkery.itarget.ui
 
 import android.app.Activity
 import android.content.Intent
@@ -10,7 +10,6 @@ import com.binkery.itarget.dialog.OnNumberChangedListener
 import com.binkery.itarget.dialog.OnTextChangedListener
 import com.binkery.itarget.sqlite.DBHelper
 import com.binkery.itarget.sqlite.TargetEntity
-import com.binkery.itarget.ui.TargetType
 import com.binkery.itarget.utils.Utils
 import kotlinx.android.synthetic.main.activity_add_target_many_time.*
 import java.util.*
@@ -45,7 +44,7 @@ class AddTargetManyTimeActivity : BaseActivity() {
 
         vTargetName.setValue(mStringTargetName)
         vTargetName.setOnClickListener({
-            Dialogs.showEditTextDialog(this, mStringTargetName, "title", object : OnTextChangedListener {
+            Dialogs.showEditTextDialog(this, mStringTargetName, "项目名字", object : OnTextChangedListener {
                 override fun onTextChanged(text: String) {
                     vTargetName.setValue(text)
                     mStringTargetName = text
@@ -68,7 +67,7 @@ class AddTargetManyTimeActivity : BaseActivity() {
 
 
         vTargetMatch.setOnClickListener({
-            Dialogs.showNumberEditTextDialog(this, mIntTargetMatch, "", object : OnNumberChangedListener {
+            Dialogs.showNumberEditTextDialog(this, mIntTargetMatch, "设定目标", object : OnNumberChangedListener {
                 override fun onChanged(value: Int) {
                     if (value <= 0) {
                         mIntTargetMatch = 1

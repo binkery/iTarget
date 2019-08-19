@@ -4,7 +4,6 @@ import android.view.View
 import android.widget.TextView
 import com.binkery.itarget.R
 import com.binkery.itarget.adapter.BaseViewCard
-import com.binkery.itarget.router.Router
 import com.binkery.itarget.sqlite.ItemEntity
 import com.binkery.itarget.utils.TextFormater
 
@@ -17,34 +16,50 @@ class RecordViewCard(private val targetType: TargetType) : BaseViewCard<ItemEnti
 
     private var vStartTime: TextView? = null
     private var vEndTime: TextView? = null
-    private var vValue: TextView? = null
+    private var vTitle: TextView? = null
+    private var vContent: TextView? = null
 
     override fun onCreateView(view: View) {
         vStartTime = view.findViewById(R.id.vStartTime)
         vEndTime = view.findViewById(R.id.vEndTime)
-        vValue = view.findViewById(R.id.vValue)
+        vTitle = view.findViewById(R.id.vTitle)
+        vContent = view.findViewById(R.id.vContent)
     }
 
     override fun getLayoutId(): Int = R.layout.layout_record_card_count
 
     override fun onBindView(entity: ItemEntity?, view: View) {
-        when (targetType) {
-            TargetType.MANY_COUNT -> {
-                vStartTime?.text = "打卡时间："
-                vEndTime?.text = TextFormater.dataTimeWithoutSecond(entity?.startTime!!)
+        vStartTime?.text = TextFormater.hhmm(entity?.startTime!!)
+
+        when {
+            targetType == TargetType.MANY_COUNT -> {
+                vEndTime?.text = ""
+                vTitle?.text = "增加了一条打卡"
+                vContent?.text = if (entity.content == "") "没什么都没有写" else entity.content
             }
-            TargetType.MANY_TIME -> {
-                vStartTime?.text = TextFormater.dataTimeWithoutSecond(entity?.startTime!!)
-                if (entity?.endTime!! > 0) {
-                    vEndTime?.text = TextFormater.dataTimeWithoutSecond(entity.endTime)
-                    vValue?.text = TextFormater.durationMins(entity.endTime - entity.startTime)
-                }
+            targetType == TargetType.MANY_TIME && entity.endTime == 0L -> {
+                vEndTime?.text = ""
+                vTitle?.text = "打卡进行中..."
+                vContent?.text = ""
+
+            }
+            targetType == TargetType.MANY_TIME -> {
+                vEndTime?.text = TextFormater.hhmm(entity.endTime)
+                vTitle?.text = "增加了一条打卡，共积累 " + (TextFormater.durationMins(entity.endTime - entity.startTime))
+                vContent?.text = if (entity.content == "") "没什么都没有写" else entity.content
             }
         }
     }
 
     override fun onItemClick(entity: ItemEntity?, position: Int) {
-        Router.startAddItemActivity(getActivity()!!, entity?.targetId!!, entity!!.id)
+        when {
+            targetType == TargetType.MANY_TIME && entity?.endTime == 0L -> {
+
+            }
+            else -> {
+                AddItemActivity.startResult(getActivity()!!, entity?.targetId!!, entity.id, 101)
+            }
+        }
     }
 
 }

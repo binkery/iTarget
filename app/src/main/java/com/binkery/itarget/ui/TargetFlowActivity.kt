@@ -1,4 +1,4 @@
-package com.binkery.itarget.ui.activity
+package com.binkery.itarget.ui
 
 import android.app.Activity
 import android.content.Intent
@@ -13,9 +13,6 @@ import com.binkery.itarget.adapter.BaseViewCard
 import com.binkery.itarget.base.BaseActivity
 import com.binkery.itarget.sqlite.DBHelper
 import com.binkery.itarget.sqlite.ItemEntity
-import com.binkery.itarget.ui.AddItemActivity
-import com.binkery.itarget.ui.SettingActivity
-import com.binkery.itarget.ui.TargetType
 import com.binkery.itarget.utils.Const
 import com.binkery.itarget.utils.TextFormater
 import com.binkery.itarget.utils.Utils
@@ -27,7 +24,7 @@ import kotlinx.android.synthetic.main.activity_target_detail_base.*
  * on 2019 08 13
  * Copyright (c) 2019 iTarget.binkery.com. All rights reserved.
  */
-class BaseTargetDetailActivity : BaseActivity() {
+class TargetFlowActivity : BaseActivity() {
 
     private var mTargetId = -1
     private var mTargetType = TargetType.MANY_COUNT
@@ -57,7 +54,7 @@ class BaseTargetDetailActivity : BaseActivity() {
 
         vTargetLayout.setSettingClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
-                SettingActivity.start(this@BaseTargetDetailActivity, mTargetId)
+                SettingActivity.start(this@TargetFlowActivity, mTargetId)
             }
         })
     }
@@ -127,7 +124,7 @@ class BaseTargetDetailActivity : BaseActivity() {
 
 }
 
-class DateRecordAdapter(activity: BaseTargetDetailActivity, val targetId: Int) : BaseAdapter<ItemEntity>(activity) {
+private class DateRecordAdapter(activity: TargetFlowActivity, val targetId: Int) : BaseAdapter<ItemEntity>(activity) {
 
     private val TYPE_EMPTY = 0
     private val TYPE_NORMAL = 2
@@ -173,14 +170,14 @@ class DateRecordAdapter(activity: BaseTargetDetailActivity, val targetId: Int) :
         Utils.log("detail", "viewType = " + viewType)
         return when (viewType) {
             TYPE_EMPTY -> EmptyRecordViewCard(mTargetType)
-            TYPE_NORMAL -> DateRecordViewCard(mTargetType)
-            else -> DateRecordViewCard(mTargetType)
+            TYPE_NORMAL -> RecordViewCard(mTargetType)
+            else -> RecordViewCard(mTargetType)
         }
     }
 
 }
 
-class EmptyRecordViewCard(private val targetType: TargetType) : BaseViewCard<ItemEntity>() {
+private class EmptyRecordViewCard(private val targetType: TargetType) : BaseViewCard<ItemEntity>() {
 
     override fun onCreateView(view: View) {
 
@@ -197,53 +194,53 @@ class EmptyRecordViewCard(private val targetType: TargetType) : BaseViewCard<Ite
 
 }
 
-class DateRecordViewCard(private val targetType: TargetType) : BaseViewCard<ItemEntity>() {
-    private var vStartTime: TextView? = null
-    private var vEndTime: TextView? = null
-    private var vTitle: TextView? = null
-    private var vContent: TextView? = null
-
-    override fun onCreateView(view: View) {
-        vStartTime = view.findViewById(R.id.vStartTime)
-        vEndTime = view.findViewById(R.id.vEndTime)
-        vTitle = view.findViewById(R.id.vTitle)
-        vContent = view.findViewById(R.id.vContent)
-
-    }
-
-    override fun getLayoutId(): Int = R.layout.layout_record_card_count
-
-    override fun onBindView(entity: ItemEntity?, view: View) {
-        vStartTime?.text = TextFormater.hhmm(entity?.startTime!!)
-
-        when {
-            targetType == TargetType.MANY_COUNT -> {
-                vEndTime?.text = ""
-                vTitle?.text = "增加了一条打卡"
-                vContent?.text = if (entity.content == "") "没什么都没有写" else entity.content
-            }
-            targetType == TargetType.MANY_TIME && entity.endTime == 0L -> {
-                vEndTime?.text = ""
-                vTitle?.text = "打卡进行中..."
-                vContent?.text = ""
-
-            }
-            targetType == TargetType.MANY_TIME -> {
-                vEndTime?.text = TextFormater.hhmm(entity.endTime)
-                vTitle?.text = "增加了一条打卡，共积累 " + (TextFormater.durationMins(entity.endTime - entity.startTime))
-                vContent?.text = if (entity.content == "") "没什么都没有写" else entity.content
-            }
-        }
-    }
-
-    override fun onItemClick(entity: ItemEntity?, position: Int) {
-        when {
-            targetType == TargetType.MANY_TIME && entity?.endTime == 0L -> {
-
-            }
-            else -> {
-                AddItemActivity.startResult(getActivity()!!, entity?.targetId!!, entity.id, 101)
-            }
-        }
-    }
-}
+//class DateRecordViewCard(private val targetType: TargetType) : BaseViewCard<ItemEntity>() {
+//    private var vStartTime: TextView? = null
+//    private var vEndTime: TextView? = null
+//    private var vTitle: TextView? = null
+//    private var vContent: TextView? = null
+//
+//    override fun onCreateView(view: View) {
+//        vStartTime = view.findViewById(R.id.vStartTime)
+//        vEndTime = view.findViewById(R.id.vEndTime)
+//        vTitle = view.findViewById(R.id.vTitle)
+//        vContent = view.findViewById(R.id.vContent)
+//
+//    }
+//
+//    override fun getLayoutId(): Int = R.layout.layout_record_card_count
+//
+//    override fun onBindView(entity: ItemEntity?, view: View) {
+//        vStartTime?.text = TextFormater.hhmm(entity?.startTime!!)
+//
+//        when {
+//            targetType == TargetType.MANY_COUNT -> {
+//                vEndTime?.text = ""
+//                vTitle?.text = "增加了一条打卡"
+//                vContent?.text = if (entity.content == "") "没什么都没有写" else entity.content
+//            }
+//            targetType == TargetType.MANY_TIME && entity.endTime == 0L -> {
+//                vEndTime?.text = ""
+//                vTitle?.text = "打卡进行中..."
+//                vContent?.text = ""
+//
+//            }
+//            targetType == TargetType.MANY_TIME -> {
+//                vEndTime?.text = TextFormater.hhmm(entity.endTime)
+//                vTitle?.text = "增加了一条打卡，共积累 " + (TextFormater.durationMins(entity.endTime - entity.startTime))
+//                vContent?.text = if (entity.content == "") "没什么都没有写" else entity.content
+//            }
+//        }
+//    }
+//
+//    override fun onItemClick(entity: ItemEntity?, position: Int) {
+//        when {
+//            targetType == TargetType.MANY_TIME && entity?.endTime == 0L -> {
+//
+//            }
+//            else -> {
+//                AddItemActivity.startResult(getActivity()!!, entity?.targetId!!, entity.id, 101)
+//            }
+//        }
+//    }
+//}

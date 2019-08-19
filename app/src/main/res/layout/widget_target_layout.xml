@@ -32,7 +32,8 @@
         android:background="@color/color_46A0F0"
         android:orientation="horizontal"
         android:paddingBottom="16dp"
-        android:paddingTop="16dp">
+        android:paddingTop="16dp"
+        android:visibility="gone">
 
 
         <com.binkery.itarget.widgets.TargetStaticItem

@@ -1,4 +1,4 @@
-package com.binkery.itarget.ui.activity
+package com.binkery.itarget.ui
 
 import android.app.Activity
 import android.content.Intent
@@ -11,8 +11,6 @@ import com.binkery.itarget.R
 import com.binkery.itarget.adapter.BaseAdapter
 import com.binkery.itarget.adapter.BaseViewCard
 import com.binkery.itarget.base.BaseActivity
-import com.binkery.itarget.ui.TargetType
-import com.binkery.itarget.utils.Utils
 import kotlinx.android.synthetic.main.activity_add_target_type.*
 
 /**
@@ -28,7 +26,7 @@ class AddTargetTypeActivity : BaseActivity() {
 
     override fun onContentCreate(savedInstanceState: Bundle?) {
 
-        setTitle("新增目标 - 选择打卡类型")
+        setTitle("选择打卡类型")
 
         vRecyclerView.layoutManager = LinearLayoutManager(this)
         vRecyclerView.adapter = TargetTypeAdapter(this)

@@ -18,10 +18,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.activity.AddTargetTypeActivity" />
-        <activity android:name=".ui.activity.AddTargetManyTimeActivity" />
+        <activity android:name=".ui.AddTargetTypeActivity" />
+        <activity android:name=".ui.AddTargetManyTimeActivity" />
 
-        <activity android:name=".ui.activity.BaseTargetDetailActivity" />
+        <activity android:name=".ui.TargetFlowActivity" />
+
+        <activity android:name=".ui.AboutActivity" />
 
         <activity android:name=".ui.AddItemActivity" />
         <activity android:name=".ui.RecordActivity" />

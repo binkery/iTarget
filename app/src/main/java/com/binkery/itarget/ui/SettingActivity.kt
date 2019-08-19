@@ -3,18 +3,14 @@ package com.binkery.itarget.ui
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.widget.EditText
-import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import com.binkery.itarget.BuildConfig
 import com.binkery.itarget.R
 import com.binkery.itarget.base.BaseActivity
 import com.binkery.itarget.dialog.Dialogs
+import com.binkery.itarget.dialog.OnDeleteListener
 import com.binkery.itarget.dialog.OnNumberChangedListener
 import com.binkery.itarget.dialog.OnTextChangedListener
-import com.binkery.itarget.router.Router
 import com.binkery.itarget.sqlite.DBHelper
 import com.binkery.itarget.utils.Utils
 import kotlinx.android.synthetic.main.activity_setting.*
@@ -57,7 +53,7 @@ class SettingActivity : BaseActivity() {
         vTargetName.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
 
-                Dialogs.showEditTextDialog(this@SettingActivity, targetEntity.name, "", object : OnTextChangedListener {
+                Dialogs.showEditTextDialog(this@SettingActivity, targetEntity.name, "修改名字", object : OnTextChangedListener {
                     override fun onTextChanged(text: String) {
                         vTargetName.setValue(text)
                         DBHelper.getInstance().targetDao().updateTarget(targetEntity)
@@ -88,7 +84,7 @@ class SettingActivity : BaseActivity() {
         }
 
         vTargetMatch.setOnClickListener({
-            Dialogs.showNumberEditTextDialog(this, targetEntity.data1.toInt(), "", object : OnNumberChangedListener {
+            Dialogs.showNumberEditTextDialog(this, targetEntity.data1.toInt(), "修改目标", object : OnNumberChangedListener {
                 override fun onChanged(value: Int) {
                     targetEntity.data1 = value.toString()
                     when {
@@ -105,12 +101,28 @@ class SettingActivity : BaseActivity() {
             })
         })
 
+        vTargetDelete.setOnClickListener({
+            Dialogs.showDeleteDialog(this@SettingActivity,"您是否要删除该目标？",object :OnDeleteListener{
+                override fun onDeleted() {
+                    DBHelper.getInstance().targetDao().deteteTarget(targetEntity)
+                    val list = DBHelper.getInstance().itemDao().queryItemByTargetId(targetId)
+                    for(item in list){
+                        DBHelper.getInstance().itemDao().deleteItem(item)
+                    }
+                    Utils.toast(applicationContext,"目标已删除")
+                    finish()
+                }
+            })
+        })
+
         vTargetRecord.setKey("打卡记录")
         vTargetRecord.setValue("")
-        vTargetRecord.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                Router.startTargetRecordActivity(this@SettingActivity, targetId)
-            }
+        vTargetRecord.setOnClickListener({
+            RecordActivity.start(this, targetId)
+        })
+
+        vAppAbout.setOnClickListener({
+            AboutActivity.start(this)
         })
 
         vAppVersion.setKey("版本")

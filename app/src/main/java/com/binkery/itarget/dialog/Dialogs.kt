@@ -74,10 +74,12 @@ class Dialogs {
             vEditText.setText("")
 
             val dialog = AlertDialog.Builder(activity).setTitle("写点什么").setView(view).create()
+            vOk.text = "写完了"
             vOk.setOnClickListener({
                 listener.onTextChanged(vEditText.text.toString())
                 dialog.dismiss()
             })
+            vCancel.text = "不想写"
             vCancel.setOnClickListener({
                 listener.onTextChanged(vEditText.text.toString())
                 dialog.dismiss()
@@ -87,8 +89,8 @@ class Dialogs {
             dialog.show()
         }
 
-        fun showDeleteDialog(activity: Activity, listener: OnDeleteListener) {
-            val dialog = AlertDialog.Builder(activity).setTitle("删除").setMessage("您是否要删除该打卡记录？").setNegativeButton("删除", object : DialogInterface.OnClickListener {
+        fun showDeleteDialog(activity: Activity, message: String, listener: OnDeleteListener) {
+            val dialog = AlertDialog.Builder(activity).setTitle("删除").setMessage(message).setNegativeButton("删除", object : DialogInterface.OnClickListener {
                 override fun onClick(dialog: DialogInterface?, which: Int) {
                     listener.onDeleted()
                 }

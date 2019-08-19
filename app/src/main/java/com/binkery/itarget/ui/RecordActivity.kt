@@ -1,7 +1,10 @@
 package com.binkery.itarget.ui
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.binkery.itarget.R
 import com.binkery.itarget.base.BaseActivity
@@ -20,6 +23,14 @@ class RecordActivity : BaseActivity() {
     var mAdapter: RecordAdapter = RecordAdapter(this)
     var targetEntity: TargetEntity? = null
     var mTargetId: Int? = null
+
+    companion object {
+        fun start(activity: Activity, targetId: Int) {
+            val intent = Intent(activity, RecordActivity::class.java)
+            intent.putExtra("target_id", targetId)
+            activity.startActivity(intent)
+        }
+    }
 
 
     override fun getContentLayoutId(): Int = R.layout.activity_record
@@ -46,6 +57,9 @@ class RecordActivity : BaseActivity() {
 //        mAdapter = RecordAdapter(this, targetEntity?.type!!)
         vRecyclerView.layoutManager = LinearLayoutManager(this)
         vRecyclerView.adapter = mAdapter
+//
+//        val animation = AnimationUtils.loadLayoutAnimation(this,R.anim.layout_animation)
+//        vRecyclerView.layoutAnimation = animation
     }
 
 

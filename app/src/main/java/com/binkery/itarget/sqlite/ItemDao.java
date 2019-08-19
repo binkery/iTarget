@@ -24,7 +24,7 @@ public interface ItemDao {
     void updateItem(ItemEntity entity);
 
     @Delete
-    void deteteItem(ItemEntity entity);
+    void deleteItem(ItemEntity entity);
 
     @Query("select * from items")
     List<ItemEntity> queryAllItem();
