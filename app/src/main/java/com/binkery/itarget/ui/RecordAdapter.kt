@@ -3,10 +3,10 @@ package com.binkery.itarget.ui
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.binkery.base.activity.BaseActivity
 import com.binkery.itarget.R
 import com.binkery.itarget.adapter.BaseAdapter
 import com.binkery.itarget.adapter.BaseViewCard
-import com.binkery.itarget.base.BaseActivity
 import com.binkery.itarget.sqlite.ItemEntity
 import com.binkery.itarget.utils.TextFormater
 

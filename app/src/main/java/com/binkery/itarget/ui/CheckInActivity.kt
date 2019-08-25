@@ -5,9 +5,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
-import androidx.annotation.MainThread
+import com.binkery.base.activity.BaseActivity
 import com.binkery.itarget.R
-import com.binkery.itarget.base.BaseActivity
 import com.binkery.itarget.dialog.Dialogs
 import com.binkery.itarget.dialog.OnTextChangedListener
 import com.binkery.itarget.sqlite.DBHelper

@@ -4,10 +4,9 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.binkery.base.activity.BaseActivity
 import com.binkery.itarget.R
-import com.binkery.itarget.base.BaseActivity
 import com.binkery.itarget.sqlite.DBHelper
 import com.binkery.itarget.sqlite.TargetEntity
 import kotlinx.android.synthetic.main.activity_record.*

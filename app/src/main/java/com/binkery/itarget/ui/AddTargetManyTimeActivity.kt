@@ -3,8 +3,8 @@ package com.binkery.itarget.ui
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import com.binkery.base.activity.BaseActivity
 import com.binkery.itarget.R
-import com.binkery.itarget.base.BaseActivity
 import com.binkery.itarget.dialog.Dialogs
 import com.binkery.itarget.dialog.OnNumberChangedListener
 import com.binkery.itarget.dialog.OnTextChangedListener

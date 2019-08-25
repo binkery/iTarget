@@ -1,9 +1,9 @@
 package com.binkery.itarget.ui
 
 import android.view.ViewGroup
+import com.binkery.base.activity.BaseActivity
 import com.binkery.itarget.adapter.BaseAdapter
 import com.binkery.itarget.adapter.BaseViewCard
-import com.binkery.itarget.base.BaseActivity
 import com.binkery.itarget.sqlite.ItemEntity
 import com.binkery.itarget.utils.Const
 import com.binkery.itarget.utils.TextFormater

@@ -22,17 +22,17 @@ abstract class BaseAdapter<Entity>(activity: Activity) : RecyclerView.Adapter<Ba
         mActivityRef = WeakReference(activity)
     }
 
-    final override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder<Entity> {
+    final override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder<Entity> {
         val viewCard: BaseViewCard<Entity> = onCreateViewCard(parent, viewType)
         val layoutId = viewCard.getLayoutId()
-        val view = LayoutInflater.from(parent?.context).inflate(layoutId, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(layoutId, parent, false)
         viewCard.onInitCard(view, mActivityRef.get()!!, this)
         return ViewHolder(view, viewCard)
     }
 
-    final override fun onBindViewHolder(holder: ViewHolder<Entity>?, position: Int) {
-        holder?.viewCard?.onBindView(getItem(position), holder.itemView)
-        holder?.itemView?.setOnClickListener(object : View.OnClickListener {
+    final override fun onBindViewHolder(holder: ViewHolder<Entity>, position: Int) {
+        holder.viewCard.onBindView(getItem(position), holder.itemView)
+        holder.itemView.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
                 holder.viewCard.onItemClick(getItem(position), position)
             }
@@ -51,14 +51,14 @@ abstract class BaseAdapter<Entity>(activity: Activity) : RecyclerView.Adapter<Ba
 
     abstract fun onCreateViewCard(parent: ViewGroup?, viewType: Int): BaseViewCard<Entity>
 
-    override fun onViewAttachedToWindow(holder: ViewHolder<Entity>?) {
+    override fun onViewAttachedToWindow(holder: ViewHolder<Entity>) {
         super.onViewAttachedToWindow(holder)
-        holder?.itemView?.animation = AnimationUtils.loadAnimation(mActivityRef.get(), R.anim.item_animation_fall_down)
+        holder.itemView.animation = AnimationUtils.loadAnimation(mActivityRef.get(), R.anim.item_animation_fall_down)
     }
 
-    override fun onViewDetachedFromWindow(holder: ViewHolder<Entity>?) {
+    override fun onViewDetachedFromWindow(holder: ViewHolder<Entity>) {
         super.onViewDetachedFromWindow(holder)
-        holder?.itemView?.clearAnimation()
+        holder.itemView.clearAnimation()
     }
 
     class ViewHolder<E>(itemView: View, val viewCard: BaseViewCard<E>) : RecyclerView.ViewHolder(itemView) {

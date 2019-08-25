@@ -4,8 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import com.binkery.base.activity.BaseActivity
 import com.binkery.itarget.R
-import com.binkery.itarget.base.BaseActivity
 import com.binkery.itarget.dialog.Dialogs
 import com.binkery.itarget.dialog.OnDeleteListener
 import com.binkery.itarget.dialog.OnMilliSecondsChangeListener
