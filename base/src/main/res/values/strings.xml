@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">base</string>
+
+    <item name="v0" format="integer" type="id" />
+    <item name="v1" format="integer" type="id" />
+    <item name="v2" format="integer" type="id" />
+    <item name="v3" format="integer" type="id" />
+    <item name="v4" format="integer" type="id" />
+    <item name="v5" format="integer" type="id" />
+    <item name="v6" format="integer" type="id" />
+    <item name="v7" format="integer" type="id" />
+    <item name="v8" format="integer" type="id" />
+    <item name="v9" format="integer" type="id" />
+    <item name="v10" format="integer" type="id" />
 </resources>

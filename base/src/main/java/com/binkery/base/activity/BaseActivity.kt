@@ -25,6 +25,12 @@ abstract class BaseActivity : AppCompatActivity() {
         })
     }
 
+    fun setActionBarEnable(enable: Boolean) {
+        if (!enable) {
+            vActionBar.visibility = View.GONE
+        }
+    }
+
     abstract fun getContentLayoutId(): Int
     abstract fun onContentCreate(savedInstanceState: Bundle?)
 

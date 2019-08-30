@@ -3,5 +3,8 @@
 
     <color name="color_46A0F0">#46A0F0</color>
     <color name="color_white">#FFFFFF</color>
-
+    <color name="color_e0e0e0">#e0e0e0</color>
+    <color name="color_black">#000000</color>
+    <color name="color_1f1f1f">#1f1f1f</color>
+    <color name="color_3c3c3c">#3c3c3c</color>
 </resources>
