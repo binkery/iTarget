@@ -36,6 +36,7 @@ class AddItemActivity : BaseActivity() {
             vItemName.setText(mItemEntity.name)
             vUserName.setText(mItemEntity.username)
             vPassword.setText(mItemEntity.password)
+            vComments.setText(mItemEntity.comments)
             setTitle("编辑")
         }
 
@@ -44,6 +45,7 @@ class AddItemActivity : BaseActivity() {
             val itemName = vItemName.text.toString().trim()
             val username = vUserName.text.toString().trim()
             val password = vPassword.text.toString().trim()
+            val comments = vComments.text.toString().trim()
 
             if (itemName == "") {
                 Utils.toast(this@AddItemActivity, "empty item name")
@@ -63,12 +65,14 @@ class AddItemActivity : BaseActivity() {
                 item.name = itemName
                 item.username = username
                 item.password = password
+                item.comments = comments
                 DBHelper.instance.itemDao().insert(item)
                 finish()
             } else {
                 mItemEntity.name = itemName
                 mItemEntity.username = username
                 mItemEntity.password = password
+                mItemEntity.comments = comments
                 DBHelper.instance.itemDao().update(mItemEntity)
                 finish()
             }

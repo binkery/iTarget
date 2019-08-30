@@ -38,6 +38,7 @@ class ItemViewActivity : BaseActivity() {
             vItemName.text = name
             vUserName.text = username
             vPassword.text = password
+            vComments.text = comments
         }
 
         vDelete.setOnClickListener {

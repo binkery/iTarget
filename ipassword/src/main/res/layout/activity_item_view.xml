@@ -45,6 +45,18 @@
         android:layout_height="wrap_content"
         android:text="hellogithub" />
 
+    <TextView
+        style="@style/ItemViewTip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="备注" />
+
+    <TextView
+        android:id="@+id/vComments"
+        style="@style/ItemViewItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

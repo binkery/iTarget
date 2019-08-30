@@ -19,6 +19,9 @@ class ItemEntity {
     @ColumnInfo(name = "password")
     var password: String = ""
 
+    @ColumnInfo(name = "comments")
+    var comments: String = ""
+
 }
 
 @Dao
