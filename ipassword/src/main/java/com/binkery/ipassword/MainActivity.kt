@@ -3,16 +3,11 @@ package com.binkery.ipassword
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.binkery.base.activity.BaseActivity
 import com.binkery.ipassword.sqlite.DBHelper
-import com.binkery.ipassword.sqlite.ItemEntity
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseActivity(), ItemAdapter.OnItemClickListener {
+class MainActivity : BaseActivity()  {
 
 
     companion object {
@@ -25,10 +20,14 @@ class MainActivity : BaseActivity(), ItemAdapter.OnItemClickListener {
     override fun getContentLayoutId(): Int = R.layout.activity_main
 
     override fun onContentCreate(savedInstanceState: Bundle?) {
-        setTitle("iPassword")
+        setTitle(R.string.app_name)
 
         DBHelper.instance.init(this)
-        vRecyclerView.layoutManager = LinearLayoutManager(this)
+
+
+        vViewPager.adapter = MainPagerAdapter(supportFragmentManager)
+
+//
 
         vAddItem.setOnClickListener {
             AddItemActivity.start(this@MainActivity, -1)
@@ -38,14 +37,8 @@ class MainActivity : BaseActivity(), ItemAdapter.OnItemClickListener {
 
     override fun onResume() {
         super.onResume()
-        val list = DBHelper.instance.itemDao().queryAll()
-        val adapter = ItemAdapter(list, this)
-        vRecyclerView.adapter = adapter
-        adapter.notifyDataSetChanged()
+
     }
 
-    override fun onItemClick(item: ItemEntity) {
-        ItemViewActivity.start(this, item.id)
-    }
 
 }

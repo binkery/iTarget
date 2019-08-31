@@ -38,4 +38,8 @@ abstract class BaseActivity : AppCompatActivity() {
         vActionBarTitle.text = title
     }
 
+    override fun setTitle(resId: Int) {
+        vActionBarTitle.setText(resId)
+    }
+
 }

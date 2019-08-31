@@ -9,13 +9,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:padding="8dp"
-        android:text="网站/服务" />
+        android:text="@string/tips_item_name" />
 
     <EditText
         android:id="@+id/vItemName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="item name"
+        android:hint="@string/hint_item_name"
         android:inputType="text"
         android:maxLines="1"
         android:padding="8dp" />
@@ -25,13 +25,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:padding="8dp"
-        android:text="用户名" />
+        android:text="@string/tips_user_name" />
 
     <EditText
         android:id="@+id/vUserName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="user name or email or account name"
+        android:hint="@string/hint_user_name"
         android:inputType="text"
         android:maxLines="1" />
 
@@ -40,13 +40,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:padding="8dp"
-        android:text="密码" />
+        android:text="@string/tips_password" />
 
     <EditText
         android:id="@+id/vPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="password"
+        android:hint="@string/hint_password"
         android:inputType="text"
         android:maxLines="1" />
 
@@ -55,17 +55,18 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:padding="8dp"
-        android:text="备注" />
+        android:text="@string/tips_comments" />
 
 
     <EditText
         android:id="@+id/vComments"
-        android:gravity="top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="top"
         android:inputType="textMultiLine"
         android:lines="3"
-        android:maxLines="5" />
+        android:maxLines="5"
+        android:hint="@string/hint_comments" />
 
     <View
         android:layout_width="match_parent"

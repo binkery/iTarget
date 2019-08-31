@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp"
+    tools:parentTag="android.widget.RelativeLayout">
+
+
+    <TextView
+        android:id="@+id/vKey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="8dp"
+        android:textColor="@color/color_black"
+        android:textSize="16dp"
+        tools:text="KEY" />
+
+
+    <ImageView
+        android:id="@+id/vArrow"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:padding="8dp"
+        android:src="@drawable/ic_chevron_right_black_18dp" />
+
+    <TextView
+        android:id="@+id/vValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/vArrow"
+        tools:text="value" />
+
+</merge>

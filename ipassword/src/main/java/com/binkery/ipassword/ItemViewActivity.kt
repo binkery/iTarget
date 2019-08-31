@@ -20,21 +20,27 @@ class ItemViewActivity : BaseActivity() {
         }
     }
 
-    private var mItemEntity: ItemEntity? = null
+    private var mItemId: Int = -1
 
     override fun getContentLayoutId(): Int = R.layout.activity_item_view
 
     override fun onContentCreate(savedInstanceState: Bundle?) {
-        val itemId = intent.getIntExtra("item_id", -1)
-        if (itemId == -1) {
+        mItemId = intent.getIntExtra("item_id", -1)
+        if (mItemId == -1) {
             finish()
             return
         }
-        mItemEntity = DBHelper.instance.itemDao().queryById(itemId)
+
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val entity = DBHelper.instance.itemDao().queryById(mItemId)
 
         setTitle("账号信息")
 
-        mItemEntity?.apply {
+        entity.apply {
             vItemName.text = name
             vUserName.text = username
             vPassword.text = password
@@ -42,21 +48,20 @@ class ItemViewActivity : BaseActivity() {
         }
 
         vDelete.setOnClickListener {
-            Utils.toast(this, "delete " + mItemEntity?.name)
-            val message = "是否删除 " + mItemEntity?.name + " 上，账号为 " + mItemEntity?.username + " 的信息吗？"
+            Utils.toast(this, "delete " + entity.name)
+            val message = "是否删除 " + entity.name + " 上，账号为 " + entity.username + " 的信息吗？"
 
             Dialogs.showDeleteDialog(this, message, object : Dialogs.OnConfromListener {
                 override fun onConform() {
-                    DBHelper.instance.itemDao().delete(mItemEntity!!)
+                    DBHelper.instance.itemDao().delete(entity)
                     finish()
                 }
             })
         }
 
         vEdit.setOnClickListener {
-            AddItemActivity.start(this, mItemEntity?.id ?: -1)
+            AddItemActivity.start(this, entity.id)
         }
-
     }
 
 }

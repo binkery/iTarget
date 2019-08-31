@@ -9,5 +9,9 @@ class Utils {
         fun toast(context: Context, message: String) {
             Toast.makeText(context, message, Toast.LENGTH_LONG).show()
         }
+
+        fun toast(context: Context, resId: Int) {
+            Toast.makeText(context, resId, Toast.LENGTH_LONG).show()
+        }
     }
 }

@@ -21,23 +21,21 @@ class AddItemActivity : BaseActivity() {
     }
 
     private var mItemId: Int = -1
-    private var mItemEntity: ItemEntity = ItemEntity()
 
     override fun getContentLayoutId(): Int = R.layout.activity_add_item
 
     override fun onContentCreate(savedInstanceState: Bundle?) {
 
-        setTitle("新增")
-
         mItemId = intent.getIntExtra("item_id", -1)
         if (mItemId != -1) {
-            mItemEntity = DBHelper.instance.itemDao().queryById(mItemId)
-
-            vItemName.setText(mItemEntity.name)
-            vUserName.setText(mItemEntity.username)
-            vPassword.setText(mItemEntity.password)
-            vComments.setText(mItemEntity.comments)
+            val itemEntity = DBHelper.instance.itemDao().queryById(mItemId)
+            vItemName.setText(itemEntity.name)
+            vUserName.setText(itemEntity.username)
+            vPassword.setText(itemEntity.password)
+            vComments.setText(itemEntity.comments)
             setTitle("编辑")
+        } else {
+            setTitle("新增")
         }
 
         vSave.setOnClickListener(View.OnClickListener {
@@ -48,15 +46,15 @@ class AddItemActivity : BaseActivity() {
             val comments = vComments.text.toString().trim()
 
             if (itemName == "") {
-                Utils.toast(this@AddItemActivity, "empty item name")
+                Utils.toast(this@AddItemActivity, R.string.empty_item_name)
                 return@OnClickListener
             }
             if (username == "") {
-                Utils.toast(this@AddItemActivity, "empty user name")
+                Utils.toast(this@AddItemActivity, R.string.empty_user_name)
                 return@OnClickListener
             }
             if (password == "") {
-                Utils.toast(this@AddItemActivity, "empty password")
+                Utils.toast(this@AddItemActivity, R.string.empty_password)
                 return@OnClickListener
             }
 
@@ -69,11 +67,12 @@ class AddItemActivity : BaseActivity() {
                 DBHelper.instance.itemDao().insert(item)
                 finish()
             } else {
-                mItemEntity.name = itemName
-                mItemEntity.username = username
-                mItemEntity.password = password
-                mItemEntity.comments = comments
-                DBHelper.instance.itemDao().update(mItemEntity)
+                val itemEntity = DBHelper.instance.itemDao().queryById(mItemId)
+                itemEntity.name = itemName
+                itemEntity.username = username
+                itemEntity.password = password
+                itemEntity.comments = comments
+                DBHelper.instance.itemDao().update(itemEntity)
                 finish()
             }
 
