@@ -9,7 +9,6 @@ class SharedUtils {
         private val sToken = SharedEditor("token")
         private const val KEY_PASSWORD = "password"
         private const val KEY_TOKEN = "token"
-        private const val MAX_TOKEN_TIME = 5 * 60_000L
 
         fun hasPassword(context: Context): Boolean {
             val value = sToken.get(context, KEY_PASSWORD, "")
@@ -32,17 +31,9 @@ class SharedUtils {
             return sToken.get(context, KEY_PASSWORD, "")
         }
 
-//        fun isToken(context: Context): Boolean {
-//            val value = sToken.get(context, KEY_TOKEN, "0")
-//            if (System.currentTimeMillis() - (value?.toLong() ?: 0) > MAX_TOKEN_TIME) {
-//                return false
-//            }
-//            return true
-//        }
-
         fun isTokenTimeout(context: Context): Boolean {
             val value = sToken.get(context, KEY_TOKEN, "0")
-            if (System.currentTimeMillis() - value.toLong() > MAX_TOKEN_TIME) {
+            if (value.toLong() > 0) {
                 return true
             }
             return false

@@ -57,34 +57,15 @@ class MainActivity : BasePasswordActivity(), MainPagerAdapter.OnSetPrimaryItemLi
         super.onResume()
         val password = SharedUtils.getPassword(this)
         if (password == "") {
-            PasswordSettingActivity.start(this, "设置隐私密码", RequestCode.SETTING_PASSWORD)
+            PasswordSettingActivity.start(this, "设置隐私密码", true)
         } else {
             if (SharedUtils.isTokenTimeout(this)) {
-                PasswordCheckingActivity.start(this, RequestCode.CHECK_PASSWORD)
+                PasswordCheckingActivity.start(this, true)
             } else {
                 SharedUtils.updateToken(this)
             }
         }
 
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == RequestCode.SETTING_PASSWORD && resultCode == Activity.RESULT_OK) {
-            val password = data?.getStringExtra("password") ?: ""
-            if (password == "") {
-
-            } else {
-                SharedUtils.setPassword(this, password)
-                SharedUtils.updateToken(this)
-            }
-        } else if (requestCode == RequestCode.SETTING_PASSWORD && resultCode == Activity.RESULT_CANCELED) {
-            Dialogs.showDialog(this, "修改密码", "不设置密码将不能使用", "去设置", "退出", View.OnClickListener {
-                PasswordSettingActivity.start(this, "设置隐私密码", RequestCode.SETTING_PASSWORD)
-            }, View.OnClickListener {
-                finish()
-            })
-        }
     }
 
 }

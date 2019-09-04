@@ -3,10 +3,7 @@ package com.binkery.ipassword
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.binkery.base.activity.BaseActivity
-import com.binkery.base.utils.Dialogs
 import com.binkery.base.utils.Utils
 import com.binkery.ipassword.utils.SharedUtils
 import com.binkery.ipassword.widgets.KeyBoardView
@@ -17,37 +14,43 @@ import kotlinx.android.synthetic.main.activity_password_setting.*
  */
 class PasswordSettingActivity : BaseActivity() {
 
-    private var mStatus = STATUS_PASSWORD_FIRST
+    private var mStatus = STATUS_PRE
 
     private var mPassword = ""
     private var mFirstPassword = ""
+    private var mExit = true
 
 
     companion object {
 
-        private const val STATUS_PASSWORD_FIRST = 2
-        private const val STATUS_PASSWORD_SECOND = 3
+        private const val STATUS_PRE = 1
+        private const val STATUS__FIRST = 2
+        private const val STATUS__SECOND = 3
 
-        fun start(activity: Activity, title: String, requestCode: Int) {
+        fun start(activity: Activity, title: String, exit: Boolean) {
             val intent = Intent(activity, PasswordSettingActivity::class.java)
             intent.putExtra("title", title)
-            activity.startActivityForResult(intent, requestCode)
+            intent.putExtra("exit", exit)
+            activity.startActivity(intent)
         }
 
-        fun start(fragment: Fragment, title: String, requestCode: Int) {
-            val intent = Intent(fragment.activity, PasswordSettingActivity::class.java)
-            intent.putExtra("title", title)
-            fragment.startActivityForResult(intent, requestCode)
-        }
     }
 
     override fun getContentLayoutId(): Int = R.layout.activity_password_setting
 
     override fun onContentCreate(savedInstanceState: Bundle?) {
+        mExit = intent.getBooleanExtra("exit", true)
         setTitle(intent.getStringExtra("title"))
 
-        vTips.text = "请输入新密码"
+        mStatus = if (SharedUtils.hasPassword(this)) STATUS_PRE else STATUS__FIRST
+        if (mStatus == STATUS_PRE) {
+            vTips.text = "请输入原密码"
+        } else if (mStatus == STATUS__FIRST) {
+            vTips.text = "请输入新密码"
+        }
         vPasswordInput.setValue(mPassword)
+
+
         vKeyBoardView.setOnValueChangedListener(object : KeyBoardView.OnValueChangedListener {
             override fun onValueChanged(value: String) {
                 if (mPassword.length < 4) {
@@ -55,30 +58,7 @@ class PasswordSettingActivity : BaseActivity() {
                     vPasswordInput.setValue(mPassword)
                 }
                 if (mPassword.length == 4) {
-                    when (mStatus) {
-                        STATUS_PASSWORD_SECOND -> {
-                            if (mPassword == mFirstPassword) {
-                                val intent = Intent()
-                                intent.putExtra("password", mPassword)
-                                setResult(Activity.RESULT_OK, intent)
-                                finish()
-                            } else {
-                                Utils.toast(this@PasswordSettingActivity, "两次密码不一致")
-                                mPassword = ""
-                                mFirstPassword = ""
-                                mStatus = STATUS_PASSWORD_FIRST
-                                vPasswordInput.setValue(mPassword)
-                                vTips.text = "请输入新密码"
-                            }
-                        }
-                        STATUS_PASSWORD_FIRST -> {
-                            mStatus = STATUS_PASSWORD_SECOND
-                            mFirstPassword = mPassword
-                            mPassword = ""
-                            vPasswordInput.setValue(mPassword)
-                            vTips.text = "请再次输入新密码"
-                        }
-                    }
+                    checkAndUpdateStatus()
                 }
             }
 
@@ -98,8 +78,44 @@ class PasswordSettingActivity : BaseActivity() {
         })
     }
 
+    private fun checkAndUpdateStatus() {
+        when (mStatus) {
+            STATUS_PRE -> {
+                if (SharedUtils.checkPassword(this, mPassword)) {
+                    mStatus = STATUS__FIRST
+                    vTips.text = "请输入新密码"
+                } else {
+                    Utils.toast(this, "密码错误")
+                }
+            }
+            STATUS__FIRST -> {
+                mFirstPassword = mPassword
+                mStatus = STATUS__SECOND
+                vTips.text = "请再次输入新密码"
+            }
+            STATUS__SECOND -> {
+                if (mPassword == mFirstPassword) {
+                    SharedUtils.setPassword(this, mPassword)
+                    SharedUtils.updateToken(this)
+                    Utils.toast(this, "密码设置成功！")
+                    finish()
+                } else {
+                    Utils.toast(this@PasswordSettingActivity, "两次密码不一致")
+                    mFirstPassword = ""
+                    mStatus = STATUS__FIRST
+                    vTips.text = "请输入新密码"
+                }
+            }
+        }
+        mPassword = ""
+        vPasswordInput.setValue(mPassword)
+    }
+
     override fun onBackClick() {
-        setResult(Activity.RESULT_CANCELED)
-        finish()
+        if (mExit) {
+            (application as PasswordApplication).exit()
+        } else {
+            finish()
+        }
     }
 }

@@ -3,8 +3,9 @@ package com.binkery.ipassword
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import com.binkery.base.activity.BaseActivity
+import com.binkery.base.utils.Utils
+import com.binkery.ipassword.utils.SharedUtils
 import com.binkery.ipassword.widgets.KeyBoardView
 import kotlinx.android.synthetic.main.activity_password_checking.*
 
@@ -12,20 +13,19 @@ class PasswordCheckingActivity : BaseActivity() {
 
     companion object {
 
-        fun start(fragment: Fragment, requestCode: Int) {
-            val intent = Intent(fragment.activity, PasswordCheckingActivity::class.java)
-            fragment.startActivityForResult(intent, requestCode)
-        }
-
-        fun start(activity: Activity, requestCode: Int) {
+        fun start(activity: Activity, exit: Boolean) {
             val intent = Intent(activity, PasswordCheckingActivity::class.java)
-            activity.startActivityForResult(intent, requestCode)
+            intent.putExtra("exit", exit)
+            activity.startActivity(intent)
         }
     }
+
+    private var mExit = true
 
     override fun getContentLayoutId(): Int = R.layout.activity_password_checking
 
     override fun onContentCreate(savedInstanceState: Bundle?) {
+        mExit = intent.getBooleanExtra("exit", true)
         var password = ""
         vPasswordInput.setValue(password)
         vTips.text = "请输入隐私密码"
@@ -37,10 +37,14 @@ class PasswordCheckingActivity : BaseActivity() {
                     vPasswordInput.setValue(password)
                 }
                 if (password.length == 4) {
-                    val intent = Intent()
-                    intent.putExtra("password", password)
-                    setResult(Activity.RESULT_OK, intent)
-                    finish()
+                    if (SharedUtils.checkPassword(this@PasswordCheckingActivity, password)) {
+                        SharedUtils.updateToken(this@PasswordCheckingActivity)
+                        finish()
+                    } else {
+                        Utils.toast(this@PasswordCheckingActivity, "密码错误")
+                        password = ""
+                        vPasswordInput.setValue(password)
+                    }
                 }
             }
 
@@ -62,8 +66,11 @@ class PasswordCheckingActivity : BaseActivity() {
     }
 
     override fun onBackClick() {
-        setResult(Activity.RESULT_CANCELED)
-        finish()
+        if (mExit) {
+            (application as PasswordApplication).exit()
+        } else {
+            finish()
+        }
     }
 
 }
