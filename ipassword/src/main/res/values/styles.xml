@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -43,6 +43,21 @@
         <item name="android:layout_margin">8dp</item>
         <item name="android:padding">8dp</item>
         <item name="android:gravity">center</item>
+    </style>
+
+    <style name="KeyBoardItem">
+        <item name="android:layout_columnSpan">1</item>
+        <item name="android:layout_columnWeight" tools:targetApi="lollipop">1</item>
+        <item name="android:layout_gravity">fill</item>
+        <item name="android:layout_rowSpan">1</item>
+        <item name="android:layout_rowWeight" tools:targetApi="lollipop">1</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="SettingItem">
+        <item name="android:background">@color/color_white</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">56dp</item>
     </style>
 
 </resources>

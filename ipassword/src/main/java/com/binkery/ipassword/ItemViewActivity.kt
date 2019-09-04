@@ -10,7 +10,7 @@ import com.binkery.ipassword.sqlite.DBHelper
 import com.binkery.ipassword.sqlite.ItemEntity
 import kotlinx.android.synthetic.main.activity_item_view.*
 
-class ItemViewActivity : BaseActivity() {
+class ItemViewActivity : BasePasswordActivity() {
 
     companion object {
         fun start(activity: Activity, itemId: Int) {

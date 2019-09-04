@@ -2,7 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.binkery.ipassword">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
+        android:name=".PasswordApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -11,7 +14,7 @@
         android:theme="@style/AppTheme">
 
 
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity" />
         <activity android:name=".AddItemActivity" />
         <activity android:name=".ItemViewActivity" />
         <activity android:name=".SplashActivity">
@@ -22,6 +25,12 @@
             </intent-filter>
 
         </activity>
+
+        <activity android:name=".PasswordSettingActivity" />
+        <activity android:name=".PasswordCheckingActivity" />
+
+        <activity android:name=".SelectedExportDataActivity" />
+        <activity android:name=".ExportPathActivity" />
     </application>
 
 </manifest>

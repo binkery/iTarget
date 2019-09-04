@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:columnCount="3"
+    android:orientation="horizontal"
+    android:rowCount="4">
+
+
+    <TextView
+        android:id="@+id/vKey1"
+        style="@style/KeyBoardItem"
+        android:text="1" />
+
+    <TextView
+        android:id="@+id/vKey2"
+        style="@style/KeyBoardItem"
+        android:text="2" />
+
+    <TextView
+        android:id="@+id/vKey3"
+        style="@style/KeyBoardItem"
+        android:text="3" />
+
+    <TextView
+        android:id="@+id/vKey4"
+        style="@style/KeyBoardItem"
+        android:text="4" />
+
+    <TextView
+        android:id="@+id/vKey5"
+        style="@style/KeyBoardItem"
+        android:text="5" />
+
+    <TextView
+        android:id="@+id/vKey6"
+        style="@style/KeyBoardItem"
+        android:text="6" />
+
+    <TextView
+        android:id="@+id/vKey7"
+        style="@style/KeyBoardItem"
+        android:text="7" />
+
+    <TextView
+        android:id="@+id/vKey8"
+        style="@style/KeyBoardItem"
+        android:text="8" />
+
+    <TextView
+        android:id="@+id/vKey9"
+        style="@style/KeyBoardItem"
+        android:text="9" />
+
+    <TextView
+        android:id="@+id/vKeyReturn"
+        style="@style/KeyBoardItem"
+        android:text="返回" />
+
+    <TextView
+        android:id="@+id/vKey0"
+        style="@style/KeyBoardItem"
+        android:text="0" />
+
+    <TextView
+        android:id="@+id/vKeyDelete"
+        style="@style/KeyBoardItem"
+        android:text="删除" />
+
+
+</GridLayout>

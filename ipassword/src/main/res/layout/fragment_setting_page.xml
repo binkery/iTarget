@@ -12,39 +12,32 @@
 
 
         <com.binkery.base.widgets.SettingItemView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/vPassword"
+            style="@style/SettingItem"
             android:layout_marginTop="16dp"
-            android:background="@color/color_white"
-            app:key="隐私密码" />
-
+            app:key="修改隐私密码"
+            app:value="" />
 
         <com.binkery.base.widgets.SettingItemView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/SettingItem"
+            android:id="@+id/vImportData"
             android:layout_marginTop="16dp"
-            android:background="@color/color_white"
             app:key="导入数据" />
 
         <com.binkery.base.widgets.SettingItemView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/SettingItem"
+            android:id="@+id/vExportData"
             android:layout_marginTop="1dp"
-            android:background="@color/color_white"
             app:key="导出数据" />
 
         <com.binkery.base.widgets.SettingItemView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/SettingItem"
             android:layout_marginTop="16dp"
-            android:background="@color/color_white"
             app:key="关于" />
 
         <com.binkery.base.widgets.SettingItemView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/SettingItem"
             android:layout_marginTop="1dp"
-            android:background="@color/color_white"
             app:key="版本" />
     </LinearLayout>
 

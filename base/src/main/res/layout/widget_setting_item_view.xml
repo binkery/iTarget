@@ -14,9 +14,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="8dp"
+        android:layout_marginLeft="16dp"
         android:textColor="@color/color_black"
-        android:textSize="16dp"
+        android:textSize="14dp"
         tools:text="KEY" />
 
 
@@ -24,6 +24,7 @@
         android:id="@+id/vArrow"
         android:layout_width="36dp"
         android:layout_height="36dp"
+        android:layout_marginRight="8dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:padding="8dp"
@@ -31,6 +32,7 @@
 
     <TextView
         android:id="@+id/vValue"
+        android:textSize="12dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
