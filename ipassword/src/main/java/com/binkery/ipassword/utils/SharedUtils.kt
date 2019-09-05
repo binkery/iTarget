@@ -34,9 +34,9 @@ class SharedUtils {
         fun isTokenTimeout(context: Context): Boolean {
             val value = sToken.get(context, KEY_TOKEN, "0")
             if (value.toLong() > 0) {
-                return true
+                return false
             }
-            return false
+            return true
         }
 
         fun updateToken(context: Context) {

@@ -20,15 +20,11 @@ class MainSettingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         vPassword = view.findViewById(R.id.vPassword)
         vPassword?.setOnClickListener {
-            PasswordSettingActivity.start(activity, "修改密码", false)
+            PasswordSettingActivity.start(activity!!, "修改密码", false)
         }
 
         view.findViewById<View>(R.id.vExportData).setOnClickListener {
-            //            Utils.toast(activity!!, "export data")
-//            activity?.apply {
-////                SelectedExportDataActivity.start(this)
-//            }
-//            PasswordSettingActivity.start(this,"设置导出文件加密密码",2003)
+            ExportPathActivity.start(activity!!)
         }
 
         view.findViewById<View>(R.id.vImportData).setOnClickListener {

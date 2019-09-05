@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 import android.widget.Toast
+import java.text.SimpleDateFormat
+import java.util.*
 
 class Utils {
 
@@ -18,6 +20,11 @@ class Utils {
 
         fun log(message: String) {
             Log.i("bky-ipw", message)
+        }
+
+        fun datetimeFormat(template: String, time: Long): String {
+            val format = SimpleDateFormat(template)
+            return format.format(Date(time))
         }
     }
 }
