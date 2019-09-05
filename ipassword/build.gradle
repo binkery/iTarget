@@ -35,7 +35,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation "androidx.room:room-runtime:$room_runtime_version"
     kapt "androidx.room:room-compiler:$room_compiler_version"
-
+    implementation 'com.google.code.gson:gson:2.8.5'
     implementation project(':base')
 
 }

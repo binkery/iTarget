@@ -7,11 +7,14 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Environment
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import com.binkery.base.utils.Utils
+import com.binkery.ipassword.code.CodeEntity
+import com.binkery.ipassword.sqlite.DBHelper
+import com.binkery.ipassword.sqlite.ItemEntity
 import com.binkery.ipassword.utils.PasswordDialog
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_export_path.*
 import java.io.File
 
@@ -47,7 +50,19 @@ class ExportPathActivity : BasePasswordActivity() {
                 Utils.toast(this, "请设置四位数密码")
                 return@setOnClickListener
             }
+            val datas = DBHelper.instance.itemDao().queryAll()
+            val json = Gson().toJson(datas)
 
+//            val file = File(mPath)
+//            file.writeText(json, Charsets.UTF_8)
+
+            CodeEntity.encode2File(mPath, json, mPassword)
+
+            val decodeJson = CodeEntity.decodeFromFile(mPath, mPassword)
+            val dataList = Gson().fromJson<List<ItemEntity>>(decodeJson, object : TypeToken<List<ItemEntity>>() {}.type)
+            for (d in dataList) {
+                Utils.log("item = " + d.id + "," + d.name + "," + d.username + "," + d.password + "," + d.comments)
+            }
         }
     }
 
