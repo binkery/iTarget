@@ -22,7 +22,7 @@ class CodeEntity {
             file.appendBytes(encode(password, json))
         }
 
-        fun decodeFromFile(path: String, password: String): String {
+        fun decodeFromFile(path: String, password: String): String? {
             val file = File(path)
             val fis = file.inputStream()
             val headArray = ByteArray(3)
@@ -32,7 +32,11 @@ class CodeEntity {
             Utils.log("version = " + version)
             val md5Array = ByteArray(32)
             fis.read(md5Array)// md5
-            Utils.log("md5 = " + String(md5Array))
+            val md5 = String(md5Array)
+            Utils.log("md5 = " + md5)
+            if (MD5.md5(password) != md5) {
+                return null
+            }
 
             val baos = ByteArrayOutputStream()
             fis.copyTo(baos, 1024)

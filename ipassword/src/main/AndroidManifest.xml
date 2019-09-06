@@ -29,8 +29,8 @@
         <activity android:name=".PasswordSettingActivity" />
         <activity android:name=".PasswordCheckingActivity" />
 
-        <activity android:name=".SelectedExportDataActivity" />
-        <activity android:name=".ExportPathActivity" />
+        <activity android:name=".ExportDataActivity" />
+        <activity android:name=".ImportDataActivity"/>
     </application>
 
 </manifest>

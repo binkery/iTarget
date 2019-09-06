@@ -24,11 +24,11 @@ class MainSettingFragment : Fragment() {
         }
 
         view.findViewById<View>(R.id.vExportData).setOnClickListener {
-            ExportPathActivity.start(activity!!)
+            ExportDataActivity.start(activity!!)
         }
 
         view.findViewById<View>(R.id.vImportData).setOnClickListener {
-
+            ImportDataActivity.start(activity!!)
         }
     }
 

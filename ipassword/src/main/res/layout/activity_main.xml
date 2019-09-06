@@ -5,6 +5,7 @@
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vViewPager"
+        android:background="#f0f0f0"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/vBottomLayout" />
@@ -27,6 +28,7 @@
 
         <TextView
             android:id="@+id/vAddItem"
+            android:layout_margin="4dp"
             android:layout_width="56dp"
             android:layout_height="match_parent"
             android:background="@color/color_46A0F0"
