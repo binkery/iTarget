@@ -40,7 +40,7 @@ class PasswordSettingActivity : BaseActivity() {
 
     override fun onContentCreate(savedInstanceState: Bundle?) {
         mExit = intent.getBooleanExtra("exit", true)
-        setTitle(intent.getStringExtra("title"))
+        vAppbar.setTitle(intent.getStringExtra("title"))
 
         mStatus = if (SharedUtils.hasPassword(this)) STATUS_PRE else STATUS__FIRST
         if (mStatus == STATUS_PRE) {

@@ -33,13 +33,12 @@ class AddItemActivity : BasePasswordActivity() {
             vUserName.setText(itemEntity.username)
             vPassword.setText(itemEntity.password)
             vComments.setText(itemEntity.comments)
-            setTitle("编辑")
+            vAppbar.setTitle("编辑")
         } else {
-            setTitle("新增")
+            vAppbar.setTitle("新增")
         }
 
-        vSave.setOnClickListener(View.OnClickListener {
-
+        vAppbar.setRightItem("保存",-1,View.OnClickListener {
             val itemName = vItemName.text.toString().trim()
             val username = vUserName.text.toString().trim()
             val password = vPassword.text.toString().trim()
@@ -75,9 +74,14 @@ class AddItemActivity : BasePasswordActivity() {
                 DBHelper.instance.itemDao().update(itemEntity)
                 finish()
             }
-
-
         })
+
+//        vSave.setOnClickListener(View.OnClickListener {
+//
+//
+//
+//
+//        })
 
 
     }

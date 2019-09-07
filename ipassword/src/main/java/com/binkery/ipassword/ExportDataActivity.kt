@@ -31,24 +31,26 @@ class ExportDataActivity : BasePasswordActivity() {
     override fun getContentLayoutId(): Int = R.layout.activity_export_path
 
     override fun onContentCreate(savedInstanceState: Bundle?) {
+        vAppbar.setTitle("导出数据")
         ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 100)
         vPasswordInput.setText("")
 
-        vNextStep.setOnClickListener {
+        vAppbar.setRightItem("开始到处", -1, View.OnClickListener {
+
             val password = vPasswordInput.text.toString()
             if (password.length < 4) {
                 Utils.toast(this, "请设置四位数密码")
-                return@setOnClickListener
+                return@OnClickListener
             }
             val datas = DBHelper.instance.itemDao().queryAll()
             val json = Gson().toJson(datas)
 
             CodeEntity.encode2File(mPath, json, password)
-            Dialogs.alert(this, "导出成功", "成功导出数据到" + mPath, "朕知道了", View.OnClickListener {
+            Dialogs.alert(this, "导出成功", "成功导出数据到 " + mPath, "朕知道了", View.OnClickListener {
                 finish()
             })
 
-        }
+        })
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {

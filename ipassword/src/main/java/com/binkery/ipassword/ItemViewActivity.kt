@@ -3,6 +3,7 @@ package com.binkery.ipassword
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import com.binkery.base.activity.BaseActivity
 import com.binkery.base.utils.Dialogs
 import com.binkery.base.utils.Utils
@@ -30,7 +31,9 @@ class ItemViewActivity : BasePasswordActivity() {
             finish()
             return
         }
-
+        vAppbar.setRightItem("编辑", -1, View.OnClickListener {
+            AddItemActivity.start(this, mItemId)
+        })
 
     }
 
@@ -38,7 +41,7 @@ class ItemViewActivity : BasePasswordActivity() {
         super.onResume()
         val entity = DBHelper.instance.itemDao().queryById(mItemId)
 
-        setTitle("账号信息")
+        vAppbar.setTitle("账号信息")
 
         entity.apply {
             vItemName.text = name
@@ -48,7 +51,6 @@ class ItemViewActivity : BasePasswordActivity() {
         }
 
         vDelete.setOnClickListener {
-            Utils.toast(this, "delete " + entity.name)
             val message = "是否删除 " + entity.name + " 上，账号为 " + entity.username + " 的信息吗？"
 
             Dialogs.showDeleteDialog(this, message, object : Dialogs.OnConfromListener {
@@ -59,9 +61,6 @@ class ItemViewActivity : BasePasswordActivity() {
             })
         }
 
-        vEdit.setOnClickListener {
-            AddItemActivity.start(this, entity.id)
-        }
     }
 
 }

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f0f0f0"
+    android:background="@color/ipw_content_background"
     android:orientation="vertical">
 
 
@@ -63,31 +63,17 @@
         android:layout_height="wrap_content"
         android:layout_weight="1" />
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/vDelete"
+        android:textSize="14dp"
+        android:background="@color/ipw_primary_color"
+        android:textColor="@color/ipw_text_icons"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_white"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/vDelete"
-            style="@style/DeleteButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:layout_weight="1"
-            android:padding="8dp"
-            android:text="删除" />
-
-        <TextView
-            android:id="@+id/vEdit"
-            style="@style/Button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="修改" />
-
-    </LinearLayout>
+        android:layout_margin="8dp"
+        android:padding="8dp"
+        android:text="删除" />
 
 
 </LinearLayout>

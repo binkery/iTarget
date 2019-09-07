@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="36dp"
+        android:src="@drawable/ic_verified_user_black_24dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="12dp"
+        android:text="@string/app_name"
+        android:textColor="@color/ipw_primary_color"
+        android:textSize="20dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="20dp"
+        android:text="
+iPassword 是一款帮助你记录帐号密码的软件。
+这一款完全的本地应用。在权限方面 ，iPassword 只申请的 SDCard 的读写权限，用来导出和导入文件。
+没有申请任何网络访问的权限，所以 app 没有提供网络备份的功能。"
+        android:textColor="@color/ipw_secondary_text"
+        android:textSize="14dp" />
 
 </LinearLayout>

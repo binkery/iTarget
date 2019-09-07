@@ -26,10 +26,12 @@ class PasswordCheckingActivity : BaseActivity() {
 
     override fun onContentCreate(savedInstanceState: Bundle?) {
         mExit = intent.getBooleanExtra("exit", true)
+
+        vAppbar.setTitle("隐私密码校验")
+
         var password = ""
         vPasswordInput.setValue(password)
         vTips.text = "请输入隐私密码"
-        setTitle("隐私密码校验")
         vKeyBoardView.setOnValueChangedListener(object : KeyBoardView.OnValueChangedListener {
             override fun onValueChanged(value: String) {
                 if (password.length < 4) {

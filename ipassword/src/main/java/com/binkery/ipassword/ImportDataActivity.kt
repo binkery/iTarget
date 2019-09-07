@@ -39,7 +39,7 @@ class ImportDataActivity : BaseActivity() {
     override fun getContentLayoutId(): Int = R.layout.activity_import_data
 
     override fun onContentCreate(savedInstanceState: Bundle?) {
-
+        vAppbar.setTitle("导入数据")
         vPathChooser.setOnClickListener {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 fileChooser()
@@ -49,21 +49,23 @@ class ImportDataActivity : BaseActivity() {
 
         }
         vPath.text = ""
-        vImportData.setOnClickListener {
+
+        vAppbar.setRightItem("开始导入",-1,View.OnClickListener {
+
             val path = vPath.text.toString()
             val password = vPasswordInput.text.toString()
             if (path.isEmpty()) {
                 Utils.toast(this, "文件路径为空")
-                return@setOnClickListener
+                return@OnClickListener
             }
             if (password.length < 4) {
                 Utils.toast(this, "密码长度必需为 4 位")
-                return@setOnClickListener
+                return@OnClickListener
             }
             val decodeJson = CodeEntity.decodeFromFile(path, password)
             if (decodeJson == null) {
                 Utils.toast(this, "密码错误")
-                return@setOnClickListener
+                return@OnClickListener
             }
             val dataList = Gson().fromJson<List<ItemEntity>>(decodeJson, object : TypeToken<List<ItemEntity>>() {}.type)
             for (d in dataList) {
@@ -78,7 +80,7 @@ class ImportDataActivity : BaseActivity() {
             Dialogs.alert(this, "导入成功", "导入" + dataList.size + "条数据。", "朕知道了", View.OnClickListener {
                 finish()
             })
-        }
+        })
     }
 
     private fun fileChooser() {
@@ -113,7 +115,7 @@ class ImportDataActivity : BaseActivity() {
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>?, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 100 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             fileChooser()

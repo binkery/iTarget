@@ -16,7 +16,7 @@ class AboutActivity : BasePasswordActivity() {
     override fun getContentLayoutId(): Int = R.layout.activity_about
 
     override fun onContentCreate(savedInstanceState: Bundle?) {
-        setTitle("关于")
+        vAppbar.setTitle("关于")
     }
 
 }

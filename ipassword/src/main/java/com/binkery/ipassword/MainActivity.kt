@@ -94,7 +94,7 @@ class MainActivity : BasePasswordActivity() {
         override fun onBindViewHolder(holder: VH, position: Int) {
             val item = items[position]
             (holder.v0 as TextView).text = item.name
-            (holder.v1 as TextView).text = item.username
+            (holder.v1 as TextView).text = "帐号：" + item.username
             (holder.v2 as TextView).text = item.password.replace(Regex("[\\w]"), "*")
             holder.itemView.setOnClickListener {
                 onItemClick(items[position])
