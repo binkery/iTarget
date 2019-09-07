@@ -4,21 +4,25 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.binkery.base.adapter.BaseAdapter
 import com.binkery.base.utils.Dialogs
+import com.binkery.base.widgets.RecycleViewDivider
 import com.binkery.ipassword.sqlite.DBHelper
+import com.binkery.ipassword.sqlite.ItemEntity
 import com.binkery.ipassword.utils.RequestCode
 import com.binkery.ipassword.utils.SharedUtils
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BasePasswordActivity() {
 
-
-    private val mAdapter = MainPagerAdapter(supportFragmentManager)
 
     companion object {
         fun start(activity: Activity) {
@@ -30,24 +34,26 @@ class MainActivity : BasePasswordActivity() {
     override fun getContentLayoutId(): Int = R.layout.activity_main
 
     override fun onContentCreate(savedInstanceState: Bundle?) {
-        setTitle(R.string.app_name)
+        vAppbar.setTitle(R.string.app_name)
 
         DBHelper.instance.init(this)
 
-        vViewPager.adapter = mAdapter
 
         vAddItem.setOnClickListener {
             AddItemActivity.start(this@MainActivity, -1)
         }
 
-        vMainPage.setOnClickListener {
-            vViewPager.setCurrentItem(0, true)
-        }
+        vAppbar.setRightItem("设置", -1, View.OnClickListener {
+            SettingActivity.start(this)
+        })
 
-        vSettingPage.setOnClickListener {
-            vViewPager.setCurrentItem(1, true)
-        }
+        vRecyclerView.layoutManager = LinearLayoutManager(this)
+        vRecyclerView.addItemDecoration(RecycleViewDivider(this, LinearLayoutManager.HORIZONTAL, 3, resources?.getColor(R.color.ipw_divider_color)!!))
 
+    }
+
+    fun onItemClick(item: ItemEntity) {
+        ItemViewActivity.start(this, item.id)
     }
 
     override fun shouldCheckPassword(): Boolean {
@@ -64,38 +70,35 @@ class MainActivity : BasePasswordActivity() {
                 PasswordCheckingActivity.start(this, true)
             } else {
                 SharedUtils.updateToken(this)
+                val list = DBHelper.instance.itemDao().queryAll()
+                val adapter = ItemAdapter(list)
+                vRecyclerView.adapter = adapter
+                adapter.notifyDataSetChanged()
             }
         }
 
     }
 
-    inner class MainPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+    inner class ItemAdapter(
+            private val items: List<ItemEntity>)
+        : BaseAdapter<ItemEntity>() {
 
+        override fun getItemCount(): Int = items.size
 
-        override fun getItem(position: Int): Fragment {
-            return when (position) {
-                0 -> MainItemFragment()
-                1 -> MainSettingFragment()
-                else -> MainItemFragment()
+        override fun getItemViewType(position: Int): Int = 0
+
+        override fun getItemLayoutId(viewType: Int): Int = R.layout.layout_item_list
+
+        override fun getItem(position: Int): ItemEntity = items[position]
+
+        override fun onBindViewHolder(holder: VH, position: Int) {
+            val item = items[position]
+            (holder.v0 as TextView).text = item.name
+            (holder.v1 as TextView).text = item.username
+            (holder.v2 as TextView).text = item.password.replace(Regex("[\\w]"), "*")
+            holder.itemView.setOnClickListener {
+                onItemClick(items[position])
             }
         }
-
-        override fun getCount(): Int = 2
-
-        override fun setPrimaryItem(container: ViewGroup, position: Int, obj: Any) {
-            Log.i("bky", "setPrimaryItem " + position + ", obj = " + obj)
-            when (position) {
-                0 -> {
-                    vMainPage.setTextColor(getColor(R.color.color_46A0F0))
-                    vSettingPage.setTextColor(getColor(R.color.color_black))
-                }
-                1 -> {
-                    vSettingPage.setTextColor(getColor(R.color.color_46A0F0))
-                    vMainPage.setTextColor(getColor(R.color.color_black))
-                }
-            }
-            super.setPrimaryItem(container, position, obj)
-        }
-
     }
 }

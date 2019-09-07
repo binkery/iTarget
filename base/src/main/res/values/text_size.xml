@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_size_title_bar">18dp</dimen>
+    <dimen name="text_size_title">16dp</dimen>
+    <dimen name="text_size_sub_title">14dp</dimen>
+    <dimen name="text_size_content">16dp</dimen>
+    <dimen name="text_size_time">12dp</dimen>
+    <dimen name="text_size_dialog_button">17dp</dimen>
+</resources>

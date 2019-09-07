@@ -12,6 +12,12 @@ buildscript {
     ext.room_runtime_version = '2.0.0'
     ext.room_compiler_version = '2.0.0'
 
+    ext.lib_kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    ext.lib_google_material = 'com.google.android.material:material:1.0.0'
+    ext.lib_google_gson = 'com.google.code.gson:gson:2.8.5'
+    ext.lib_androidx_room = 'androidx.room:room-runtime:2.0.0'
+    ext.lib_androidx_room_compiler = 'androidx.room:room-compiler:2.0.0'
+
     repositories {
         google()
         jcenter()

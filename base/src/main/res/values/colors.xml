@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--http://www.flatuicolorpicker.com/grey-hex-color-code-->
+
     <color name="color_46A0F0">#46A0F0</color>
     <color name="color_white">#FFFFFF</color>
     <color name="color_e0e0e0">#e0e0e0</color>
     <color name="color_black">#000000</color>
     <color name="color_1f1f1f">#1f1f1f</color>
     <color name="color_3c3c3c">#3c3c3c</color>
+    <color name="color_5e5e5e">#5e5e5e</color>
+    <color name="color_7f7f7f">#7f7f7f</color>
+
+    <color name="base_nav_bar_background">#46A0F0</color>
+    <color name="base_tool_bar_background">#46A0F0</color>
 </resources>

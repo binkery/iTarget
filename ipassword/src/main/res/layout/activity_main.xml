@@ -3,47 +3,56 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/vViewPager"
-        android:background="#f0f0f0"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/vRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/vBottomLayout" />
+        android:layout_height="match_parent" />
+
+    <!--<androidx.viewpager.widget.ViewPager-->
+    <!--android:id="@+id/vViewPager"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_above="@+id/vBottomLayout"-->
+    <!--android:background="#f0f0f0" />-->
+
+    <!---->
+    <!---->
+
+    <!--<LinearLayout-->
+    <!--android:id="@+id/vBottomLayout"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="48dp"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:background="@color/ipw_primary_color"-->
+    <!--android:orientation="horizontal">-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/vMainPage"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:text="主页" />-->
 
 
-    <LinearLayout
-        android:id="@+id/vBottomLayout"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
+    <!--<TextView-->
+    <!--android:id="@+id/vSettingPage"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:text="管理" />-->
+    <!--</LinearLayout>-->
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/vAddItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="36dp"
+        android:layout_marginRight="36dp"
+        android:src="@drawable/ic_add_black_24dp" />
 
-        <TextView
-            android:id="@+id/vMainPage"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="主页" />
-
-        <TextView
-            android:id="@+id/vAddItem"
-            android:layout_margin="4dp"
-            android:layout_width="56dp"
-            android:layout_height="match_parent"
-            android:background="@color/color_46A0F0"
-            android:gravity="center"
-            android:text="+"
-            android:textColor="@color/color_white"
-            android:textSize="24dp" />
-
-        <TextView
-            android:id="@+id/vSettingPage"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="管理" />
-    </LinearLayout>
 
 </RelativeLayout>

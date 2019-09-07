@@ -32,11 +32,13 @@
 
         <com.binkery.base.widgets.SettingItemView
             style="@style/SettingItem"
+            android:id="@+id/vAbout"
             android:layout_marginTop="16dp"
             app:key="关于" />
 
         <com.binkery.base.widgets.SettingItemView
             style="@style/SettingItem"
+            android:id="@+id/vVersion"
             android:layout_marginTop="1dp"
             app:key="版本" />
     </LinearLayout>

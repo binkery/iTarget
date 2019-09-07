@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+
+    <!--https://www.materialpalette.com/blue/orange-->
+
+    <color name="ipw_dark_primary_color">#1976D2</color>
+    <color name="ipw_light_primary_color">#BBDEFB</color>
+    <color name="ipw_primary_color">#2196F3</color>
+    <color name="ipw_text_icons">#FFFFFF</color>
+    <color name="ipw_accent_color">#FF9800</color>
+    <color name="ipw_primary_text">#212121</color>
+    <color name="ipw_secondary_text">#757575</color>
+    <color name="ipw_divider_color">#BDBDBD</color>
+
+
+    <color name="ipw_content_background">@color/ipw_text_icons</color>
+
+    <color name="base_nav_bar_background">@color/ipw_primary_color</color>
+    <color name="base_tool_bar_background">@color/ipw_primary_color</color>
 </resources>

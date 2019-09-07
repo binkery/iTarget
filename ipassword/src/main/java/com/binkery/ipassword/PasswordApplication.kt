@@ -53,7 +53,7 @@ class PasswordApplication : Application() {
     override fun onTrimMemory(level: Int) {
         super.onTrimMemory(level)
         Utils.log("onTrimMemory level = " + level)
-        if (level == TRIM_MEMORY_UI_HIDDEN) {
+        if (level >= TRIM_MEMORY_UI_HIDDEN) {
             SharedUtils.cleanToken(this)
         }
     }

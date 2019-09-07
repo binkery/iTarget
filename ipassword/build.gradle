@@ -31,11 +31,14 @@ kapt {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.google.android.material:material:1.0.0'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation "androidx.room:room-runtime:$room_runtime_version"
-    kapt "androidx.room:room-compiler:$room_compiler_version"
-    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation rootProject.ext.lib_kotlin_stdlib
+
+    implementation rootProject.ext.lib_androidx_room
+    kapt rootProject.ext.lib_androidx_room_compiler
+
+    implementation rootProject.ext.lib_google_gson
+    implementation rootProject.ext.lib_google_material
+
     implementation project(':base')
 
 }

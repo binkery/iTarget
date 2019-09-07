@@ -12,7 +12,7 @@ class SplashActivity : BaseActivity() {
     override fun getContentLayoutId(): Int = R.layout.activity_splash
 
     override fun onContentCreate(savedInstanceState: Bundle?) {
-        setActionBarEnable(false)
+        vAppbar.hide()
         mHandler.postDelayed({
             MainActivity.start(this)
             finish()

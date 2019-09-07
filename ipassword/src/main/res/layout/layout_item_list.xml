@@ -1,25 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:background="@color/color_white"
+    android:background="@color/ipw_content_background"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:paddingBottom="12dp"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp"
+    android:paddingTop="8dp">
 
     <TextView
         android:id="@+id/v0"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="name"
-        android:textSize="18dp"
-        android:textStyle="bold" />
+        android:textColor="@color/ipw_primary_text"
+        android:textSize="@dimen/text_size_title"
+        android:textStyle="normal" />
 
     <TextView
         android:id="@+id/v1"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/v0"
+        android:layout_marginTop="8dp"
+        android:maxLines="1"
         android:text="username"
-        android:textSize="16dp" />
+        android:textColor="@color/ipw_secondary_text"
+        android:textSize="@dimen/text_size_sub_title" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/v2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/v1"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="8dp"
+        android:maxLines="1"
+        android:text="password"
+        android:textColor="@color/ipw_secondary_text"
+        android:textSize="@dimen/text_size_sub_title" />
+
+</RelativeLayout>

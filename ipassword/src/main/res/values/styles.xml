@@ -3,9 +3,23 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/color_46A0F0</item>
-        <item name="colorPrimaryDark">@color/color_46A0F0</item>
-        <item name="colorAccent">@color/color_46A0F0</item>
+        <item name="colorPrimary">@color/ipw_dark_primary_color</item>
+        <item name="colorPrimaryDark">@color/ipw_primary_color</item>
+        <item name="colorAccent">@color/ipw_accent_color</item>
+    </style>
+
+
+    <style name="Theme.SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@color/color_46A0F0</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:clipToPadding">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="lollipop">true</item>
+        <item name="android:windowTranslucentNavigation" tools:targetApi="kitkat">true</item>
+        <item name="android:navigationBarColor" tools:targetApi="lollipop">
+            @android:color/transparent
+        </item>
     </style>
 
     <style name="ItemViewTip">
