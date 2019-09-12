@@ -31,7 +31,7 @@ class ItemViewActivity : BasePasswordActivity() {
             finish()
             return
         }
-        vAppbar.setRightItem("编辑", -1, View.OnClickListener {
+        vAppbar.setRightItem(R.string.edit, -1, View.OnClickListener {
             AddItemActivity.start(this, mItemId)
         })
 
@@ -41,7 +41,7 @@ class ItemViewActivity : BasePasswordActivity() {
         super.onResume()
         val entity = DBHelper.instance.itemDao().queryById(mItemId)
 
-        vAppbar.setTitle("账号信息")
+        vAppbar.setTitle(R.string.title_account_detail)
 
         entity.apply {
             vItemName.text = name

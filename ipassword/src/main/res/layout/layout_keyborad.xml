@@ -55,7 +55,7 @@
     <TextView
         android:id="@+id/vKeyReturn"
         style="@style/KeyBoardItem"
-        android:text="返回" />
+        android:text="@string/returns" />
 
     <TextView
         android:id="@+id/vKey0"
@@ -65,7 +65,7 @@
     <TextView
         android:id="@+id/vKeyDelete"
         style="@style/KeyBoardItem"
-        android:text="删除" />
+        android:text="@string/delete" />
 
 
 </GridLayout>

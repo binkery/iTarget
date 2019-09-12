@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:padding="8dp"
-        android:text="请选择导入的文档：" />
+        android:text="@string/import_data_choose_file" />
 
     <LinearLayout
         android:id="@+id/vPathChooser"
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:padding="8dp"
-            android:text="选择" />
+            android:text="@string/select" />
 
     </LinearLayout>
 
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:padding="8dp"
-        android:text="请输入文件加密密码：" />
+        android:text="@string/import_data_password" />
 
     <EditText
         android:id="@+id/vPasswordInput"
@@ -53,16 +53,5 @@
         android:inputType="number"
         android:maxLength="4"
         android:padding="8dp" />
-
-    <!--<TextView-->
-    <!--android:id="@+id/vImportData"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_margin="8dp"-->
-    <!--android:background="@color/color_46A0F0"-->
-    <!--android:gravity="center"-->
-    <!--android:padding="8dp"-->
-    <!--android:text="开始导入"-->
-    <!--android:textColor="@color/color_white" />-->
 
 </LinearLayout>

@@ -9,7 +9,7 @@
         android:layout_height="56dp"
         android:layout_gravity="center"
         android:layout_marginTop="36dp"
-        android:src="@drawable/ic_verified_user_black_24dp" />
+        android:src="@drawable/ic_launcher" />
 
     <TextView
         android:layout_width="wrap_content"

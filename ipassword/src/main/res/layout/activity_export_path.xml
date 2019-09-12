@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:text="加密密码："
+        android:text="@string/export_data_password"
         android:textSize="12dp" />
 
     <EditText
@@ -23,29 +23,11 @@
         android:text="******"
         android:textSize="16dp" />
 
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:orientation="horizontal">-->
-
-    <!---->
-
-    <!--&lt;!&ndash;<TextView&ndash;&gt;-->
-    <!--&lt;!&ndash;android:id="@+id/vModifyPassword"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_margin="8dp"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:padding="8dp"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:text="设置" />&ndash;&gt;-->
-
-    <!--</LinearLayout>-->
-
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:text="导出文件路径："
+        android:text="@string/export_data_path"
         android:textSize="12dp" />
 
     <TextView
@@ -56,17 +38,5 @@
         android:padding="8dp"
         android:text="/sdcard/ipassword/"
         android:textSize="16dp" />
-
-    <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_weight="1" />-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/vNextStep"-->
-        <!--style="@style/Button"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="导出" />-->
 
 </LinearLayout>

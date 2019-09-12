@@ -35,7 +35,7 @@ class ExportDataActivity : BasePasswordActivity() {
         ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 100)
         vPasswordInput.setText("")
 
-        vAppbar.setRightItem("开始到处", -1, View.OnClickListener {
+        vAppbar.setRightItem("开始导出", -1, View.OnClickListener {
 
             val password = vPasswordInput.text.toString()
             if (password.length < 4) {

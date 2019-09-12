@@ -63,6 +63,12 @@ class Appbar {
         vRightItem.setOnClickListener(listener)
     }
 
+    fun setRightItem(title: Int, icon: Int, listener: View.OnClickListener) {
+        vRightItem.visibility = View.VISIBLE
+        vRightItem.setText(title)
+        vRightItem.setOnClickListener(listener)
+    }
+
 //    fun setLeftItem(title: String, icon: Int, listener: View.OnClickListener) {
 //
 //    }

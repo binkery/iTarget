@@ -22,25 +22,25 @@
             style="@style/SettingItem"
             android:id="@+id/vImportData"
             android:layout_marginTop="16dp"
-            app:key="导入数据" />
+            app:key="@string/import_data" />
 
         <com.binkery.base.widgets.SettingItemView
             style="@style/SettingItem"
             android:id="@+id/vExportData"
             android:layout_marginTop="1dp"
-            app:key="导出数据" />
+            app:key="@string/export_data" />
 
         <com.binkery.base.widgets.SettingItemView
             style="@style/SettingItem"
             android:id="@+id/vAbout"
             android:layout_marginTop="16dp"
-            app:key="关于" />
+            app:key="@string/about" />
 
         <com.binkery.base.widgets.SettingItemView
             style="@style/SettingItem"
             android:id="@+id/vVersion"
             android:layout_marginTop="1dp"
-            app:key="版本" />
+            app:key="@string/version" />
     </LinearLayout>
 
 </ScrollView>
