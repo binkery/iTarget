@@ -20,17 +20,63 @@
         android:textColor="@color/ipw_primary_color"
         android:textSize="20dp" />
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginTop="20dp"
-        android:text="
-iPassword 是一款帮助你记录帐号密码的软件。
-这一款完全的本地应用。在权限方面 ，iPassword 只申请的 SDCard 的读写权限，用来导出和导入文件。
-没有申请任何网络访问的权限，所以 app 没有提供网络备份的功能。"
-        android:textColor="@color/ipw_secondary_text"
-        android:textSize="14dp" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/AboutTextView"
+                android:text="@string/about_string1" />
+
+            <TextView
+                style="@style/AboutTextView"
+                android:text="@string/about_string2" />
+
+            <TextView
+                style="@style/AboutTextView"
+                android:text="@string/about_string3" />
+
+            <TextView
+                style="@style/AboutTextView"
+                android:text="@string/about_string4" />
+
+            <TextView
+                style="@style/AboutTextView"
+                android:text="@string/about_string5" />
+
+            <TextView
+                style="@style/AboutTextView"
+                android:text="@string/about_string6" />
+
+            <TextView
+                style="@style/AboutTextView"
+                android:text="@string/about_string7" />
+
+            <TextView
+                style="@style/AboutTextView"
+                android:text="@string/about_string8" />
+
+            <TextView
+                style="@style/AboutTextView"
+                android:text="@string/about_string9" />
+
+            <TextView
+                style="@style/AboutTextView"
+                android:text="@string/about_string10" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="30dp"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
 
 </LinearLayout>

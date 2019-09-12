@@ -95,7 +95,7 @@ class MainActivity : BasePasswordActivity() {
             val item = items[position]
             (holder.v0 as TextView).text = item.name
             (holder.v1 as TextView).text = "帐号：" + item.username
-            (holder.v2 as TextView).text = item.password.replace(Regex("[\\w]"), "*")
+            (holder.v2 as TextView).text = String(CharArray(item.password.length) {'*'})
             holder.itemView.setOnClickListener {
                 onItemClick(items[position])
             }

@@ -34,4 +34,16 @@
     <string name="export_data">Export Data</string>
     <string name="about">About</string>
     <string name="version">Version</string>
+
+    <string name="about_string1">iPassword 是一款离线的密码保管箱</string>
+    <string name="about_string2">为了解决您对密码安全的疑虑，iPassword 没有申请网络访问权限，所以您不用担心 iPassword 会收集您的账号信息。</string>
+    <string name="about_string3">iPassword 唯一申请的权限是存储卡的读写权限。在导出数据和导入数据的时候，申请您的授权。如果您不需要导出或者导入数据，您可以不授予权限。</string>
+    <string name="about_string4">导出数据时，需要您对将要导出的数据文件设置文件加密密钥，请务必牢记这个密钥。</string>
+    <string name="about_string5">导出的数据文件您需要妥善保管，存储到您放心的网络空间。</string>
+    <string name="about_string6">导出的数据文件若被人拿走，在不知晓加密密钥的情况下，是打不开的。</string>
+    <string name="about_string7">iPassword 会持续提高加密算法的复杂度，以保证提供更加安全的加密。</string>
+    <string name="about_string8">如果忘记机密密钥的话，您可能无法正常导入数据</string>
+    <string name="about_string9">iPassword 是完全离线的应用，如果您卸载 iPassword 前未导出数据的话，您将没有任何办法恢复数据。</string>
+    <string name="about_string10">有任何问题、意见、建议、不满，甚至气愤，可以随时和 iPassword 联系。因为 iPassword 没有申请网络权限，所以也没有设计提交意见反馈的功能，欢迎通过邮件的方式和开发者联系。</string>
+
 </resources>
