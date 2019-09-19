@@ -9,6 +9,8 @@ class SharedUtils {
         private val sToken = SharedEditor("token")
         private const val KEY_PASSWORD = "password"
         private const val KEY_TOKEN = "token"
+        private const val AUTO_BACKUP = "auto_backup"
+        private const val KEY_EXPORT_KEY = "export_key"
 
         fun hasPassword(context: Context): Boolean {
             val value = sToken.get(context, KEY_PASSWORD, "")
@@ -45,6 +47,24 @@ class SharedUtils {
 
         fun cleanToken(context: Context) {
             sToken.put(context, KEY_TOKEN, "0")
+        }
+
+        fun isOpenAutoBackup(context: Context): Boolean {
+            val value = sToken.get(context, AUTO_BACKUP, "0")
+            return value == "1"
+        }
+
+        fun openAutoBackup(context: Context, password: String) {
+            sToken.put(context, AUTO_BACKUP, "1")
+            sToken.put(context, KEY_EXPORT_KEY, password)
+        }
+
+        fun closeAutoBackup(context: Context) {
+            sToken.put(context, AUTO_BACKUP, "0")
+        }
+
+        fun getExportKey(context: Context): String {
+            return sToken.get(context, KEY_EXPORT_KEY, "")
         }
 
     }

@@ -19,28 +19,34 @@
             app:value="" />
 
         <com.binkery.base.widgets.SettingItemView
-            style="@style/SettingItem"
             android:id="@+id/vImportData"
+            style="@style/SettingItem"
             android:layout_marginTop="16dp"
-            app:key="@string/import_data" />
+            app:key="导入数据" />
 
         <com.binkery.base.widgets.SettingItemView
-            style="@style/SettingItem"
             android:id="@+id/vExportData"
+            style="@style/SettingItem"
             android:layout_marginTop="1dp"
-            app:key="@string/export_data" />
+            app:key="导出数据" />
 
         <com.binkery.base.widgets.SettingItemView
+            android:id="@+id/vAutoBackup"
             style="@style/SettingItem"
+            android:layout_marginTop="1dp"
+            app:key="自动备份" />
+
+        <com.binkery.base.widgets.SettingItemView
             android:id="@+id/vAbout"
+            style="@style/SettingItem"
             android:layout_marginTop="16dp"
-            app:key="@string/about" />
+            app:key="关于" />
 
         <com.binkery.base.widgets.SettingItemView
-            style="@style/SettingItem"
             android:id="@+id/vVersion"
+            style="@style/SettingItem"
             android:layout_marginTop="1dp"
-            app:key="@string/version" />
+            app:key="版本" />
     </LinearLayout>
 
 </ScrollView>

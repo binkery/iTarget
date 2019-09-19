@@ -65,7 +65,7 @@
     <TextView
         android:id="@+id/vKeyDelete"
         style="@style/KeyBoardItem"
-        android:text="@string/delete" />
+        android:text="删除" />
 
 
 </GridLayout>

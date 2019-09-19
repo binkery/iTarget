@@ -8,7 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:text="@string/export_data_password"
+        android:text="请输入加密密钥，长度大于等于 6"
+        android:textColor="@color/ipw_primary_text"
         android:textSize="12dp" />
 
     <EditText
@@ -16,18 +17,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:digits="0123456789"
-        android:inputType="number"
-        android:maxLength="4"
+        android:hint="密钥"
+        android:inputType="text"
+        android:maxLength="24"
         android:padding="8dp"
-        android:text="******"
         android:textSize="16dp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:text="@string/export_data_path"
+        android:text="文件输出路径："
+        android:textColor="@color/ipw_primary_text"
         android:textSize="12dp" />
 
     <TextView
@@ -37,6 +38,7 @@
         android:layout_margin="8dp"
         android:padding="8dp"
         android:text="/sdcard/ipassword/"
+        android:textColor="@color/ipw_secondary_text"
         android:textSize="16dp" />
 
 </LinearLayout>

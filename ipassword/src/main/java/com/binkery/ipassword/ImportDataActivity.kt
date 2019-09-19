@@ -63,6 +63,7 @@ class ImportDataActivity : BaseActivity() {
                 return@OnClickListener
             }
             val decodeJson = CodeEntity.decodeFromFile(path, password)
+            Utils.log("decode json = " + decodeJson)
             if (decodeJson == null) {
                 Utils.toast(this, "密码错误")
                 return@OnClickListener

@@ -9,15 +9,20 @@ import com.binkery.base.utils.Dialogs
 import com.binkery.base.utils.Utils
 import com.binkery.ipassword.sqlite.DBHelper
 import com.binkery.ipassword.sqlite.ItemEntity
+import com.binkery.ipassword.utils.ExportData
+import com.binkery.ipassword.utils.SharedUtils
 import kotlinx.android.synthetic.main.activity_item_view.*
 
 class ItemViewActivity : BasePasswordActivity() {
 
     companion object {
-        fun start(activity: Activity, itemId: Int) {
+
+        private const val RQC_EDIT = 101
+
+        fun start(activity: Activity, itemId: Int, requestCode: Int) {
             val intent = Intent(activity, ItemViewActivity::class.java)
             intent.putExtra("item_id", itemId)
-            activity.startActivity(intent)
+            activity.startActivityForResult(intent, requestCode)
         }
     }
 
@@ -32,16 +37,29 @@ class ItemViewActivity : BasePasswordActivity() {
             return
         }
         vAppbar.setRightItem(R.string.edit, -1, View.OnClickListener {
-            AddItemActivity.start(this, mItemId)
+            AddItemActivity.start(this, mItemId, RQC_EDIT)
         })
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when {
+            requestCode == RQC_EDIT && resultCode == Activity.RESULT_OK -> {
+
+            }
+            requestCode == RQC_EDIT && resultCode == Activity.RESULT_FIRST_USER -> {
+                setResult(Activity.RESULT_OK)
+                finish()
+            }
+        }
     }
 
     override fun onResume() {
         super.onResume()
         val entity = DBHelper.instance.itemDao().queryById(mItemId)
 
-        vAppbar.setTitle(R.string.title_account_detail)
+        vAppbar.setTitle("账号信息")
 
         entity.apply {
             vItemName.text = name
@@ -50,16 +68,6 @@ class ItemViewActivity : BasePasswordActivity() {
             vComments.text = comments
         }
 
-        vDelete.setOnClickListener {
-            val message = "是否删除 " + entity.name + " 上，账号为 " + entity.username + " 的信息吗？"
-
-            Dialogs.showDeleteDialog(this, message, object : Dialogs.OnConfromListener {
-                override fun onConform() {
-                    DBHelper.instance.itemDao().delete(entity)
-                    finish()
-                }
-            })
-        }
 
     }
 

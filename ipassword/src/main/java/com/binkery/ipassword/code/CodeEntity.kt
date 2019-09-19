@@ -2,6 +2,7 @@ package com.binkery.ipassword.code
 
 import com.binkery.base.utils.MD5
 import com.binkery.base.utils.Utils
+import com.binkery.ipassword.utils.AESUtils
 import java.io.ByteArrayOutputStream
 import java.io.File
 
@@ -16,10 +17,11 @@ class CodeEntity {
         fun encode2File(path: String, json: String, password: String) {
             val file = File(path)
             file.writeText("ipw", Charsets.UTF_8)
-            file.appendBytes(kotlin.ByteArray(1, { 1 }))
+            file.appendBytes(kotlin.ByteArray(1, { 2 }))
             file.appendText(MD5.md5(password))
 //            file.appendText(encode(password, json))
-            file.appendBytes(encode(password, json))
+//            file.appendBytes(encode(password, json))
+            file.appendBytes(AESUtils.encrypt(json, password))
         }
 
         fun decodeFromFile(path: String, password: String): String? {
@@ -41,27 +43,36 @@ class CodeEntity {
             val baos = ByteArrayOutputStream()
             fis.copyTo(baos, 1024)
 //            val data = String(baos.toByteArray(), Charsets.UTF_8)
-            val result = decode(password, baos.toByteArray())
-            Utils.log("result = " + result)
-            return result
+            when (version) {
+                2 -> {
+                    val result = AESUtils.decode(baos.toByteArray(), password)
+                    return String(result, Charsets.UTF_8)
+                }
+                else -> {
+                    val result = decode(password, baos.toByteArray())
+                    Utils.log("result = " + result)
+                    return result
+                }
+            }
+
         }
 
-        private fun encode(password: String, data: String): ByteArray {
-
-            val byteArray = password.toByteArray(Charsets.UTF_8)
-            var key: Int = 0
-            for (b in byteArray) {
-                key += (b.toInt() and 0xFF)
-            }
-            Utils.log("encode key = " + key)
-            val dataArray = data.toByteArray(Charsets.UTF_8)
-            val resultArray = ByteArray(dataArray.size)
-            dataArray.forEachIndexed { index, byte ->
-                resultArray[index] = ((byte + key) and 0xFF).toByte()
-//                Utils.log("encode byte " + byte + " to " + resultArray[index])
-            }
-            return resultArray
-        }
+//        private fun encode(password: String, data: String): ByteArray {
+//
+//            val byteArray = password.toByteArray(Charsets.UTF_8)
+//            var key: Int = 0
+//            for (b in byteArray) {
+//                key += (b.toInt() and 0xFF)
+//            }
+//            Utils.log("encode key = " + key)
+//            val dataArray = data.toByteArray(Charsets.UTF_8)
+//            val resultArray = ByteArray(dataArray.size)
+//            dataArray.forEachIndexed { index, byte ->
+//                resultArray[index] = ((byte + key) and 0xFF).toByte()
+////                Utils.log("encode byte " + byte + " to " + resultArray[index])
+//            }
+//            return resultArray
+//        }
 
         private fun decode(password: String, dataArray: ByteArray): String {
             val byteArray = password.toByteArray(Charsets.UTF_8)

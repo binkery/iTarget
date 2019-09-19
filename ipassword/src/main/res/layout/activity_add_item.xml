@@ -74,5 +74,22 @@
         android:lines="3"
         android:maxLines="5" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+
+    <TextView
+        android:id="@+id/vDelete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@color/ipw_primary_color"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="删除"
+        android:textColor="@color/ipw_text_icons"
+        android:textSize="14dp" />
 
 </LinearLayout>

@@ -36,6 +36,10 @@ class Dialogs {
             dialog.show()
         }
 
+//        fun alert(activity: Activity, title: Int, message: Int, button: Int, listener: View.OnClickListener?) {
+//            alert(activity, activity.resources.getString(title), activity.resources.getString(message), activity.resources.getString(button), listener)
+//        }
+
         fun alert(activity: Activity, title: String, message: String, button: String, listener: View.OnClickListener?) {
             val view = LayoutInflater.from(activity).inflate(R.layout.base_dialog_alert, null, false)
             view.findViewById<TextView>(R.id.vTitle).text = title

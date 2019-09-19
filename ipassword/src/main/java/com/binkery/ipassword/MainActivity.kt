@@ -25,6 +25,10 @@ class MainActivity : BasePasswordActivity() {
 
 
     companion object {
+
+        private const val RQC_NEW_ITEM = 100
+        private const val RQC_VIEW_ITEM = 101
+
         fun start(activity: Activity) {
             val intent = Intent(activity, MainActivity::class.java)
             activity.startActivity(intent)
@@ -34,13 +38,13 @@ class MainActivity : BasePasswordActivity() {
     override fun getContentLayoutId(): Int = R.layout.activity_main
 
     override fun onContentCreate(savedInstanceState: Bundle?) {
-        vAppbar.setTitle(R.string.app_name)
+        vAppbar.setTitle("iPassword 密码箱")
 
         DBHelper.instance.init(this)
 
 
         vAddItem.setOnClickListener {
-            AddItemActivity.start(this@MainActivity, -1)
+            AddItemActivity.start(this@MainActivity, -1, RQC_NEW_ITEM)
         }
 
         vAppbar.setRightItem("设置", -1, View.OnClickListener {
@@ -49,11 +53,30 @@ class MainActivity : BasePasswordActivity() {
 
         vRecyclerView.layoutManager = LinearLayoutManager(this)
         vRecyclerView.addItemDecoration(RecycleViewDivider(this, LinearLayoutManager.HORIZONTAL, 3, resources?.getColor(R.color.ipw_divider_color)!!))
+        updateUI()
+    }
 
+    private fun updateUI() {
+        val list = DBHelper.instance.itemDao().queryAll()
+        val adapter = ItemAdapter(list)
+        vRecyclerView.adapter = adapter
+        adapter.notifyDataSetChanged()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when {
+            requestCode == RQC_VIEW_ITEM && resultCode == Activity.RESULT_OK -> {
+                updateUI()
+            }
+            requestCode == RQC_NEW_ITEM && resultCode == Activity.RESULT_OK -> {
+                updateUI()
+            }
+        }
     }
 
     fun onItemClick(item: ItemEntity) {
-        ItemViewActivity.start(this, item.id)
+        ItemViewActivity.start(this, item.id, RQC_VIEW_ITEM)
     }
 
     override fun shouldCheckPassword(): Boolean {
@@ -70,10 +93,6 @@ class MainActivity : BasePasswordActivity() {
                 PasswordCheckingActivity.start(this, true)
             } else {
                 SharedUtils.updateToken(this)
-                val list = DBHelper.instance.itemDao().queryAll()
-                val adapter = ItemAdapter(list)
-                vRecyclerView.adapter = adapter
-                adapter.notifyDataSetChanged()
             }
         }
 
@@ -95,7 +114,7 @@ class MainActivity : BasePasswordActivity() {
             val item = items[position]
             (holder.v0 as TextView).text = item.name
             (holder.v1 as TextView).text = "帐号：" + item.username
-            (holder.v2 as TextView).text = String(CharArray(item.password.length) {'*'})
+            (holder.v2 as TextView).text = String(CharArray(item.password.length) { '*' })
             holder.itemView.setOnClickListener {
                 onItemClick(items[position])
             }

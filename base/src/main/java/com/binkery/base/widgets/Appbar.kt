@@ -33,9 +33,9 @@ class Appbar {
         vTitle.text = title
     }
 
-    fun setTitle(resId: Int) {
-        vTitle.setText(resId)
-    }
+//    fun setTitle(resId: Int) {
+//        vTitle.setText(resId)
+//    }
 
     fun setTitleBackground(color: Int) {
         vContainer.setBackgroundColor(color)

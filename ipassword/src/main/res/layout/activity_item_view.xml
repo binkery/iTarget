@@ -10,7 +10,7 @@
         style="@style/ItemViewTip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/tips_item_name" />
+        android:text="项目名称" />
 
     <TextView
         android:id="@+id/vItemName"
@@ -23,7 +23,7 @@
         style="@style/ItemViewTip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/tips_user_name" />
+        android:text="用户名" />
 
 
     <TextView
@@ -37,7 +37,7 @@
         style="@style/ItemViewTip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/tips_password" />
+        android:text="密码" />
 
     <TextView
         android:id="@+id/vPassword"
@@ -50,7 +50,7 @@
         style="@style/ItemViewTip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/tips_comments" />
+        android:text="备注" />
 
     <TextView
         android:id="@+id/vComments"
@@ -62,18 +62,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1" />
-
-    <TextView
-        android:id="@+id/vDelete"
-        android:textSize="14dp"
-        android:background="@color/ipw_primary_color"
-        android:textColor="@color/ipw_text_icons"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:padding="8dp"
-        android:text="@string/delete" />
-
 
 </LinearLayout>

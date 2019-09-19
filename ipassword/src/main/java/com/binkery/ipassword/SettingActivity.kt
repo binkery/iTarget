@@ -3,6 +3,7 @@ package com.binkery.ipassword
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import com.binkery.ipassword.utils.SharedUtils
 import kotlinx.android.synthetic.main.activity_setting.*
 
 class SettingActivity : BasePasswordActivity() {
@@ -37,6 +38,17 @@ class SettingActivity : BasePasswordActivity() {
 
         vVersion.setValue(BuildConfig.VERSION_NAME)
 
+        vAutoBackup.setOnClickListener { AutoBackupActivity.start(this) }
+
+
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (SharedUtils.isOpenAutoBackup(this)) {
+            vAutoBackup.setValue("已开启")
+        } else {
+            vAutoBackup.setValue("已关闭")
+        }
+    }
 }

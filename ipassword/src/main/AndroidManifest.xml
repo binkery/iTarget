@@ -34,6 +34,7 @@
         <activity android:name=".ImportDataActivity" />
         <activity android:name=".AboutActivity" />
         <activity android:name=".SettingActivity" />
+        <activity android:name=".AutoBackupActivity"/>
     </application>
 
 </manifest>
