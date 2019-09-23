@@ -4,29 +4,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:padding="8dp"
-        android:text="@string/tips_item_name" />
-
     <EditText
         android:id="@+id/vItemName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:hint="项目名称"
         android:inputType="text"
         android:maxLines="1"
         android:padding="8dp" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:padding="8dp"
-        android:text="@string/tips_user_name" />
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="8dp"-->
+    <!--android:padding="8dp"-->
+    <!--android:text="用户名" />-->
 
     <EditText
         android:id="@+id/vUserName"
@@ -34,32 +28,44 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:hint="用户名"
 
         android:inputType="text"
         android:maxLines="1" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:padding="8dp"
-        android:text="@string/tips_password" />
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="8dp"-->
+    <!--android:padding="8dp"-->
+    <!--android:text="密码" />-->
 
-    <EditText
-        android:id="@+id/vPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:inputType="textVisiblePassword"
-        android:maxLines="1" />
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:padding="8dp"
-        android:text="@string/tips_comments" />
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/vPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:hint="密码"
+            android:inputType="textVisiblePassword"
+            android:maxLines="1" />
+
+        <TextView
+            android:id="@+id/vPasswordGenerator"
+            android:textColor="@color/ipw_primary_color"
+            android:padding="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="随机密码" />
+    </LinearLayout>
+
 
 
     <EditText
@@ -68,8 +74,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-
         android:gravity="top"
+
+        android:hint="备注"
         android:inputType="textMultiLine"
         android:lines="3"
         android:maxLines="5" />

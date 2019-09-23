@@ -35,6 +35,7 @@
         <activity android:name=".AboutActivity" />
         <activity android:name=".SettingActivity" />
         <activity android:name=".AutoBackupActivity"/>
+        <activity android:name=".PasswordGeneratorActivity"/>
     </application>
 
 </manifest>

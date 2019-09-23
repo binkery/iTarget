@@ -1,5 +1,6 @@
 package com.binkery.base.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.LayoutInflater
@@ -15,11 +16,7 @@ abstract class BaseActivity : AppCompatActivity() {
     protected val vAppbar = Appbar()
 
 
-    override final fun onCreate(savedInstanceState: Bundle?) {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            window.navigationBarColor = resources.getColor(R.color.base_nav_bar_background)
-////            vContainer.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
-//        }
+    final override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
 
@@ -43,7 +40,7 @@ abstract class BaseActivity : AppCompatActivity() {
     abstract fun onContentCreate(savedInstanceState: Bundle?)
 
     open fun onBackClick() {
-        finish()
+        finishActivity()
     }
 
     override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
@@ -52,6 +49,11 @@ abstract class BaseActivity : AppCompatActivity() {
             return true
         }
         return super.onKeyUp(keyCode, event)
+    }
+
+    fun finishActivity(resultCode: Int = -1, data: Intent? = null) {
+        setResult(resultCode, data)
+        finish()
     }
 
 }

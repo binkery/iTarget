@@ -17,6 +17,8 @@ buildscript {
     ext.lib_google_gson = 'com.google.code.gson:gson:2.8.5'
     ext.lib_androidx_room = 'androidx.room:room-runtime:2.0.0'
     ext.lib_androidx_room_compiler = 'androidx.room:room-compiler:2.0.0'
+    ext.lib_androidx_lifecycle_viewmodel = 'androidx.lifecycle:lifecycle-viewmodel:2.0.0'
+    ext.lib_androidx_lifecycle_extensions = 'androidx.lifecycle:lifecycle-extensions:2.0.0'
 
     repositories {
         google()

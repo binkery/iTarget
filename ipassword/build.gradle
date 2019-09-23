@@ -40,6 +40,9 @@ dependencies {
     implementation rootProject.ext.lib_androidx_room
     kapt rootProject.ext.lib_androidx_room_compiler
 
+    implementation rootProject.ext.lib_androidx_lifecycle_viewmodel
+    implementation rootProject.ext.lib_androidx_lifecycle_extensions
+
     implementation rootProject.ext.lib_google_gson
     implementation rootProject.ext.lib_google_material
 
