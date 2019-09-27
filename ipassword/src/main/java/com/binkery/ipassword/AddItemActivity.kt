@@ -5,10 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.binkery.base.utils.Dialogs
-import com.binkery.base.utils.Utils
-import com.binkery.ipassword.sqlite.DBHelper
 import kotlinx.android.synthetic.main.activity_add_item.*
 
 class AddItemActivity : BasePasswordActivity() {
@@ -23,28 +20,24 @@ class AddItemActivity : BasePasswordActivity() {
         }
     }
 
-    private var mItemId: Int = -1
-
     override fun getContentLayoutId(): Int = R.layout.activity_add_item
 
     override fun onContentCreate(savedInstanceState: Bundle?) {
 
-        val viewModel = ViewModelProviders.of(this).get(EditViewModel::class.java)
-        viewModel.getItemEntity().observe(this, Observer {
-            if (it == null) {
+        val viewModel = getViewModel<EditViewModel>()
+        viewModel.getItemEntity().observe(this, Observer { entity->
+            if (entity == null) {
                 vAppbar.setTitle("新建")
                 vDelete.visibility = View.GONE
             } else {
-                vItemName.setText(it.name)
-                vUserName.setText(it.username)
-                vPassword.setText(it.password)
-                vComments.setText(it.comments)
+                vItemName.setText(entity.name)
+                vUserName.setText(entity.username)
+                vPassword.setText(entity.password)
+                vComments.setText(entity.comments)
                 vAppbar.setTitle("编辑")
                 vDelete.visibility = View.VISIBLE
                 vDelete.setOnClickListener {
-                    val entity = DBHelper.instance.itemDao().queryById(mItemId)
                     val message = "是否删除 " + entity.name + " 上，账号为 " + entity.username + " 的信息吗？"
-
                     Dialogs.comfirm(this, "删除确认", message, "再想想", "确认删除", null, View.OnClickListener {
                         viewModel.delete(this)
                     })
@@ -52,12 +45,8 @@ class AddItemActivity : BasePasswordActivity() {
             }
         })
 
-        mItemId = intent.getIntExtra("item_id", -1)
-        viewModel.loadItemEntity(mItemId)
-
-        viewModel.getToast().observe(this, Observer {
-            Utils.toast(this, it)
-        })
+        val itemId = intent.getIntExtra("item_id", -1)
+        viewModel.loadItemEntity(itemId)
 
         vAppbar.setRightItem("保存", -1, View.OnClickListener {
             val itemName = vItemName.text.toString().trim()

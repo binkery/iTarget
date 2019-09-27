@@ -8,6 +8,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.CompoundButton
 import androidx.core.app.ActivityCompat
+import com.binkery.base.ext.gone
+import com.binkery.base.ext.longToast
+import com.binkery.base.ext.visible
 import com.binkery.base.utils.Utils
 import com.binkery.ipassword.utils.SharedUtils
 import kotlinx.android.synthetic.main.activity_auto_backup.*
@@ -35,7 +38,7 @@ class AutoBackupActivity : BasePasswordActivity() {
             }
             val password = vPasswordInput.text.toString()
             if (password.length < 6) {
-                Utils.toast(this, "密码少于 6 位数")
+                "密码少于 6 位数".longToast(this)
                 return@OnClickListener
             }
             val hasPermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -69,15 +72,15 @@ class AutoBackupActivity : BasePasswordActivity() {
 
     private fun updateWithCheckBox(isChecked: Boolean) {
         if (isChecked) {
-            vPasswordDescription.visibility = View.VISIBLE
-            vPasswordInput.visibility = View.VISIBLE
-            vPermissionDescription.visibility = View.VISIBLE
-            vCheckPermission.visibility = View.VISIBLE
+            vPasswordDescription.visible()
+            vPasswordInput.visible()
+            vPermissionDescription.visible()
+            vCheckPermission.visible()
         } else {
-            vPasswordDescription.visibility = View.GONE
-            vPasswordInput.visibility = View.GONE
-            vPermissionDescription.visibility = View.GONE
-            vCheckPermission.visibility = View.GONE
+            vPasswordDescription.gone()
+            vPasswordInput.gone()
+            vPermissionDescription.gone()
+            vCheckPermission.gone()
         }
     }
 

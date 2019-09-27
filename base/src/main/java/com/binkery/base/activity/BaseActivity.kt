@@ -7,16 +7,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProviders
 import com.binkery.base.R
+import com.binkery.base.utils.Utils
 import com.binkery.base.widgets.Appbar
 import kotlinx.android.synthetic.main.base_activity.*
 
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity(), ViewContainer {
 
     protected val vAppbar = Appbar()
 
+    override fun showToast(message: String) {
+        Utils.toast(this, message)
+    }
 
-    final override fun onCreate(savedInstanceState: Bundle?) {
+    inline fun <reified T : BaseViewModel> getViewModel(): T {
+        val viewModel = ViewModelProviders.of(this).get(T::class.java)
+        viewModel.init(this)
+        return viewModel
+    }
+
+     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
 

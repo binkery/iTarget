@@ -5,22 +5,19 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.binkery.base.activity.BaseViewModel
+import com.binkery.base.ext.longToast
 import com.binkery.ipassword.sqlite.DBHelper
 import com.binkery.ipassword.sqlite.ItemEntity
 import com.binkery.ipassword.utils.ExportData
 import com.binkery.ipassword.utils.SharedUtils
 
-class EditViewModel : ViewModel() {
+class EditViewModel : BaseViewModel() {
 
     private val mItemEntity: MutableLiveData<ItemEntity?> = MutableLiveData()
-    private val mToast: MutableLiveData<String> = MutableLiveData()
 
     fun getItemEntity(): LiveData<ItemEntity?> {
         return mItemEntity
-    }
-
-    fun getToast(): LiveData<String> {
-        return mToast
     }
 
     fun loadItemEntity(id: Int) {
@@ -32,9 +29,10 @@ class EditViewModel : ViewModel() {
         if (SharedUtils.isOpenAutoBackup(context)) {
             val password = SharedUtils.getExportKey(context)
             val path = ExportData.export(context, password)
-            mToast.value = "自动备份数据到 $path"
+            "自动备份数据到 $path".longToast(context)
+
         } else {
-            mToast.value = "已保存，您未开启自动备份功能"
+            "已保存，您未开启自动备份功能".longToast(context)
         }
     }
 
@@ -49,15 +47,15 @@ class EditViewModel : ViewModel() {
 
     fun save(activity: AddItemActivity, name: String, user: String, password: String, comment: String) {
         if (name == "") {
-            mToast.value = "网站名字为空"
+            "网站名字为空".longToast(activity)
             return
         }
         if (user == "") {
-            mToast.value = "用户名为空"
+            "用户名为空".longToast(activity)
             return
         }
         if (password == "") {
-            mToast.value = "密码为空"
+            "密码为空".longToast(activity)
             return
         }
         if (mItemEntity.value == null) {

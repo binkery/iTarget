@@ -2,7 +2,9 @@ package com.binkery.ipassword
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.view.View
 import com.binkery.base.activity.BaseActivity
 import com.binkery.base.utils.Utils
 import com.binkery.ipassword.utils.SharedUtils
@@ -22,16 +24,31 @@ class PasswordCheckingActivity : BaseActivity() {
 
     private var mExit = true
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        window.decorView.systemUiVisibility =    View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.statusBarColor = 0x000000
+            window.navigationBarColor = 0x000000
+        }
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
+            window.navigationBarDividerColor = 0xff0000ff.toInt()
+        }
+
+//        setContentView(R.layout.activity_password_checking)
+    }
+
     override fun getContentLayoutId(): Int = R.layout.activity_password_checking
 
     override fun onContentCreate(savedInstanceState: Bundle?) {
         mExit = intent.getBooleanExtra("exit", true)
 
-        vAppbar.setTitle("隐私密码校验")
+//        vAppbar.setTitle("隐私密码校验")
+        vAppbar.hide()
 
         var password = ""
         vPasswordInput.setValue(password)
-        vTips.text = "请输入隐私密码"
+//        vTips.text = "请输入隐私密码"
         vKeyBoardView.setOnValueChangedListener(object : KeyBoardView.OnValueChangedListener {
             override fun onValueChanged(value: String) {
                 if (password.length < 4) {
